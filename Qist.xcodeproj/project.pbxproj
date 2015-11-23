@@ -1,0 +1,838 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1718F40C1BA9327100242278 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F40B1BA9327100242278 /* AppDelegate.swift */; };
+		1718F40F1BA9327100242278 /* Qist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1718F40D1BA9327100242278 /* Qist.xcdatamodeld */; };
+		1718F4141BA9327100242278 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1718F4121BA9327100242278 /* Main.storyboard */; };
+		1718F4161BA9327100242278 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1718F4151BA9327100242278 /* Images.xcassets */; };
+		1718F4191BA9327100242278 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1718F4171BA9327100242278 /* LaunchScreen.xib */; };
+		1718F4251BA9327100242278 /* QistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F4241BA9327100242278 /* QistTests.swift */; };
+		1718F4361BA9369B00242278 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F4351BA9369B00242278 /* ActivityIndicatorView.swift */; };
+		1718F4381BA936D000242278 /* NSDate+Qist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F4371BA936D000242278 /* NSDate+Qist.swift */; };
+		1718F43A1BA936EA00242278 /* String+Qist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F4391BA936EA00242278 /* String+Qist.swift */; };
+		1718F43C1BA9370800242278 /* UIColor+Qist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F43B1BA9370800242278 /* UIColor+Qist.swift */; };
+		1718F43E1BA9372300242278 /* UIFont+Qist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F43D1BA9372300242278 /* UIFont+Qist.swift */; };
+		1718F4421BA93B0400242278 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F4411BA93B0400242278 /* ApiClient.swift */; };
+		1718F4471BA93FC600242278 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F4461BA93FC600242278 /* LoginController.swift */; };
+		1718F4491BA9402F00242278 /* ForgotPassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F4481BA9402F00242278 /* ForgotPassController.swift */; };
+		1718F44B1BA9404E00242278 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F44A1BA9404E00242278 /* SignupController.swift */; };
+		1718F44F1BA94A1000242278 /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F44E1BA94A1000242278 /* BaseController.swift */; };
+		1718F4551BA9637400242278 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1718F4521BA9637400242278 /* Default-568h@2x.png */; };
+		1718F4561BA9637400242278 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1718F4531BA9637400242278 /* Default-667h@2x.png */; };
+		1718F4571BA9637400242278 /* Default-1104h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1718F4541BA9637400242278 /* Default-1104h@2x.png */; };
+		1718F4611BA97CA600242278 /* Alert+Qist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F4601BA97CA500242278 /* Alert+Qist.swift */; };
+		1718F4631BA998BB00242278 /* QistTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F4621BA998BB00242278 /* QistTextField.swift */; };
+		1718F4651BA99DBC00242278 /* ScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F4641BA99DBC00242278 /* ScannerController.swift */; };
+		17362B371BAFCBD70042EDF8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17362B361BAFCBD70042EDF8 /* User.swift */; };
+		1738B5EC1BB911E900496CA5 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1738B5EB1BB911E900496CA5 /* HistoryCell.swift */; };
+		1738B5EE1BB9236600496CA5 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1738B5ED1BB9236600496CA5 /* ProfileCell.swift */; };
+		1738B5F01BB9555400496CA5 /* LocateQistSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1738B5EF1BB9555400496CA5 /* LocateQistSearchView.swift */; };
+		1738B5F21BB9744200496CA5 /* LocateQistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1738B5F11BB9744100496CA5 /* LocateQistCell.swift */; };
+		173EB3661BB54C20001E17A5 /* CartsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173EB3651BB54C20001E17A5 /* CartsCell.swift */; };
+		173EB3681BB55122001E17A5 /* WishListsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173EB3671BB55122001E17A5 /* WishListsCell.swift */; };
+		173EB36C1BB57208001E17A5 /* CheckOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173EB36B1BB57208001E17A5 /* CheckOutView.swift */; };
+		174577401BD10F240063AFDC /* QistLoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1745773F1BD10F240063AFDC /* QistLoadingOverlay.swift */; };
+		174577441BD12D900063AFDC /* SavedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174577431BD12D900063AFDC /* SavedUser.swift */; };
+		174618FA1BC3CB48002ECB60 /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174618F91BC3CB48002ECB60 /* AboutController.swift */; };
+		174618FC1BC3CB5F002ECB60 /* SupportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174618FB1BC3CB5F002ECB60 /* SupportController.swift */; };
+		174618FE1BC3F434002ECB60 /* ScanProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174618FD1BC3F434002ECB60 /* ScanProductController.swift */; };
+		174D16AF1BB3C67D00E0B4E8 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174D16AE1BB3C67D00E0B4E8 /* Store.swift */; };
+		174D16B11BB4004700E0B4E8 /* SegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174D16B01BB4004700E0B4E8 /* SegmentedView.swift */; };
+		174D16B31BB416A500E0B4E8 /* WishListsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174D16B21BB416A500E0B4E8 /* WishListsController.swift */; };
+		174D16B51BB416C100E0B4E8 /* SpecialsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174D16B41BB416C100E0B4E8 /* SpecialsController.swift */; };
+		174D16B71BB416EE00E0B4E8 /* LocateQistsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174D16B61BB416EE00E0B4E8 /* LocateQistsController.swift */; };
+		174D16B91BB419DD00E0B4E8 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174D16B81BB419DD00E0B4E8 /* ProfileController.swift */; };
+		174D16BB1BB419F100E0B4E8 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174D16BA1BB419F100E0B4E8 /* SettingsController.swift */; };
+		174D16BD1BB41A0400E0B4E8 /* HistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174D16BC1BB41A0400E0B4E8 /* HistoryController.swift */; };
+		174D16BF1BB420A600E0B4E8 /* SpecialsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174D16BE1BB420A600E0B4E8 /* SpecialsCell.swift */; };
+		1752C0CD1BAA9B9B00B0C419 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1752C0CC1BAA9B9B00B0C419 /* Social.framework */; };
+		1752C0CF1BAA9BA800B0C419 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1752C0CE1BAA9BA800B0C419 /* Accounts.framework */; };
+		1752C0D11BAA9BB400B0C419 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1752C0D01BAA9BB400B0C419 /* SystemConfiguration.framework */; };
+		1752C0D31BAAA90A00B0C419 /* QistSocials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1752C0D21BAAA90A00B0C419 /* QistSocials.swift */; };
+		1752C0D61BAAC80E00B0C419 /* GooglePlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1752C0D51BAAC80E00B0C419 /* GooglePlus.swift */; };
+		17A4908C1BCE99EB0026D0C8 /* QistLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A4908B1BCE99EB0026D0C8 /* QistLocationManager.swift */; };
+		17C30BEA1BB28F7C00B141A0 /* LeftPanelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C30BE91BB28F7C00B141A0 /* LeftPanelCell.swift */; };
+		17C30BEC1BB28F8E00B141A0 /* LeftPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C30BEB1BB28F8E00B141A0 /* LeftPanelView.swift */; };
+		17C30BEE1BB2935A00B141A0 /* StoresController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C30BED1BB2935A00B141A0 /* StoresController.swift */; };
+		17C30BF01BB2B0E900B141A0 /* CartsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C30BEF1BB2B0E800B141A0 /* CartsController.swift */; };
+		17C30BF21BB2E6E100B141A0 /* StoresCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C30BF11BB2E6E100B141A0 /* StoresCell.swift */; };
+		5A91332EC38115BA3B69C4A7 /* libPods-Qist.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3119CBC0CCEA183D72273706 /* libPods-Qist.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1718F41F1BA9327100242278 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1718F3FE1BA9327100242278 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1718F4051BA9327100242278;
+			remoteInfo = Qist;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		141B83A7854F2BAA750B7BEF /* Pods-Qist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qist.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qist/Pods-Qist.debug.xcconfig"; sourceTree = "<group>"; };
+		1718F4061BA9327100242278 /* Qist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qist.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1718F40A1BA9327100242278 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1718F40B1BA9327100242278 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1718F40E1BA9327100242278 /* Qist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Qist.xcdatamodel; sourceTree = "<group>"; };
+		1718F4131BA9327100242278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1718F4151BA9327100242278 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		1718F4181BA9327100242278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		1718F41E1BA9327100242278 /* QistTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QistTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1718F4231BA9327100242278 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1718F4241BA9327100242278 /* QistTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QistTests.swift; sourceTree = "<group>"; };
+		1718F4351BA9369B00242278 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		1718F4371BA936D000242278 /* NSDate+Qist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Qist.swift"; sourceTree = "<group>"; };
+		1718F4391BA936EA00242278 /* String+Qist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Qist.swift"; sourceTree = "<group>"; };
+		1718F43B1BA9370800242278 /* UIColor+Qist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Qist.swift"; sourceTree = "<group>"; };
+		1718F43D1BA9372300242278 /* UIFont+Qist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Qist.swift"; sourceTree = "<group>"; };
+		1718F43F1BA9385400242278 /* Qist-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Qist-Prefix.pch"; sourceTree = "<group>"; };
+		1718F4401BA9387C00242278 /* Qist-Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Qist-Bridging.h"; sourceTree = "<group>"; };
+		1718F4411BA93B0400242278 /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		1718F4461BA93FC600242278 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		1718F4481BA9402F00242278 /* ForgotPassController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPassController.swift; sourceTree = "<group>"; };
+		1718F44A1BA9404E00242278 /* SignupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
+		1718F44E1BA94A1000242278 /* BaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseController.swift; sourceTree = "<group>"; };
+		1718F4521BA9637400242278 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		1718F4531BA9637400242278 /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
+		1718F4541BA9637400242278 /* Default-1104h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-1104h@2x.png"; sourceTree = "<group>"; };
+		1718F4601BA97CA500242278 /* Alert+Qist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alert+Qist.swift"; sourceTree = "<group>"; };
+		1718F4621BA998BB00242278 /* QistTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QistTextField.swift; sourceTree = "<group>"; };
+		1718F4641BA99DBC00242278 /* ScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerController.swift; sourceTree = "<group>"; };
+		17362B361BAFCBD70042EDF8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		1738B5EB1BB911E900496CA5 /* HistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
+		1738B5ED1BB9236600496CA5 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		1738B5EF1BB9555400496CA5 /* LocateQistSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocateQistSearchView.swift; sourceTree = "<group>"; };
+		1738B5F11BB9744100496CA5 /* LocateQistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocateQistCell.swift; sourceTree = "<group>"; };
+		173EB3651BB54C20001E17A5 /* CartsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartsCell.swift; sourceTree = "<group>"; };
+		173EB3671BB55122001E17A5 /* WishListsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishListsCell.swift; sourceTree = "<group>"; };
+		173EB36B1BB57208001E17A5 /* CheckOutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOutView.swift; sourceTree = "<group>"; };
+		1745773F1BD10F240063AFDC /* QistLoadingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QistLoadingOverlay.swift; sourceTree = "<group>"; };
+		174577431BD12D900063AFDC /* SavedUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedUser.swift; sourceTree = "<group>"; };
+		174618F91BC3CB48002ECB60 /* AboutController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
+		174618FB1BC3CB5F002ECB60 /* SupportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportController.swift; sourceTree = "<group>"; };
+		174618FD1BC3F434002ECB60 /* ScanProductController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanProductController.swift; sourceTree = "<group>"; };
+		174D16AE1BB3C67D00E0B4E8 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		174D16B01BB4004700E0B4E8 /* SegmentedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedView.swift; sourceTree = "<group>"; };
+		174D16B21BB416A500E0B4E8 /* WishListsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishListsController.swift; sourceTree = "<group>"; };
+		174D16B41BB416C100E0B4E8 /* SpecialsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialsController.swift; sourceTree = "<group>"; };
+		174D16B61BB416EE00E0B4E8 /* LocateQistsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocateQistsController.swift; sourceTree = "<group>"; };
+		174D16B81BB419DD00E0B4E8 /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		174D16BA1BB419F100E0B4E8 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		174D16BC1BB41A0400E0B4E8 /* HistoryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryController.swift; sourceTree = "<group>"; };
+		174D16BE1BB420A600E0B4E8 /* SpecialsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialsCell.swift; sourceTree = "<group>"; };
+		1752C0CC1BAA9B9B00B0C419 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		1752C0CE1BAA9BA800B0C419 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		1752C0D01BAA9BB400B0C419 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1752C0D21BAAA90A00B0C419 /* QistSocials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QistSocials.swift; sourceTree = "<group>"; };
+		1752C0D51BAAC80E00B0C419 /* GooglePlus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlus.swift; sourceTree = "<group>"; };
+		17A4908B1BCE99EB0026D0C8 /* QistLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QistLocationManager.swift; sourceTree = "<group>"; };
+		17C30BE91BB28F7C00B141A0 /* LeftPanelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftPanelCell.swift; sourceTree = "<group>"; };
+		17C30BEB1BB28F8E00B141A0 /* LeftPanelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftPanelView.swift; sourceTree = "<group>"; };
+		17C30BED1BB2935A00B141A0 /* StoresController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoresController.swift; sourceTree = "<group>"; };
+		17C30BEF1BB2B0E800B141A0 /* CartsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartsController.swift; sourceTree = "<group>"; };
+		17C30BF11BB2E6E100B141A0 /* StoresCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoresCell.swift; sourceTree = "<group>"; };
+		3119CBC0CCEA183D72273706 /* libPods-Qist.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Qist.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E0AB52774DEB7435663672A /* Pods-Qist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qist.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qist/Pods-Qist.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1718F4031BA9327100242278 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1752C0D11BAA9BB400B0C419 /* SystemConfiguration.framework in Frameworks */,
+				1752C0CF1BAA9BA800B0C419 /* Accounts.framework in Frameworks */,
+				1752C0CD1BAA9B9B00B0C419 /* Social.framework in Frameworks */,
+				5A91332EC38115BA3B69C4A7 /* libPods-Qist.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1718F41B1BA9327100242278 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1718F3FD1BA9327100242278 = {
+			isa = PBXGroup;
+			children = (
+				1718F4081BA9327100242278 /* Qist */,
+				1718F4211BA9327100242278 /* QistTests */,
+				1718F4071BA9327100242278 /* Products */,
+				3F40C2460E0989A9EE91D560 /* Pods */,
+				D8ED7DC189714E677CA0367A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		1718F4071BA9327100242278 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1718F4061BA9327100242278 /* Qist.app */,
+				1718F41E1BA9327100242278 /* QistTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1718F4081BA9327100242278 /* Qist */ = {
+			isa = PBXGroup;
+			children = (
+				1718F4501BA9635700242278 /* Assets */,
+				1718F42E1BA9344C00242278 /* Controllers */,
+				1718F42F1BA9344D00242278 /* Lib */,
+				1718F4321BA9344D00242278 /* Models */,
+				1718F4331BA934C700242278 /* Views */,
+				1718F40B1BA9327100242278 /* AppDelegate.swift */,
+				1718F4151BA9327100242278 /* Images.xcassets */,
+				1718F40D1BA9327100242278 /* Qist.xcdatamodeld */,
+				1718F4091BA9327100242278 /* Supporting Files */,
+			);
+			path = Qist;
+			sourceTree = "<group>";
+		};
+		1718F4091BA9327100242278 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1718F40A1BA9327100242278 /* Info.plist */,
+				1718F43F1BA9385400242278 /* Qist-Prefix.pch */,
+				1718F4401BA9387C00242278 /* Qist-Bridging.h */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1718F4211BA9327100242278 /* QistTests */ = {
+			isa = PBXGroup;
+			children = (
+				1718F4241BA9327100242278 /* QistTests.swift */,
+				1718F4221BA9327100242278 /* Supporting Files */,
+			);
+			path = QistTests;
+			sourceTree = "<group>";
+		};
+		1718F4221BA9327100242278 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1718F4231BA9327100242278 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1718F42E1BA9344C00242278 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1718F4431BA93F9C00242278 /* BaseControllers */,
+				1718F4441BA93F9C00242278 /* CellControllers */,
+				1718F4451BA93F9C00242278 /* ViewControllers */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1718F42F1BA9344D00242278 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				1718F4341BA9367B00242278 /* Common */,
+				1718F4301BA9344D00242278 /* Api */,
+				1718F4311BA9344D00242278 /* Extensions */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		1718F4301BA9344D00242278 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				1718F4411BA93B0400242278 /* ApiClient.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		1718F4311BA9344D00242278 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1718F4371BA936D000242278 /* NSDate+Qist.swift */,
+				1718F4391BA936EA00242278 /* String+Qist.swift */,
+				1718F43B1BA9370800242278 /* UIColor+Qist.swift */,
+				1718F43D1BA9372300242278 /* UIFont+Qist.swift */,
+				1718F4601BA97CA500242278 /* Alert+Qist.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1718F4321BA9344D00242278 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				17362B361BAFCBD70042EDF8 /* User.swift */,
+				174D16AE1BB3C67D00E0B4E8 /* Store.swift */,
+				174577431BD12D900063AFDC /* SavedUser.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1718F4331BA934C700242278 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1718F4171BA9327100242278 /* LaunchScreen.xib */,
+				1718F4121BA9327100242278 /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1718F4341BA9367B00242278 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1718F4351BA9369B00242278 /* ActivityIndicatorView.swift */,
+				1718F4621BA998BB00242278 /* QistTextField.swift */,
+				1752C0D21BAAA90A00B0C419 /* QistSocials.swift */,
+				1752C0D51BAAC80E00B0C419 /* GooglePlus.swift */,
+				17A4908B1BCE99EB0026D0C8 /* QistLocationManager.swift */,
+				1745773F1BD10F240063AFDC /* QistLoadingOverlay.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		1718F4431BA93F9C00242278 /* BaseControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1718F44E1BA94A1000242278 /* BaseController.swift */,
+				17C30BEB1BB28F8E00B141A0 /* LeftPanelView.swift */,
+				174D16B01BB4004700E0B4E8 /* SegmentedView.swift */,
+				173EB36B1BB57208001E17A5 /* CheckOutView.swift */,
+				1738B5EF1BB9555400496CA5 /* LocateQistSearchView.swift */,
+			);
+			path = BaseControllers;
+			sourceTree = "<group>";
+		};
+		1718F4441BA93F9C00242278 /* CellControllers */ = {
+			isa = PBXGroup;
+			children = (
+				17C30BE91BB28F7C00B141A0 /* LeftPanelCell.swift */,
+				17C30BF11BB2E6E100B141A0 /* StoresCell.swift */,
+				173EB3651BB54C20001E17A5 /* CartsCell.swift */,
+				173EB3671BB55122001E17A5 /* WishListsCell.swift */,
+				174D16BE1BB420A600E0B4E8 /* SpecialsCell.swift */,
+				1738B5EB1BB911E900496CA5 /* HistoryCell.swift */,
+				1738B5ED1BB9236600496CA5 /* ProfileCell.swift */,
+				1738B5F11BB9744100496CA5 /* LocateQistCell.swift */,
+			);
+			path = CellControllers;
+			sourceTree = "<group>";
+		};
+		1718F4451BA93F9C00242278 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1718F4461BA93FC600242278 /* LoginController.swift */,
+				1718F4481BA9402F00242278 /* ForgotPassController.swift */,
+				1718F44A1BA9404E00242278 /* SignupController.swift */,
+				1718F4641BA99DBC00242278 /* ScannerController.swift */,
+				174618FD1BC3F434002ECB60 /* ScanProductController.swift */,
+				17C30BED1BB2935A00B141A0 /* StoresController.swift */,
+				17C30BEF1BB2B0E800B141A0 /* CartsController.swift */,
+				174D16B21BB416A500E0B4E8 /* WishListsController.swift */,
+				174D16B41BB416C100E0B4E8 /* SpecialsController.swift */,
+				174D16B61BB416EE00E0B4E8 /* LocateQistsController.swift */,
+				174D16B81BB419DD00E0B4E8 /* ProfileController.swift */,
+				174D16BA1BB419F100E0B4E8 /* SettingsController.swift */,
+				174D16BC1BB41A0400E0B4E8 /* HistoryController.swift */,
+				174618F91BC3CB48002ECB60 /* AboutController.swift */,
+				174618FB1BC3CB5F002ECB60 /* SupportController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		1718F4501BA9635700242278 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				1718F4511BA9635700242278 /* Splash-images */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		1718F4511BA9635700242278 /* Splash-images */ = {
+			isa = PBXGroup;
+			children = (
+				1718F4521BA9637400242278 /* Default-568h@2x.png */,
+				1718F4531BA9637400242278 /* Default-667h@2x.png */,
+				1718F4541BA9637400242278 /* Default-1104h@2x.png */,
+			);
+			path = "Splash-images";
+			sourceTree = "<group>";
+		};
+		3F40C2460E0989A9EE91D560 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				141B83A7854F2BAA750B7BEF /* Pods-Qist.debug.xcconfig */,
+				5E0AB52774DEB7435663672A /* Pods-Qist.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D8ED7DC189714E677CA0367A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1752C0D01BAA9BB400B0C419 /* SystemConfiguration.framework */,
+				1752C0CE1BAA9BA800B0C419 /* Accounts.framework */,
+				1752C0CC1BAA9B9B00B0C419 /* Social.framework */,
+				3119CBC0CCEA183D72273706 /* libPods-Qist.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1718F4051BA9327100242278 /* Qist */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1718F4281BA9327100242278 /* Build configuration list for PBXNativeTarget "Qist" */;
+			buildPhases = (
+				36096CA052D6CAFDD5813144 /* Check Pods Manifest.lock */,
+				1718F4021BA9327100242278 /* Sources */,
+				1718F4031BA9327100242278 /* Frameworks */,
+				1718F4041BA9327100242278 /* Resources */,
+				20107EFADF196ECB35D14A8B /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Qist;
+			productName = Qist;
+			productReference = 1718F4061BA9327100242278 /* Qist.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1718F41D1BA9327100242278 /* QistTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1718F42B1BA9327100242278 /* Build configuration list for PBXNativeTarget "QistTests" */;
+			buildPhases = (
+				1718F41A1BA9327100242278 /* Sources */,
+				1718F41B1BA9327100242278 /* Frameworks */,
+				1718F41C1BA9327100242278 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1718F4201BA9327100242278 /* PBXTargetDependency */,
+			);
+			name = QistTests;
+			productName = QistTests;
+			productReference = 1718F41E1BA9327100242278 /* QistTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1718F3FE1BA9327100242278 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = GrepRuby3;
+				TargetAttributes = {
+					1718F4051BA9327100242278 = {
+						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 83U27DZH5K;
+					};
+					1718F41D1BA9327100242278 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 1718F4051BA9327100242278;
+					};
+				};
+			};
+			buildConfigurationList = 1718F4011BA9327100242278 /* Build configuration list for PBXProject "Qist" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1718F3FD1BA9327100242278;
+			productRefGroup = 1718F4071BA9327100242278 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1718F4051BA9327100242278 /* Qist */,
+				1718F41D1BA9327100242278 /* QistTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1718F4041BA9327100242278 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1718F4141BA9327100242278 /* Main.storyboard in Resources */,
+				1718F4571BA9637400242278 /* Default-1104h@2x.png in Resources */,
+				1718F4551BA9637400242278 /* Default-568h@2x.png in Resources */,
+				1718F4191BA9327100242278 /* LaunchScreen.xib in Resources */,
+				1718F4161BA9327100242278 /* Images.xcassets in Resources */,
+				1718F4561BA9637400242278 /* Default-667h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1718F41C1BA9327100242278 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		20107EFADF196ECB35D14A8B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Qist/Pods-Qist-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		36096CA052D6CAFDD5813144 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1718F4021BA9327100242278 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				174D16B31BB416A500E0B4E8 /* WishListsController.swift in Sources */,
+				173EB36C1BB57208001E17A5 /* CheckOutView.swift in Sources */,
+				174D16BF1BB420A600E0B4E8 /* SpecialsCell.swift in Sources */,
+				173EB3681BB55122001E17A5 /* WishListsCell.swift in Sources */,
+				1738B5F21BB9744200496CA5 /* LocateQistCell.swift in Sources */,
+				1718F4611BA97CA600242278 /* Alert+Qist.swift in Sources */,
+				17C30BF21BB2E6E100B141A0 /* StoresCell.swift in Sources */,
+				1718F4491BA9402F00242278 /* ForgotPassController.swift in Sources */,
+				174D16AF1BB3C67D00E0B4E8 /* Store.swift in Sources */,
+				1718F4631BA998BB00242278 /* QistTextField.swift in Sources */,
+				174D16BB1BB419F100E0B4E8 /* SettingsController.swift in Sources */,
+				1738B5EE1BB9236600496CA5 /* ProfileCell.swift in Sources */,
+				174577401BD10F240063AFDC /* QistLoadingOverlay.swift in Sources */,
+				1718F40F1BA9327100242278 /* Qist.xcdatamodeld in Sources */,
+				174577441BD12D900063AFDC /* SavedUser.swift in Sources */,
+				174618FC1BC3CB5F002ECB60 /* SupportController.swift in Sources */,
+				1718F44B1BA9404E00242278 /* SignupController.swift in Sources */,
+				1738B5F01BB9555400496CA5 /* LocateQistSearchView.swift in Sources */,
+				17A4908C1BCE99EB0026D0C8 /* QistLocationManager.swift in Sources */,
+				17C30BF01BB2B0E900B141A0 /* CartsController.swift in Sources */,
+				1718F4651BA99DBC00242278 /* ScannerController.swift in Sources */,
+				17C30BEA1BB28F7C00B141A0 /* LeftPanelCell.swift in Sources */,
+				1718F4421BA93B0400242278 /* ApiClient.swift in Sources */,
+				174D16B11BB4004700E0B4E8 /* SegmentedView.swift in Sources */,
+				17C30BEE1BB2935A00B141A0 /* StoresController.swift in Sources */,
+				1718F43C1BA9370800242278 /* UIColor+Qist.swift in Sources */,
+				1718F40C1BA9327100242278 /* AppDelegate.swift in Sources */,
+				1718F4381BA936D000242278 /* NSDate+Qist.swift in Sources */,
+				1718F43E1BA9372300242278 /* UIFont+Qist.swift in Sources */,
+				17C30BEC1BB28F8E00B141A0 /* LeftPanelView.swift in Sources */,
+				174D16BD1BB41A0400E0B4E8 /* HistoryController.swift in Sources */,
+				1752C0D61BAAC80E00B0C419 /* GooglePlus.swift in Sources */,
+				174D16B91BB419DD00E0B4E8 /* ProfileController.swift in Sources */,
+				1752C0D31BAAA90A00B0C419 /* QistSocials.swift in Sources */,
+				1718F4361BA9369B00242278 /* ActivityIndicatorView.swift in Sources */,
+				174618FA1BC3CB48002ECB60 /* AboutController.swift in Sources */,
+				174D16B71BB416EE00E0B4E8 /* LocateQistsController.swift in Sources */,
+				17362B371BAFCBD70042EDF8 /* User.swift in Sources */,
+				1738B5EC1BB911E900496CA5 /* HistoryCell.swift in Sources */,
+				1718F43A1BA936EA00242278 /* String+Qist.swift in Sources */,
+				173EB3661BB54C20001E17A5 /* CartsCell.swift in Sources */,
+				174618FE1BC3F434002ECB60 /* ScanProductController.swift in Sources */,
+				1718F44F1BA94A1000242278 /* BaseController.swift in Sources */,
+				1718F4471BA93FC600242278 /* LoginController.swift in Sources */,
+				174D16B51BB416C100E0B4E8 /* SpecialsController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1718F41A1BA9327100242278 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1718F4251BA9327100242278 /* QistTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1718F4201BA9327100242278 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1718F4051BA9327100242278 /* Qist */;
+			targetProxy = 1718F41F1BA9327100242278 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1718F4121BA9327100242278 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1718F4131BA9327100242278 /* Base */,
+			);
+			name = Main.storyboard;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		1718F4171BA9327100242278 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1718F4181BA9327100242278 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			path = ..;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1718F4261BA9327100242278 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 141B83A7854F2BAA750B7BEF /* Pods-Qist.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Qist/Qist-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "ac0f354d-00ec-4491-8b9c-0111cb27c4a6";
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Qist/Qist-Bridging.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1718F4271BA9327100242278 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E0AB52774DEB7435663672A /* Pods-Qist.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Qist/Qist-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "ac0f354d-00ec-4491-8b9c-0111cb27c4a6";
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Qist/Qist-Bridging.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1718F4291BA9327100242278 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 141B83A7854F2BAA750B7BEF /* Pods-Qist.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Qist/Qist-Prefix.pch";
+				INFOPLIST_FILE = Qist/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Qist.apps;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ac0f354d-00ec-4491-8b9c-0111cb27c4a6";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Qist/Qist-Bridging.h";
+			};
+			name = Debug;
+		};
+		1718F42A1BA9327100242278 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E0AB52774DEB7435663672A /* Pods-Qist.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Qist/Qist-Prefix.pch";
+				INFOPLIST_FILE = Qist/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Qist.apps;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ac0f354d-00ec-4491-8b9c-0111cb27c4a6";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Qist/Qist-Bridging.h";
+			};
+			name = Release;
+		};
+		1718F42C1BA9327100242278 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = QistTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Qist.apps;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ac0f354d-00ec-4491-8b9c-0111cb27c4a6";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qist.app/Qist";
+			};
+			name = Debug;
+		};
+		1718F42D1BA9327100242278 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = QistTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Qist.apps;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ac0f354d-00ec-4491-8b9c-0111cb27c4a6";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qist.app/Qist";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1718F4011BA9327100242278 /* Build configuration list for PBXProject "Qist" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1718F4261BA9327100242278 /* Debug */,
+				1718F4271BA9327100242278 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1718F4281BA9327100242278 /* Build configuration list for PBXNativeTarget "Qist" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1718F4291BA9327100242278 /* Debug */,
+				1718F42A1BA9327100242278 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1718F42B1BA9327100242278 /* Build configuration list for PBXNativeTarget "QistTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1718F42C1BA9327100242278 /* Debug */,
+				1718F42D1BA9327100242278 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1718F40D1BA9327100242278 /* Qist.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1718F40E1BA9327100242278 /* Qist.xcdatamodel */,
+			);
+			currentVersion = 1718F40E1BA9327100242278 /* Qist.xcdatamodel */;
+			path = Qist.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 1718F3FE1BA9327100242278 /* Project object */;
+}
