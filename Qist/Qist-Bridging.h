@@ -9,6 +9,8 @@
 #ifndef Qist_Qist_Bridging_h
 #define Qist_Qist_Bridging_h
 
+#import "Reachability.h"
+
 // Comment below line if you are not using AFNetworking
 #import "AFNetworking.h"
 #import "AFHTTPSessionManager.h"
