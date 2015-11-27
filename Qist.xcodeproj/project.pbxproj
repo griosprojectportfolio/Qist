@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		17157E671C045A7C00D516DB /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 17157E661C045A7C00D516DB /* Reachability.m */; settings = {ASSET_TAGS = (); }; };
+		17157E671C045A7C00D516DB /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 17157E661C045A7C00D516DB /* Reachability.m */; };
 		1718F40C1BA9327100242278 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F40B1BA9327100242278 /* AppDelegate.swift */; };
 		1718F40F1BA9327100242278 /* Qist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1718F40D1BA9327100242278 /* Qist.xcdatamodeld */; };
 		1718F4141BA9327100242278 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1718F4121BA9327100242278 /* Main.storyboard */; };
@@ -452,7 +452,7 @@
 				TargetAttributes = {
 					1718F4051BA9327100242278 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 83U27DZH5K;
+						DevelopmentTeam = 9N9Q6F2JY8;
 					};
 					1718F41D1BA9327100242278 = {
 						CreatedOnToolsVersion = 6.4;
@@ -647,8 +647,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mike and Paul Enterprises Ltd (9N9Q6F2JY8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mike and Paul Enterprises Ltd (9N9Q6F2JY8)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -673,7 +673,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "ac0f354d-00ec-4491-8b9c-0111cb27c4a6";
+				PROVISIONING_PROFILE = "96df1dd0-ca24-4f53-8487-d443442dc2df";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Qist/Qist-Bridging.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -699,8 +699,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mike and Paul Enterprises Ltd (9N9Q6F2JY8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mike and Paul Enterprises Ltd (9N9Q6F2JY8)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -717,7 +717,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "ac0f354d-00ec-4491-8b9c-0111cb27c4a6";
+				PROVISIONING_PROFILE = "96df1dd0-ca24-4f53-8487-d443442dc2df";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Qist/Qist-Bridging.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -730,15 +730,15 @@
 			baseConfigurationReference = 141B83A7854F2BAA750B7BEF /* Pods-Qist.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mike and Paul Enterprises Ltd (9N9Q6F2JY8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mike and Paul Enterprises Ltd (9N9Q6F2JY8)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Qist/Qist-Prefix.pch";
 				INFOPLIST_FILE = Qist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Qist.apps;
+				PRODUCT_BUNDLE_IDENTIFIER = nz.co.qist.qist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ac0f354d-00ec-4491-8b9c-0111cb27c4a6";
+				PROVISIONING_PROFILE = "96df1dd0-ca24-4f53-8487-d443442dc2df";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Qist/Qist-Bridging.h";
 			};
 			name = Debug;
@@ -748,15 +748,15 @@
 			baseConfigurationReference = 5E0AB52774DEB7435663672A /* Pods-Qist.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mike and Paul Enterprises Ltd (9N9Q6F2JY8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mike and Paul Enterprises Ltd (9N9Q6F2JY8)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Qist/Qist-Prefix.pch";
 				INFOPLIST_FILE = Qist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Qist.apps;
+				PRODUCT_BUNDLE_IDENTIFIER = nz.co.qist.qist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ac0f354d-00ec-4491-8b9c-0111cb27c4a6";
+				PROVISIONING_PROFILE = "96df1dd0-ca24-4f53-8487-d443442dc2df";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Qist/Qist-Bridging.h";
 			};
 			name = Release;
@@ -765,8 +765,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mike and Paul Enterprises Ltd (9N9Q6F2JY8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mike and Paul Enterprises Ltd (9N9Q6F2JY8)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -779,7 +779,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Qist.apps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ac0f354d-00ec-4491-8b9c-0111cb27c4a6";
+				PROVISIONING_PROFILE = "96df1dd0-ca24-4f53-8487-d443442dc2df";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qist.app/Qist";
 			};
 			name = Debug;
@@ -788,8 +788,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: OCUS Corporation (83U27DZH5K)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mike and Paul Enterprises Ltd (9N9Q6F2JY8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mike and Paul Enterprises Ltd (9N9Q6F2JY8)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -798,7 +798,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Qist.apps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ac0f354d-00ec-4491-8b9c-0111cb27c4a6";
+				PROVISIONING_PROFILE = "96df1dd0-ca24-4f53-8487-d443442dc2df";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qist.app/Qist";
 			};
 			name = Release;
