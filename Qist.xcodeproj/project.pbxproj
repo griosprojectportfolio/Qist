@@ -673,7 +673,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "96df1dd0-ca24-4f53-8487-d443442dc2df";
+				PROVISIONING_PROFILE = "19347db1-fcd5-4ad8-931e-eb2c83363381";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Qist/Qist-Bridging.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -717,7 +717,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "96df1dd0-ca24-4f53-8487-d443442dc2df";
+				PROVISIONING_PROFILE = "19347db1-fcd5-4ad8-931e-eb2c83363381";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Qist/Qist-Bridging.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -736,9 +736,9 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Qist/Qist-Prefix.pch";
 				INFOPLIST_FILE = Qist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = nz.co.qist.qist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michael.qist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "96df1dd0-ca24-4f53-8487-d443442dc2df";
+				PROVISIONING_PROFILE = "19347db1-fcd5-4ad8-931e-eb2c83363381";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Qist/Qist-Bridging.h";
 			};
 			name = Debug;
@@ -754,9 +754,9 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Qist/Qist-Prefix.pch";
 				INFOPLIST_FILE = Qist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = nz.co.qist.qist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michael.qist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "96df1dd0-ca24-4f53-8487-d443442dc2df";
+				PROVISIONING_PROFILE = "19347db1-fcd5-4ad8-931e-eb2c83363381";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Qist/Qist-Bridging.h";
 			};
 			name = Release;
@@ -777,9 +777,9 @@
 				);
 				INFOPLIST_FILE = QistTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Qist.apps;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michael.qist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "96df1dd0-ca24-4f53-8487-d443442dc2df";
+				PROVISIONING_PROFILE = "19347db1-fcd5-4ad8-931e-eb2c83363381";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qist.app/Qist";
 			};
 			name = Debug;
@@ -796,9 +796,9 @@
 				);
 				INFOPLIST_FILE = QistTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Qist.apps;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michael.qist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "96df1dd0-ca24-4f53-8487-d443442dc2df";
+				PROVISIONING_PROFILE = "19347db1-fcd5-4ad8-931e-eb2c83363381";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qist.app/Qist";
 			};
 			name = Release;

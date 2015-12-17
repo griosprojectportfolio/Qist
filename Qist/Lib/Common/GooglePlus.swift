@@ -6,9 +6,8 @@
 //  Copyright (c) 2015 GrepRuby3. All rights reserved.
 //
 
-
-let clientID = "577720510948-9hccb3k19l1ac5ph6bevhu6safasn10j.apps.googleusercontent.com"
-let clientSecret = "pZ-PBS6rDARtBFFhBkcOmY7Q"
+let clientID = "437235601525-68q340io6ud4nq95i3u5pkon4v3v5f4j.apps.googleusercontent.com"
+let clientSecret = "1HYqoSXCiKesPtdo54NztvoE"
 let redirectURI = "http://localhost"
 let scope = "https://www.googleapis.com/auth/userinfo.email"
 let visibleactions = "http://schemas.google.com/AddActivity"
