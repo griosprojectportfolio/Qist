@@ -72,7 +72,7 @@ class SignupController : BaseController {
             self.presentViewController(self.alertQist, animated: true, completion: nil)
             
         }else{
-            self.showAlertOnSuccessAndError(errorMessage,isPop:false)
+            self.showErrorPopupWith_title_message("REGISTER!", strMessage: errorMessage)
         }
         
     }
@@ -80,23 +80,25 @@ class SignupController : BaseController {
     
     
     // MARK: - API CALL- Post user info to sign up
+    
     func postUserBasicInfoOnServer(){
         
         self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = [ "firstname": self.txtFirstName!.text! , "lastname" : self.txtLastName!.text! , "username" : "test1" ,
-            "email": self.txtEmailAddress!.text! , "password" : self.txtPassword!.text! , "confirm_password" : self.txtRepeatPass!.text! ,
-            "address" : "test" , "mailing_list" : "1"]
+        let dictParams : NSDictionary = [ "first_name": self.txtFirstName!.text! ,"last_name" : self.txtLastName!.text! ,
+            "email": self.txtEmailAddress!.text! ,"password" : self.txtPassword!.text! ,"confirm_password" : self.txtRepeatPass!.text! ,
+            "longitude" : self.longitude ,"latitude" : self.latitude]
         
-        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "signup", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "user_signup", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
                 self.stopLoadingIndicatorView()
-                let dictTemp : NSDictionary = responseObject as! NSDictionary
-                print(dictTemp)
-                self.showAlertOnSuccessAndError("Successfully registered on Qist.",isPop:true)
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                let objCustomer : NSDictionary = dictResponse["customer"] as! NSDictionary
+                self.setUserLoginSession_AccessToken(objCustomer["access_token"] as! String)
+                self.storeSignupUserInfoInCoreData(objCustomer)
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                self.showErrorPopupWith_title_message("Signup", strMessage: "Signup api have some error.")
+                self.showErrorPopupWith_title_message("REGISTER!", strMessage:(error?.localizedDescription)!)
         })
     }
     
@@ -137,18 +139,28 @@ class SignupController : BaseController {
         return strError
     }
     
-    func showAlertOnSuccessAndError(strMessage:String , isPop : Bool){
-        self.alertQist = UIAlertController.alertWithTitleAndMessage("Register" ,message: strMessage, handler:{(objAlertAction : UIAlertAction!) -> Void in
-            if isPop {
-                self.navigationController?.popViewControllerAnimated(true)
-            }
+    func storeSignupUserInfoInCoreData(dictData: NSDictionary) {
+        let arrData : NSArray = NSArray(object: dictData)
+        MagicalRecord.saveWithBlock({ ( context : NSManagedObjectContext!) -> Void in
+            User.entityFromArrayInContext( arrData , localContext: context)
+            self.showAlertOnSignUpSuccess("Successfully registered on Qist.")
         })
-        self.presentViewController(self.alertQist, animated: true, completion: nil)
+    }
+    
+    func showAlertOnSignUpSuccess(strMessage:String){
+        dispatch_async(dispatch_get_main_queue()) {
+            self.alertQist = UIAlertController.alertWithTitleAndMessage("REGISTER" ,message: strMessage, handler:{(objAlertAction : UIAlertAction!) -> Void in
+                self.performSegueWithIdentifier("Scanner", sender: self)
+            })
+            self.presentViewController(self.alertQist, animated: true, completion: nil)
+        }
     }
     
     
     // MARK: -  Overrided Methods of BaseController
+    
     override func configureComponentsLayout(){
+        
         // This function use for set layout of components.
         self.txtFirstName!.setupTextFieldBasicProperty("icon_username", isSecureEntery: false)
         self.txtLastName!.setupTextFieldBasicProperty("icon_username", isSecureEntery: false)

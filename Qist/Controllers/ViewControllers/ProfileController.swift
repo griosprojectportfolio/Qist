@@ -11,13 +11,15 @@ import Foundation
 class ProfileController : BaseController , segmentedTapActionDelegate {
     
     @IBOutlet var tblProfile : UITableView!
-    var dictProfile : NSDictionary = ["name" : "Christin Goulden", "email":"abc@gmail.com", "password":"*****","location":"143 Street A, Bronx NY"]
+    var objUser : User!
     
     // MARK: -  Current view related Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.title = "PROFILE"
+        let arrFetchedData : NSArray = User.MR_findAll()
+        objUser = arrFetchedData.objectAtIndex(0) as! User
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -60,18 +62,23 @@ class ProfileController : BaseController , segmentedTapActionDelegate {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell : ProfileCell = tableView.dequeueReusableCellWithIdentifier("ProCell",forIndexPath:indexPath) as! ProfileCell
         cell.configureProfileTableViewCell()
-        cell.setupHistoryCellContentAt_IndexPath(indexPath,objProfile:dictProfile)
+        cell.setupProfileCellContentAt_IndexPath(indexPath, objUser: objUser)
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 3 {
+            let destination = self.storyboard?.instantiateViewControllerWithIdentifier("UpdateProfile") as! UpdateProfileController
+            destination.index = indexPath.row
+            self.navigationController?.pushViewController(destination, animated: true)
+        }
     }
     
     

@@ -51,7 +51,7 @@ class LeftPanelView : UIView , UITableViewDelegate , UITableViewDataSource , UIG
         tblBckImageView.layer.masksToBounds = true
         self.addSubview(tblBckImageView)
         
-        self.tblView.frame = CGRectMake(0, 25 , self.tblWidth - 8 , frame.size.height)
+        self.tblView.frame = self.getTableFrameRect()
         self.tblView.registerClass(LeftPanelCell.self, forCellReuseIdentifier: "cell")
         self.tblView.delegate = self
         self.tblView.dataSource = self
@@ -86,24 +86,7 @@ class LeftPanelView : UIView , UITableViewDelegate , UITableViewDataSource , UIG
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        var height : CGFloat = 95.0
-        if section == 0 {
-            if isiPhone6 {
-                height = 120
-            }else if isiPhone6plus {
-                height = 150
-            }
-        }else if section == 1 {
-            
-            if isiPhone6 {
-                height = self.frame.size.height - 530
-            }else if isiPhone6plus {
-                height = self.frame.size.height - 560
-            }else {
-                height = self.frame.size.height - 505
-            }
-        }
-        return height
+        return self.getHeaderHeightForSection(section)
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -116,6 +99,8 @@ class LeftPanelView : UIView , UITableViewDelegate , UITableViewDataSource , UIG
                 headerImageView.frame = CGRectMake(0, 0, self.tblWidth , 120)
             }else if isiPhone6plus {
                 headerImageView.frame = CGRectMake(0, 0, self.tblWidth , 150)
+            }else if isiPad {
+                headerImageView.frame = CGRectMake(0, 0, self.tblWidth , 170)
             }
             let iconTap = UITapGestureRecognizer(target: self, action: Selector("topIconTapAction"))
             headerImageView.userInteractionEnabled = true
@@ -142,6 +127,42 @@ class LeftPanelView : UIView , UITableViewDelegate , UITableViewDataSource , UIG
     }
     
     
+    // MARK: - Some common methods
+    
+    func getTableFrameRect() -> CGRect {
+        var frameRect : CGRect = CGRect()
+        if isiPad {
+            frameRect = CGRectMake(0, 25 , self.tblWidth - 18 , frame.size.height)
+        }else {
+            frameRect = CGRectMake(0, 25 , self.tblWidth - 8 , frame.size.height)
+        }
+        return frameRect;
+    }
+    
+    func getHeaderHeightForSection(section : Int) -> CGFloat {
+        var height : CGFloat = 95.0
+        if section == 0 {
+            if isiPhone6 {
+                height = 120
+            }else if isiPhone6plus {
+                height = 150
+            }else if isiPad {
+                height = 170
+            }
+        }else if section == 1 {
+            if isiPhone6 {
+                height = self.frame.size.height - 530
+            }else if isiPhone6plus {
+                height = self.frame.size.height - 560
+            }else if isiPad {
+                height = self.frame.size.height - 580
+            }else {
+                height = self.frame.size.height - 505
+            }
+        }
+        return height
+    }
+    
     // MARK: - Toggle left view
     func toggleLeftPanel(viewController : UIViewController){
         
@@ -167,7 +188,6 @@ class LeftPanelView : UIView , UITableViewDelegate , UITableViewDataSource , UIG
         })
         
     }
-    
     
     // MARK: - Top icon Tap Gesture Method
     func topIconTapAction() {

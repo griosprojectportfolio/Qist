@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14A389" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="SavedUser" representedClassName="Qist.SavedUser" syncable="YES">
-        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="user_name" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15A284" minimumToolsVersion="Automatic">
     <entity name="Store" syncable="YES">
         <attribute name="store_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="store_imgUrl" optional="YES" attributeType="String" syncable="YES"/>
@@ -11,16 +7,24 @@
         <attribute name="store_title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="Qist.User" syncable="YES">
-        <attribute name="birth_date" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="email_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="address_1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="address_2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="device_token" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="facebook_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="first_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="googleplus_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="last_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="twitter_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
         <element name="Store" positionX="-63" positionY="27" width="128" height="105"/>
-        <element name="User" positionX="-63" positionY="-18" width="128" height="135"/>
-        <element name="SavedUser" positionX="-54" positionY="45" width="128" height="75"/>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="270"/>
     </elements>
 </model>

@@ -10,6 +10,8 @@ import Foundation
 
 class SupportController : BaseController {
     
+    @IBOutlet var webView: UIWebView!
+    
     // MARK: -  Current view related Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +21,7 @@ class SupportController : BaseController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.getSupportPageContentFromServer()
         // Do any additional setup befour appear the view.
     }
     
@@ -31,5 +34,34 @@ class SupportController : BaseController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - API CALL- GET ABOUT US PAGE DATA
+    func getSupportPageContentFromServer(){
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "support", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+                self.stopLoadingIndicatorView()
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                let objPage : NSDictionary = dictResponse["page"] as! NSDictionary
+                self.webView.loadHTMLString(objPage["content"] as! String, baseURL: nil)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                self.showErrorPopupWith_title_message("SUPPORT!", strMessage:(error?.localizedDescription)!)
+        })
+    }
+    
+    // MARK: -  Overrided Methods of BaseController
+    override func configureComponentsLayout(){
+        // This function use for set layout of components.
+    }
+    
+    override func assignDataToComponents(){
+        // This function use for assign data to components.
+    }
+    
     
 }

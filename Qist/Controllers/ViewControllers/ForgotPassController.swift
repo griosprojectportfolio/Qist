@@ -59,28 +59,28 @@ class ForgotPassController : BaseController , facebookDataDelegate , twitterData
     }
     
     @IBAction func sendEmailButtonTapped(sender: UIButton) {
-        self.navigationController?.popViewControllerAnimated(true)
-        /*
+        
         let errorMessage : String = isEnteredDataValid()
         
         if errorMessage.isEmpty {
             
             self.startLoadingIndicatorView()
-            var dictParams : NSDictionary = ["access_token": self.auth_token]
+            let dictParams : NSDictionary = ["email": self.txtRecoveryEmail!.text!]
             
-            self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "resetpassword", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "forgot_pass", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
                 
                     self.stopLoadingIndicatorView()
                     let dictTemp : NSDictionary = responseObject as! NSDictionary
-                
+                    print(dictTemp)
                 },
                 failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                     self.stopLoadingIndicatorView()
+                    self.showErrorPopupWith_title_message("FORGOT PASSWORD!", strMessage:(error?.localizedDescription)!)
             })
         }else{
-             self.showErrorPopupWith_title_message("Forgot Password", strMessage: errorMessage)
+             self.showErrorPopupWith_title_message("FORGOT PASSWORD!", strMessage: errorMessage)
         }
-        */
+        
     }
     
     
@@ -108,7 +108,7 @@ class ForgotPassController : BaseController , facebookDataDelegate , twitterData
     func currentFacebookUserData(dictResponse:NSDictionary) {
         self.stopLoadingIndicatorView()
         // Save user basic info in database
-        self.storeUserInfoInCoreData(dictResponse,isLoginVia:"Facebook")
+        //self.storeUserInfoInCoreData(dictResponse,isLoginVia:"Facebook")
     }
     
     func failedToGetFacebookUserData(errorMessage:String) {
@@ -121,10 +121,9 @@ class ForgotPassController : BaseController , facebookDataDelegate , twitterData
     // MARK: - twitterDataDelegate Delegate Methods
     func currentTwitterUserData(dictResponse:NSDictionary) {
         self.stopLoadingIndicatorView()
-        let dictData : NSDictionary = [ "id" : dictResponse["id_str"] as! String ,"first_name" : dictResponse["name"] as! String ,
-            "last_name" : dictResponse["name"] as! String , "email" : "" , "birthday" : "", "gender" : "" ]
+        //let dictData : NSDictionary = [ "id" : dictResponse["id_str"] as! String ,"first_name" : dictResponse["name"] as! String , "last_name" : dictResponse["name"] as! String , "email" : "" , "birthday" : "", "gender" : "" ]
         // Save user basic info in database
-        self.storeUserInfoInCoreData(dictData,isLoginVia:"Twitter")
+        //self.storeUserInfoInCoreData(dictData,isLoginVia:"Twitter")
     }
     
     func failedToGettwitterUserData(errorMessage:String) {
@@ -136,11 +135,9 @@ class ForgotPassController : BaseController , facebookDataDelegate , twitterData
     
     // MARK: - googlePlusDataDelegate Delegate Methods
     func currentGooglePlusUserData(dictResponse:NSDictionary) {
-        let dictData : NSDictionary = [ "id" : dictResponse["id"] as! String ,"first_name" : dictResponse["name"] as! String ,
-            "last_name" : dictResponse["name"] as! String , "email" : dictResponse["email"] as! String ,
-            "birthday" : "", "gender" : dictResponse["gender"] as! String ]
+        //let dictData : NSDictionary = [ "id" : dictResponse["id"] as! String ,"first_name" : dictResponse["name"] as! String , "last_name" : dictResponse["name"] as! String , "email" : dictResponse["email"] as! String , "birthday" : "", "gender" : dictResponse["gender"] as! String ]
         // Save user basic info in database
-        self.storeUserInfoInCoreData(dictData,isLoginVia:"Google Plus")
+        //self.storeUserInfoInCoreData(dictData,isLoginVia:"Google Plus")
     }
     
     func failedToGetGooglePlusUserData(errorMessage:String) {
@@ -154,7 +151,6 @@ class ForgotPassController : BaseController , facebookDataDelegate , twitterData
         let arrData : NSArray = NSArray(object: dictData)
         MagicalRecord.saveWithBlock({ ( context : NSManagedObjectContext!) -> Void in
             User.entityFromArrayInContext( arrData , localContext: context)
-            self.setUserLoginSession_AccessToken("XYZ")
             self.showLoginAlertWithNavigation(isLoginVia)
         })
     }
@@ -186,7 +182,7 @@ class ForgotPassController : BaseController , facebookDataDelegate , twitterData
     
     func showLoginAlertWithNavigation(strMessage:String){
         dispatch_async(dispatch_get_main_queue()) {
-            self.alertQist = UIAlertController.alertWithTitleAndMessage("Login" ,message:"Successfully logged in with \(strMessage)", handler:{(objAlertAction : UIAlertAction!) -> Void in
+            self.alertQist = UIAlertController.alertWithTitleAndMessage("LOGIN" ,message:"Successfully logged in with \(strMessage)", handler:{(objAlertAction : UIAlertAction!) -> Void in
                 self.performSegueWithIdentifier("Scanner", sender: self)
             })
             self.presentViewController(self.alertQist, animated: true, completion: nil)
@@ -209,6 +205,9 @@ class ForgotPassController : BaseController , facebookDataDelegate , twitterData
             self.btnCancel?.frame = CGRectMake(self.btnCancel!.frame.origin.x + 2, self.btnCancel!.frame.origin.y ,self.btnCancel!.frame.size.width , self.btnCancel!.frame.size.height)
         }else if isiPhone6plus {
             self.btnCancel?.frame = CGRectMake(self.btnCancel!.frame.origin.x, self.btnCancel!.frame.origin.y - 2,self.btnCancel!.frame.size.width , self.btnCancel!.frame.size.height)
+        }else if isiPad {
+            self.txtRecoveryEmail?.frame = CGRectMake(self.txtRecoveryEmail!.frame.origin.x + 15, self.txtRecoveryEmail!.frame.origin.y,self.txtRecoveryEmail!.frame.size.width - 30, self.txtRecoveryEmail!.frame.size.height)
+            self.btnCancel?.frame = CGRectMake(self.btnCancel!.frame.origin.x - 15, self.btnCancel!.frame.origin.y - 6,self.btnCancel!.frame.size.width , self.btnCancel!.frame.size.height)
         }
     }
     

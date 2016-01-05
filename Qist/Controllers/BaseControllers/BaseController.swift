@@ -9,10 +9,11 @@
 import Foundation
 import UIKit
 
-let isiPhone4s     =   UIScreen.mainScreen().bounds.size.height == 480
-let isiPhone5      =   UIScreen.mainScreen().bounds.size.width == 320
+let isiPhone4s     =   UIScreen.mainScreen().bounds.size.width == 320 && UIScreen.mainScreen().bounds.size.height == 480
+let isiPhone5      =   UIScreen.mainScreen().bounds.size.width == 320 && UIScreen.mainScreen().bounds.size.height == 568
 let isiPhone6      =   UIScreen.mainScreen().bounds.size.width == 375
 let isiPhone6plus  =   UIScreen.mainScreen().bounds.size.width == 414
+let isiPad         =   UIScreen.mainScreen().bounds.size.width == 768.0 || UIScreen.mainScreen().bounds.size.width == 1024.0
 
 
 class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate , locationAuthorizationDelegate {
@@ -25,6 +26,9 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
     var leftView : LeftPanelView!
     var rightSwipeGestureRecognizer : UISwipeGestureRecognizer!
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
+    let longitude = QistLocationManager.sharedManager.currentLocation.longitude
+    let latitude = QistLocationManager.sharedManager.currentLocation.latitude
     
     let btnBackNav: UIButton = UIButton(type: UIButtonType.Custom)
     let btnBackLogo: UIButton = UIButton(type: UIButtonType.Custom)
@@ -40,6 +44,20 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         }
         set (newValue) {
             NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "auth_token")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
+    
+    var remember_user : String {
+        get {
+            var strUserName : String = ""
+            if(NSUserDefaults.standardUserDefaults().objectForKey("remember_user") != nil){
+                strUserName = NSUserDefaults.standardUserDefaults().objectForKey("remember_user") as! String
+            }
+            return strUserName
+        }
+        set (newValue) {
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "remember_user")
             NSUserDefaults.standardUserDefaults().synchronize()
         }
     }
@@ -137,6 +155,14 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         }
     }
     
+    func showBackNavAlertWith_title_message(strTitle:String, strMessage:String){
+        dispatch_async(dispatch_get_main_queue()) {
+            self.alertQist = UIAlertController.alertWithTitleAndMessage(strTitle,message:strMessage, handler:{(objAlertAction : UIAlertAction!) -> Void in
+                self.navigationController?.popViewControllerAnimated(true)
+            })
+            self.presentViewController(self.alertQist, animated: true, completion: nil)
+        }
+    }
     
     
     // MARK: - leftPanelDelegate Delegate Method.

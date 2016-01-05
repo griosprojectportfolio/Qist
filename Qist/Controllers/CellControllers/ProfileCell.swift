@@ -12,7 +12,7 @@ class ProfileCell : UITableViewCell {
     
     @IBOutlet var lblTitle : UILabel!
     @IBOutlet var lblSubTitle: UILabel!
-    @IBOutlet var btnChangeCart: UIButton!
+    @IBOutlet var btnChange: UIButton!
     
     func configureProfileTableViewCell(){
         
@@ -28,16 +28,27 @@ class ProfileCell : UITableViewCell {
         lblSubTitle.font = UIFont.normalFontOfSize(13.0)
     }
 
-    func setupHistoryCellContentAt_IndexPath(indexPath:NSIndexPath,objProfile:NSDictionary){
+    func setupProfileCellContentAt_IndexPath(indexPath:NSIndexPath,objUser:User){
+        
         switch indexPath.row {
-        case 0 :    self.lblTitle.text = "Name"
-                    self.lblSubTitle.text = objProfile["name"] as? String
-        case 1 :    self.lblTitle.text = "Email Address"
-                    self.lblSubTitle.text = objProfile["email"] as? String
-        case 2 :    self.lblTitle.text = "Password"
-                    self.lblSubTitle.text = objProfile["password"] as? String
-        case 3 :    self.lblTitle.text = "Your Location"
-                    self.lblSubTitle.text = objProfile["location"] as? String
+        
+        case 0 :    self.lblTitle.text = "First Name"
+                    self.lblSubTitle.text = objUser.first_name!
+            
+        case 1 :    self.lblTitle.text = "Last Name"
+                    self.lblSubTitle.text = objUser.last_name!
+            
+        case 2 :    self.lblTitle.text = "Email Address"
+                    self.lblSubTitle.text = objUser.email
+                    self.btnChange.hidden = true
+            
+        case 3 :    self.lblTitle.text = "Password"
+                    self.lblSubTitle.text = "****"
+            
+        case 4 :    self.lblTitle.text = "Your Location"
+                    self.lblSubTitle.text = objUser.address_1
+                    self.btnChange.hidden = true
+            
         default :   self.lblTitle.text = ""
                     self.lblSubTitle.text = ""
         }

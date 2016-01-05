@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17036DEF1C3B9594003A3012 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17036DED1C3B9594003A3012 /* User.swift */; };
 		17157E671C045A7C00D516DB /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 17157E661C045A7C00D516DB /* Reachability.m */; };
 		1718F40C1BA9327100242278 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F40B1BA9327100242278 /* AppDelegate.swift */; };
 		1718F40F1BA9327100242278 /* Qist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1718F40D1BA9327100242278 /* Qist.xcdatamodeld */; };
@@ -30,7 +31,6 @@
 		1718F4611BA97CA600242278 /* Alert+Qist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F4601BA97CA500242278 /* Alert+Qist.swift */; };
 		1718F4631BA998BB00242278 /* QistTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F4621BA998BB00242278 /* QistTextField.swift */; };
 		1718F4651BA99DBC00242278 /* ScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F4641BA99DBC00242278 /* ScannerController.swift */; };
-		17362B371BAFCBD70042EDF8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17362B361BAFCBD70042EDF8 /* User.swift */; };
 		1738B5EC1BB911E900496CA5 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1738B5EB1BB911E900496CA5 /* HistoryCell.swift */; };
 		1738B5EE1BB9236600496CA5 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1738B5ED1BB9236600496CA5 /* ProfileCell.swift */; };
 		1738B5F01BB9555400496CA5 /* LocateQistSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1738B5EF1BB9555400496CA5 /* LocateQistSearchView.swift */; };
@@ -39,7 +39,6 @@
 		173EB3681BB55122001E17A5 /* WishListsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173EB3671BB55122001E17A5 /* WishListsCell.swift */; };
 		173EB36C1BB57208001E17A5 /* CheckOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173EB36B1BB57208001E17A5 /* CheckOutView.swift */; };
 		174577401BD10F240063AFDC /* QistLoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1745773F1BD10F240063AFDC /* QistLoadingOverlay.swift */; };
-		174577441BD12D900063AFDC /* SavedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174577431BD12D900063AFDC /* SavedUser.swift */; };
 		174618FA1BC3CB48002ECB60 /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174618F91BC3CB48002ECB60 /* AboutController.swift */; };
 		174618FC1BC3CB5F002ECB60 /* SupportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174618FB1BC3CB5F002ECB60 /* SupportController.swift */; };
 		174618FE1BC3F434002ECB60 /* ScanProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174618FD1BC3F434002ECB60 /* ScanProductController.swift */; };
@@ -57,6 +56,7 @@
 		1752C0D11BAA9BB400B0C419 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1752C0D01BAA9BB400B0C419 /* SystemConfiguration.framework */; };
 		1752C0D31BAAA90A00B0C419 /* QistSocials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1752C0D21BAAA90A00B0C419 /* QistSocials.swift */; };
 		1752C0D61BAAC80E00B0C419 /* GooglePlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1752C0D51BAAC80E00B0C419 /* GooglePlus.swift */; };
+		179DAEE51C3BE21B0049B421 /* UpdateProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179DAEE41C3BE21B0049B421 /* UpdateProfileController.swift */; };
 		17A4908C1BCE99EB0026D0C8 /* QistLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A4908B1BCE99EB0026D0C8 /* QistLocationManager.swift */; };
 		17C30BEA1BB28F7C00B141A0 /* LeftPanelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C30BE91BB28F7C00B141A0 /* LeftPanelCell.swift */; };
 		17C30BEC1BB28F8E00B141A0 /* LeftPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C30BEB1BB28F8E00B141A0 /* LeftPanelView.swift */; };
@@ -78,6 +78,7 @@
 
 /* Begin PBXFileReference section */
 		141B83A7854F2BAA750B7BEF /* Pods-Qist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qist.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qist/Pods-Qist.debug.xcconfig"; sourceTree = "<group>"; };
+		17036DED1C3B9594003A3012 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		17157E651C045A7C00D516DB /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		17157E661C045A7C00D516DB /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		1718F4061BA9327100242278 /* Qist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qist.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,7 +109,6 @@
 		1718F4601BA97CA500242278 /* Alert+Qist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alert+Qist.swift"; sourceTree = "<group>"; };
 		1718F4621BA998BB00242278 /* QistTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QistTextField.swift; sourceTree = "<group>"; };
 		1718F4641BA99DBC00242278 /* ScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerController.swift; sourceTree = "<group>"; };
-		17362B361BAFCBD70042EDF8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1738B5EB1BB911E900496CA5 /* HistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		1738B5ED1BB9236600496CA5 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		1738B5EF1BB9555400496CA5 /* LocateQistSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocateQistSearchView.swift; sourceTree = "<group>"; };
@@ -117,7 +117,6 @@
 		173EB3671BB55122001E17A5 /* WishListsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishListsCell.swift; sourceTree = "<group>"; };
 		173EB36B1BB57208001E17A5 /* CheckOutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOutView.swift; sourceTree = "<group>"; };
 		1745773F1BD10F240063AFDC /* QistLoadingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QistLoadingOverlay.swift; sourceTree = "<group>"; };
-		174577431BD12D900063AFDC /* SavedUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedUser.swift; sourceTree = "<group>"; };
 		174618F91BC3CB48002ECB60 /* AboutController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		174618FB1BC3CB5F002ECB60 /* SupportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportController.swift; sourceTree = "<group>"; };
 		174618FD1BC3F434002ECB60 /* ScanProductController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanProductController.swift; sourceTree = "<group>"; };
@@ -135,6 +134,7 @@
 		1752C0D01BAA9BB400B0C419 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		1752C0D21BAAA90A00B0C419 /* QistSocials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QistSocials.swift; sourceTree = "<group>"; };
 		1752C0D51BAAC80E00B0C419 /* GooglePlus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlus.swift; sourceTree = "<group>"; };
+		179DAEE41C3BE21B0049B421 /* UpdateProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfileController.swift; sourceTree = "<group>"; };
 		17A4908B1BCE99EB0026D0C8 /* QistLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QistLocationManager.swift; sourceTree = "<group>"; };
 		17C30BE91BB28F7C00B141A0 /* LeftPanelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftPanelCell.swift; sourceTree = "<group>"; };
 		17C30BEB1BB28F8E00B141A0 /* LeftPanelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftPanelView.swift; sourceTree = "<group>"; };
@@ -283,9 +283,8 @@
 		1718F4321BA9344D00242278 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				17362B361BAFCBD70042EDF8 /* User.swift */,
 				174D16AE1BB3C67D00E0B4E8 /* Store.swift */,
-				174577431BD12D900063AFDC /* SavedUser.swift */,
+				17036DED1C3B9594003A3012 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -353,6 +352,7 @@
 				174D16B41BB416C100E0B4E8 /* SpecialsController.swift */,
 				174D16B61BB416EE00E0B4E8 /* LocateQistsController.swift */,
 				174D16B81BB419DD00E0B4E8 /* ProfileController.swift */,
+				179DAEE41C3BE21B0049B421 /* UpdateProfileController.swift */,
 				174D16BA1BB419F100E0B4E8 /* SettingsController.swift */,
 				174D16BC1BB41A0400E0B4E8 /* HistoryController.swift */,
 				174618F91BC3CB48002ECB60 /* AboutController.swift */,
@@ -542,6 +542,7 @@
 			files = (
 				174D16B31BB416A500E0B4E8 /* WishListsController.swift in Sources */,
 				173EB36C1BB57208001E17A5 /* CheckOutView.swift in Sources */,
+				17036DEF1C3B9594003A3012 /* User.swift in Sources */,
 				174D16BF1BB420A600E0B4E8 /* SpecialsCell.swift in Sources */,
 				173EB3681BB55122001E17A5 /* WishListsCell.swift in Sources */,
 				1738B5F21BB9744200496CA5 /* LocateQistCell.swift in Sources */,
@@ -554,7 +555,6 @@
 				1738B5EE1BB9236600496CA5 /* ProfileCell.swift in Sources */,
 				174577401BD10F240063AFDC /* QistLoadingOverlay.swift in Sources */,
 				1718F40F1BA9327100242278 /* Qist.xcdatamodeld in Sources */,
-				174577441BD12D900063AFDC /* SavedUser.swift in Sources */,
 				174618FC1BC3CB5F002ECB60 /* SupportController.swift in Sources */,
 				1718F44B1BA9404E00242278 /* SignupController.swift in Sources */,
 				1738B5F01BB9555400496CA5 /* LocateQistSearchView.swift in Sources */,
@@ -562,6 +562,7 @@
 				17C30BF01BB2B0E900B141A0 /* CartsController.swift in Sources */,
 				1718F4651BA99DBC00242278 /* ScannerController.swift in Sources */,
 				17C30BEA1BB28F7C00B141A0 /* LeftPanelCell.swift in Sources */,
+				179DAEE51C3BE21B0049B421 /* UpdateProfileController.swift in Sources */,
 				1718F4421BA93B0400242278 /* ApiClient.swift in Sources */,
 				174D16B11BB4004700E0B4E8 /* SegmentedView.swift in Sources */,
 				17C30BEE1BB2935A00B141A0 /* StoresController.swift in Sources */,
@@ -577,7 +578,6 @@
 				1718F4361BA9369B00242278 /* ActivityIndicatorView.swift in Sources */,
 				174618FA1BC3CB48002ECB60 /* AboutController.swift in Sources */,
 				174D16B71BB416EE00E0B4E8 /* LocateQistsController.swift in Sources */,
-				17362B371BAFCBD70042EDF8 /* User.swift in Sources */,
 				1738B5EC1BB911E900496CA5 /* HistoryCell.swift in Sources */,
 				1718F43A1BA936EA00242278 /* String+Qist.swift in Sources */,
 				17157E671C045A7C00D516DB /* Reachability.m in Sources */,

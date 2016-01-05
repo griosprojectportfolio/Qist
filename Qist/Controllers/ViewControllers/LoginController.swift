@@ -33,7 +33,7 @@ class LoginController : BaseController , facebookDataDelegate , twitterDataDeleg
         if !self.auth_token.isEmpty {
             self.performSegueWithIdentifier("Scanner", sender: self)
         }else{
-            self.getAndSetLastLogedInUser([],isSetUser:false)
+            self.getAndSetLastLogedInUser("", isSetUser : false)
         }
     }
     
@@ -106,7 +106,7 @@ class LoginController : BaseController , facebookDataDelegate , twitterDataDeleg
     func currentFacebookUserData(dictResponse:NSDictionary) {
         self.stopLoadingIndicatorView()
         // Save user basic info in database
-        self.storeUserInfoInCoreData(dictResponse,isLoginVia:"Facebook")
+        //self.storeUserInfoInCoreData(dictResponse,isLoginVia:"Facebook")
     }
     
     func failedToGetFacebookUserData(errorMessage:String) {
@@ -119,10 +119,9 @@ class LoginController : BaseController , facebookDataDelegate , twitterDataDeleg
     // MARK: - twitterDataDelegate Delegate Methods
     func currentTwitterUserData(dictResponse:NSDictionary) {
         self.stopLoadingIndicatorView()
-        let dictData : NSDictionary = [ "id" : dictResponse["id_str"] as! String ,"first_name" : dictResponse["name"] as! String ,
-            "last_name" : dictResponse["name"] as! String , "email" : "" , "birthday" : "", "gender" : "" ]
+        //let dictData : NSDictionary = [ "id" : dictResponse["id_str"] as! String ,"first_name" : dictResponse["name"] as! String , "last_name" : dictResponse["name"] as! String , "email" : "" , "birthday" : "", "gender" : "" ]
         // Save user basic info in database
-        self.storeUserInfoInCoreData(dictData,isLoginVia:"Twitter")
+        //self.storeUserInfoInCoreData(dictData,isLoginVia:"Twitter")
     }
     
     func failedToGettwitterUserData(errorMessage:String) {
@@ -134,11 +133,9 @@ class LoginController : BaseController , facebookDataDelegate , twitterDataDeleg
     
     // MARK: - googlePlusDataDelegate Delegate Methods
     func currentGooglePlusUserData(dictResponse:NSDictionary) {
-        let dictData : NSDictionary = [ "id" : dictResponse["id"] as! String ,"first_name" : dictResponse["name"] as! String ,
-            "last_name" : dictResponse["name"] as! String , "email" : dictResponse["email"] as! String ,
-            "birthday" : "", "gender" : dictResponse["gender"] as! String ]
+        //let dictData : NSDictionary = [ "id" : dictResponse["id"] as! String ,"first_name" : dictResponse["name"] as! String , "last_name" : dictResponse["name"] as! String , "email" : dictResponse["email"] as! String , "birthday" : "", "gender" : dictResponse["gender"] as! String ]
         // Save user basic info in database
-        self.storeUserInfoInCoreData(dictData,isLoginVia:"Google Plus")
+        //self.storeUserInfoInCoreData(dictData,isLoginVia:"Google Plus")
     }
     
     func failedToGetGooglePlusUserData(errorMessage:String) {
@@ -156,27 +153,31 @@ class LoginController : BaseController , facebookDataDelegate , twitterDataDeleg
         if errorMessage.isEmpty {
             
             if self.btnIsRemember?.tag == 1 {
-                self.getAndSetLastLogedInUser([["user_name" : self.txtEmail!.text! , "password" : self.txtPassword!.text!]],isSetUser:true)
+                self.getAndSetLastLogedInUser(self.txtEmail!.text!, isSetUser: true)
+            }else {
+                self.getAndSetLastLogedInUser("", isSetUser : true)
             }
             
             self.startLoadingIndicatorView()
-            let dictParams : NSDictionary = ["email": self.txtEmail!.text! , "password" : self.txtPassword!.text!]
+            let dictParams : NSDictionary = ["user_name": self.txtEmail!.text! , "password" : self.txtPassword!.text!]
             
-            self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "login", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "user_login", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
                 
                     self.stopLoadingIndicatorView()
-                    let dictTemp : NSDictionary = responseObject as! NSDictionary
-                    let dictResponse : NSDictionary = dictTemp["user"] as! NSDictionary
-                    self.setUserLoginSession_AccessToken( dictResponse["access_token"] as! String)
-                    self.showLoginAlertWithNavigation(self.txtEmail!.text!)
+                    let dictResponse : NSDictionary = responseObject as! NSDictionary
+                    let objCustomer : NSDictionary = dictResponse["customer"] as! NSDictionary
+                    self.setUserLoginSession_AccessToken(objCustomer["access_token"] as! String)
+                    self.storeUserInfoInCoreData(objCustomer, isLoginVia: dictParams["user_name"] as! String)
                     self.resetLoginPageContents()
 
                 },
                 failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                     self.stopLoadingIndicatorView()
+                    self.showErrorPopupWith_title_message("LOGIN!", strMessage:(error?.localizedDescription)!)
             })
+            
         }else{
-            self.showErrorPopupWith_title_message("LOGIN", strMessage: errorMessage)
+            self.showErrorPopupWith_title_message("LOGIN!", strMessage: errorMessage)
         }
     }
     
@@ -184,7 +185,6 @@ class LoginController : BaseController , facebookDataDelegate , twitterDataDeleg
         let arrData : NSArray = NSArray(object: dictData)
         MagicalRecord.saveWithBlock({ ( context : NSManagedObjectContext!) -> Void in
             User.entityFromArrayInContext( arrData , localContext: context)
-            self.setUserLoginSession_AccessToken("XYZ")
             self.showLoginAlertWithNavigation(isLoginVia)
         })
     }
@@ -225,7 +225,7 @@ class LoginController : BaseController , facebookDataDelegate , twitterDataDeleg
     
     func showLoginAlertWithNavigation(strMessage:String){
         dispatch_async(dispatch_get_main_queue()) {
-            self.alertQist = UIAlertController.alertWithTitleAndMessage("Login" ,message:"Successfully logged in with \(strMessage)", handler:{(objAlertAction : UIAlertAction!) -> Void in
+            self.alertQist = UIAlertController.alertWithTitleAndMessage("LOGIN" ,message:"Successfully logged in with \(strMessage)", handler:{(objAlertAction : UIAlertAction!) -> Void in
                 self.performSegueWithIdentifier("Scanner", sender: self)
             })
             self.presentViewController(self.alertQist, animated: true, completion: nil)
@@ -241,18 +241,11 @@ class LoginController : BaseController , facebookDataDelegate , twitterDataDeleg
     
     
     // MARK: -  Remember me Functionality methods
-    func getAndSetLastLogedInUser(arrUserInfo: NSArray ,isSetUser: Bool){
+    func getAndSetLastLogedInUser(strUserName: String ,isSetUser: Bool){
         if isSetUser {
-            MagicalRecord.saveWithBlock({ ( context : NSManagedObjectContext!) -> Void in
-                SavedUser.entityFromArrayInContext( arrUserInfo, localContext: context)
-            })
-        }else{
-            let arrUser = SavedUser.MR_findAll() as NSArray
-            if arrUser.count > 0 {
-                let objUser : SavedUser = arrUser[0] as! SavedUser
-                self.txtEmail?.text = objUser.user_name
-                self.txtPassword?.text = objUser.password
-            }
+            self.remember_user = strUserName
+        }else {
+            self.txtEmail?.text = self.remember_user
         }
     }
     

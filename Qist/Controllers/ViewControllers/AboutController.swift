@@ -9,9 +9,9 @@
 import Foundation
 
 class AboutController : BaseController {
-
     
-    @IBOutlet var lblAboutUs: UILabel!
+    @IBOutlet var webView: UIWebView!
+    var strAboutUs: String = String()
     
     // MARK: -  Current view related Methods
     override func viewDidLoad() {
@@ -22,6 +22,7 @@ class AboutController : BaseController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.getAboutUsPageContentFromServer()
         // Do any additional setup befour appear the view.
     }
     
@@ -36,16 +37,33 @@ class AboutController : BaseController {
     }
     
     
+    // MARK: - API CALL- GET ABOUT US PAGE DATA
+    func getAboutUsPageContentFromServer(){
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "about", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+                self.stopLoadingIndicatorView()
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                let objPage : NSDictionary = dictResponse["page"] as! NSDictionary
+                self.strAboutUs = objPage["content"] as! String
+                self.webView.loadHTMLString(self.strAboutUs, baseURL: nil)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                self.showErrorPopupWith_title_message("ABOUT!", strMessage:(error?.localizedDescription)!)
+        })
+    }
+
     // MARK: -  Overrided Methods of BaseController
     override func configureComponentsLayout(){
         // This function use for set layout of components.
-        self.lblAboutUs.font = UIFont.defaultFontOfSize(15.0)
-        self.lblAboutUs.textColor = UIColor.appCellSubTitleColor()
     }
     
     override func assignDataToComponents(){
         // This function use for assign data to components.
-        self.lblAboutUs.text = "Qist (pronounced Kissed) is the loyalty card with a difference. Instead of just gathering your data and accumulating points, Qist gives you what you want most, instant savings and discounts specific to you! In return you share your shopping habits with the retailers you choose, which they will use to market their best deals to you! See our website for full terms and conditions"
     }
     
 }
