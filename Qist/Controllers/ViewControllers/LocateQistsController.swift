@@ -98,6 +98,29 @@ class LocateQistsController : BaseController {
     }
     
     
+    // MARK: - API CALLS - Get all stores
+    func getAllStoresInfoFromServer() {
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token , "latitude" : self.latitude, "longitude" : self.longitude, "address": ""]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "nearby_stores", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+                self.stopLoadingIndicatorView()
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                print(dictResponse)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                do {
+                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
+                    self.showErrorPopupWith_title_message("LOCATE!", strMessage:dictUser["error"] as! String)
+                }catch {
+                    self.showErrorPopupWith_title_message("LOCATE!", strMessage:"Server Api error.")
+                }
+        })
+    }
+    
     // MARK: -  Overrided Methods of BaseController
     override func configureComponentsLayout(){
         // This function use for set layout of components.

@@ -11,15 +11,12 @@ import Foundation
 class ProfileController : BaseController , segmentedTapActionDelegate {
     
     @IBOutlet var tblProfile : UITableView!
-    var objUser : User!
     
     // MARK: -  Current view related Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.title = "PROFILE"
-        let arrFetchedData : NSArray = User.MR_findAll()
-        objUser = arrFetchedData.objectAtIndex(0) as! User
     }
     
     override func viewWillAppear(animated: Bool) {

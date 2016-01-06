@@ -9,12 +9,18 @@
 import Foundation
 import UIKit
 
+protocol storeCellDelegate {
+    func favouriteAndUnfavouriteButtonTapped(intSection : Int)
+}
+
 class StoresCell : UITableViewCell {
     
     @IBOutlet var lblTitle : UILabel!
     @IBOutlet var lblSubTitle: UILabel!
     @IBOutlet var btnHeart: UIButton!
     @IBOutlet var storeImgView: UIImageView!
+    
+    var storeDelegate: storeCellDelegate?
     
     func configureStoreTableViewCell(){
         
@@ -39,6 +45,10 @@ class StoresCell : UITableViewCell {
         self.lblSubTitle.text = "Christchurch,Caterbury"
         self.storeImgView.image = UIImage(named: "hamburger")
         
+    }
+    
+    @IBAction func heartButtonTapped(sender: UIButton){
+        self.storeDelegate?.favouriteAndUnfavouriteButtonTapped(sender.tag)
     }
     
 }

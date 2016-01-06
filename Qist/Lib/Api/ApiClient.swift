@@ -138,4 +138,31 @@ class ApiClient : AFHTTPRequestOperationManager {
         }
     }
     
+    // MARK: - Clear all tables in core data
+    func deleteAllTableContent() {
+        
+        let arrEntities : NSArray = NSArray(array:["User","Store"])
+        
+        MagicalRecord.saveWithBlock({ ( context : NSManagedObjectContext!) -> Void in
+            
+            for var i = 0 ; i < arrEntities.count; i++ {
+                
+                let fetchRequest : NSFetchRequest = NSFetchRequest()
+                let error : NSErrorPointer = NSErrorPointer()
+                let entity = NSEntityDescription.entityForName(arrEntities[i] as! String, inManagedObjectContext: context)
+                fetchRequest.entity = entity
+                do {
+                    let items : NSArray = try context.executeFetchRequest(fetchRequest)
+                    
+                    items.forEach { element in
+                        context.deleteObject(element as! NSManagedObject)
+                    }
+                    context.save(error)
+                }catch {
+                
+                }
+            }
+        })
+    }
+    
 }

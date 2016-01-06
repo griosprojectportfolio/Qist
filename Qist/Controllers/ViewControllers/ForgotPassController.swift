@@ -75,7 +75,12 @@ class ForgotPassController : BaseController , facebookDataDelegate , twitterData
                 },
                 failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                     self.stopLoadingIndicatorView()
-                    self.showErrorPopupWith_title_message("FORGOT PASSWORD!", strMessage:(error?.localizedDescription)!)
+                    do {
+                        let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
+                        self.showErrorPopupWith_title_message("FORGOT PASSWORD!", strMessage:dictUser["error"] as! String)
+                    }catch {
+                        self.showErrorPopupWith_title_message("ERROR!", strMessage:"Server Api error.")
+                    }
             })
         }else{
              self.showErrorPopupWith_title_message("FORGOT PASSWORD!", strMessage: errorMessage)

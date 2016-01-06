@@ -16,6 +16,8 @@ class CartsController : BaseController , segmentedTapActionDelegate {
     @IBOutlet var tblCartsView : UITableView!
     var objCheckOutView : CheckOutView!
     
+    var isWishlists : Bool = false
+    
     // MARK: -  Current view related Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,11 +50,15 @@ class CartsController : BaseController , segmentedTapActionDelegate {
     }
     
     func leftSegmentTappedAction() {
+        self.isWishlists = false
+        self.getAllCurrentCartInfoFromServer()
         self.tblCartsView?.frame = CGRectMake(self.tblCartsView!.frame.origin.x, self.tblCartsView!.frame.origin.y ,self.tblCartsView!.frame.size.width , self.view.frame.size.height - 310 )
         self.setupCheckOutViewDataContent()
     }
     
     func rightSegmentTappedAction() {
+        self.isWishlists = true
+        self.getAllWishlistsInfoFromServer()
         self.tblCartsView?.frame = CGRectMake(self.tblCartsView!.frame.origin.x, self.tblCartsView!.frame.origin.y ,self.tblCartsView!.frame.size.width , self.view.frame.size.height - 190 )
         self.objCheckOutView.removeFromSuperview()
     }
@@ -90,6 +96,141 @@ class CartsController : BaseController , segmentedTapActionDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
+    
+    
+    // MARK: - API CALLS - All Carts, Wish lists, Carts etc
+    func getAllCurrentCartInfoFromServer() {
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token , "latitude" : self.latitude, "longitude" : self.longitude]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "current_cart", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+                self.stopLoadingIndicatorView()
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                print(dictResponse)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                do {
+                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
+                    self.showErrorPopupWith_title_message("CARTS!", strMessage:dictUser["error"] as! String)
+                }catch {
+                    self.showErrorPopupWith_title_message("CARTS!", strMessage:"Server Api error.")
+                }
+        })
+    }
+    
+    func getAllWishlistsInfoFromServer() {
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token , "latitude" : self.latitude, "longitude" : self.longitude]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "wishlist", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+                self.stopLoadingIndicatorView()
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                print(dictResponse)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                do {
+                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
+                    self.showErrorPopupWith_title_message("WISHLISTS!", strMessage:dictUser["error"] as! String)
+                }catch {
+                    self.showErrorPopupWith_title_message("WISHLISTS!", strMessage:"Server Api error.")
+                }
+        })
+    }
+    
+    func addProductToWishLists() {
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": "0"]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "add_product_to_wishlist", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+                self.stopLoadingIndicatorView()
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                print(dictResponse)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                do {
+                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
+                    self.showErrorPopupWith_title_message("ADD PRODUCT!", strMessage:dictUser["error"] as! String)
+                }catch {
+                    self.showErrorPopupWith_title_message("ADD PRODUCT!", strMessage:"Server Api error.")
+                }
+        })
+    }
+    
+    func removeProductFromWishLists() {
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": "0"]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "remove_product_from_wishlist", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+            self.stopLoadingIndicatorView()
+            let dictResponse : NSDictionary = responseObject as! NSDictionary
+            print(dictResponse)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                do {
+                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
+                    self.showErrorPopupWith_title_message("REMOVE PRODUCT!", strMessage:dictUser["error"] as! String)
+                }catch {
+                    self.showErrorPopupWith_title_message("REMOVE PRODUCT!", strMessage:"Server Api error.")
+                }
+        })
+    }
+    
+    func addProductToCurrentCart() {
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": "0", "store_id" : "0"]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "add_product_to_cart", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+                self.stopLoadingIndicatorView()
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                print(dictResponse)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                do {
+                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
+                    self.showErrorPopupWith_title_message("ADD CART!", strMessage:dictUser["error"] as! String)
+                }catch {
+                    self.showErrorPopupWith_title_message("ADD CART!", strMessage:"Server Api error.")
+                }
+        })
+    }
+    
+    
+    func removeProductFromCurrentCart() {
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": "0", "store_id" : "0", "all" : "0"]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "remove_product_from_wishlist", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+                self.stopLoadingIndicatorView()
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                print(dictResponse)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                do {
+                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
+                    self.showErrorPopupWith_title_message("REMOVE CART!", strMessage:dictUser["error"] as! String)
+                }catch {
+                    self.showErrorPopupWith_title_message("REMOVE CART!", strMessage:"Server Api error.")
+                }
+        })
+    }
     
     
     // MARK: - Setup Bottom CheckOut View Methods

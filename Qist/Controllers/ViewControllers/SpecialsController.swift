@@ -17,6 +17,7 @@ class SpecialsController : BaseController , segmentedTapActionDelegate {
     @IBOutlet var lbl_TopExpire: UILabel!
     @IBOutlet var top_ImageView: UIImageView!
     
+    var isJustForYou : Bool = false
     
     // MARK: -  Current view related Methods
     override func viewDidLoad() {
@@ -28,6 +29,7 @@ class SpecialsController : BaseController , segmentedTapActionDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         // Do any additional setup befour appear the view.
+        self.getAllSpecialProductFromServer()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -41,29 +43,6 @@ class SpecialsController : BaseController , segmentedTapActionDelegate {
     }
     
     
-
-    // MARK: - TableView Delegate and Data Source Methods
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell : SpecialsCell = tableView.dequeueReusableCellWithIdentifier("SpecialCell",forIndexPath:indexPath) as! SpecialsCell
-        cell.configureStoreTableViewCell()
-        cell.setupStoreCellContent()
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
-    
-    
-    
     // MARK: - segmentedTapActionDelegate and their Delegate Methods
     func setupTopSegmentedControlOnView(){
         let segView : SegmentedView = SegmentedView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 64, self.view.frame.size.width, 35), leftBtnTitle: "ALL SPECIALS", rightBtnTitle: "JUST FOR YOU")
@@ -72,11 +51,13 @@ class SpecialsController : BaseController , segmentedTapActionDelegate {
     }
     
     func leftSegmentTappedAction() {
-        
+        self.isJustForYou = false
+        self.getAllSpecialProductFromServer()
     }
     
     func rightSegmentTappedAction() {
-        
+        self.isJustForYou = true
+        self.getAllJustForYouProductFromServer()
     }
     
     
@@ -107,6 +88,73 @@ class SpecialsController : BaseController , segmentedTapActionDelegate {
         
     }
     
+
+    // MARK: - TableView Delegate and Data Source Methods
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 6
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell : SpecialsCell = tableView.dequeueReusableCellWithIdentifier("SpecialCell",forIndexPath:indexPath) as! SpecialsCell
+        cell.configureStoreTableViewCell()
+        cell.setupStoreCellContent()
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    
+    
+    // MARK: - API CALLS - All Specials Stores
+    func getAllSpecialProductFromServer() {
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "specials", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+                self.stopLoadingIndicatorView()
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                print(dictResponse)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                do {
+                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
+                    self.showErrorPopupWith_title_message("SPECIALS!", strMessage:dictUser["error"] as! String)
+                }catch {
+                    self.showErrorPopupWith_title_message("SPECIALS!", strMessage:"Server Api error.")
+                }
+        })
+    }
+    
+    func getAllJustForYouProductFromServer() {
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "just_for_you", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+            self.stopLoadingIndicatorView()
+            let dictResponse : NSDictionary = responseObject as! NSDictionary
+            print(dictResponse)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                do {
+                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
+                    self.showErrorPopupWith_title_message("SPECIALS!", strMessage:dictUser["error"] as! String)
+                }catch {
+                    self.showErrorPopupWith_title_message("SPECIALS!", strMessage:"Server Api error.")
+                }
+        })
+    }
     
     // MARK: -  Overrided Methods of BaseController
     override func configureComponentsLayout(){

@@ -61,4 +61,11 @@ class CartsCell : UITableViewCell {
         
     }
     
+    @IBAction func removeFromWishlistsButtonTapped(sender: UIButton){
+        
+    }
+    
+    @IBAction func addOrRemoveButtonTapped(sender: UIButton){
+        
+    }
 }

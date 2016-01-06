@@ -28,6 +28,7 @@ class HistoryController : BaseController , segmentedTapActionDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         // Do any additional setup befour appear the view.
+        self.getAllScanHistoryFromServer()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -51,11 +52,13 @@ class HistoryController : BaseController , segmentedTapActionDelegate {
     
     func leftSegmentTappedAction() {
         self.isPurchase = false
+        self.getAllScanHistoryFromServer()
         self.tblHistory.reloadData()
     }
     
     func rightSegmentTappedAction() {
         self.isPurchase = true
+        self.getAllPurchaseHistoryFromServer()
         self.tblHistory.reloadData()
     }
     
@@ -153,6 +156,51 @@ class HistoryController : BaseController , segmentedTapActionDelegate {
     }
     
     
+    
+    // MARK: - API CALLS - All Stores, Favourites Stores
+    func getAllScanHistoryFromServer() {
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "customer_id": self.objUser.id!]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "scan_history", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+                self.stopLoadingIndicatorView()
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                print(dictResponse)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                do {
+                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
+                    self.showErrorPopupWith_title_message("HISTORY!", strMessage:dictUser["error"] as! String)
+                }catch {
+                    self.showErrorPopupWith_title_message("HISTORY!", strMessage:"Server Api error.")
+                }
+        })
+    }
+    
+    func getAllPurchaseHistoryFromServer() {
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "customer_id": self.objUser.id!]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "purchase_history", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+                self.stopLoadingIndicatorView()
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                print(dictResponse)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                do {
+                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
+                    self.showErrorPopupWith_title_message("HISTORY!", strMessage:dictUser["error"] as! String)
+                }catch {
+                    self.showErrorPopupWith_title_message("HISTORY!", strMessage:"Server Api error.")
+                }
+        })
+    }
     
     // MARK: -  Overrided Methods of BaseController
     override func configureComponentsLayout(){

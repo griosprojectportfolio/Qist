@@ -98,7 +98,12 @@ class SignupController : BaseController {
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                self.showErrorPopupWith_title_message("REGISTER!", strMessage:(error?.localizedDescription)!)
+                do {
+                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
+                    self.showErrorPopupWith_title_message("REGISTER!", strMessage:dictUser["error"] as! String)
+                }catch {
+                    self.showErrorPopupWith_title_message("ERROR!", strMessage:"Server Api error.")
+                }
         })
     }
     

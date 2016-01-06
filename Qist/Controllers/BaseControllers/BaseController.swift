@@ -29,7 +29,8 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
     
     let longitude = QistLocationManager.sharedManager.currentLocation.longitude
     let latitude = QistLocationManager.sharedManager.currentLocation.latitude
-    
+    var objUser : User!
+
     let btnBackNav: UIButton = UIButton(type: UIButtonType.Custom)
     let btnBackLogo: UIButton = UIButton(type: UIButtonType.Custom)
 
@@ -133,6 +134,29 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         self.view.addGestureRecognizer(self.rightSwipeGestureRecognizer)
     }
     
+    func setUserLoggedOutFromApplication() {
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("DELETE", URLString: "logout", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+                self.stopLoadingIndicatorView()
+                self.setUserLoginSession_AccessToken("")
+                self.sharedApi.deleteAllTableContent()
+                self.navigationController?.popToRootViewControllerAnimated(false)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                do {
+                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
+                    self.showErrorPopupWith_title_message("LOGOUT!", strMessage:dictUser["error"] as! String)
+                }catch {
+                    self.showErrorPopupWith_title_message("LOGOUT!", strMessage:"Server Api error.")
+                }
+        })
+    }
+    
+    // MARK: - Common page loading View Methods.
     func startLoadingIndicatorView(){
         dispatch_async(dispatch_get_main_queue(),{
             QistLoadingOverlay.shared.showOverlay(self.view, lblText: "Loading...")
@@ -146,7 +170,7 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
     }
     
     
-    // MARK: - Base Class Common Methods.
+    // MARK: - Common Alert View Methods.
     func showErrorPopupWith_title_message(strTitle:String, strMessage:String){
         dispatch_async(dispatch_get_main_queue()) {
             self.alertQist = UIAlertController.alertWithTitleAndMessage(strTitle,message:strMessage, handler:{(objAlertAction : UIAlertAction!) -> Void in
@@ -230,9 +254,8 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
                     let destination = self.storyboard?.instantiateViewControllerWithIdentifier("Support") as! SupportController
                     self.navigationController?.pushViewController(destination, animated: true)
                 }
-            case 2 :
-                    self.setUserLoginSession_AccessToken("")
-                   self.navigationController?.popToRootViewControllerAnimated(false)
+            case 2 : self.setUserLoggedOutFromApplication()
+                
             default :
                 if !fromController.isKindOfClass(ScannerController) {
                     let destination = self.storyboard?.instantiateViewControllerWithIdentifier("Scanner") as! ScannerController
@@ -293,5 +316,9 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         QistLocationManager.sharedManager.delegate = self
         leftView = LeftPanelView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height))
         leftView.delegate = self
+        
+        let arrFetchedData : NSArray = User.MR_findAll()
+        objUser = arrFetchedData.count > 0 ? arrFetchedData.objectAtIndex(0) as! User : nil
+        
     }
 }
