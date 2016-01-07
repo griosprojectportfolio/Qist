@@ -171,12 +171,7 @@ class HistoryController : BaseController , segmentedTapActionDelegate {
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                do {
-                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
-                    self.showErrorPopupWith_title_message("HISTORY!", strMessage:dictUser["error"] as! String)
-                }catch {
-                    self.showErrorPopupWith_title_message("HISTORY!", strMessage:"Server Api error.")
-                }
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "HISTORY!")
         })
     }
     
@@ -193,12 +188,7 @@ class HistoryController : BaseController , segmentedTapActionDelegate {
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                do {
-                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
-                    self.showErrorPopupWith_title_message("HISTORY!", strMessage:dictUser["error"] as! String)
-                }catch {
-                    self.showErrorPopupWith_title_message("HISTORY!", strMessage:"Server Api error.")
-                }
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "HISTORY!")
         })
     }
     

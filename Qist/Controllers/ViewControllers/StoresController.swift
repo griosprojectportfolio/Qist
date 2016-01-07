@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class StoresController : BaseController , segmentedTapActionDelegate {
+class StoresController : BaseController , segmentedTapActionDelegate , storeCellDelegate {
     
     @IBOutlet var tblView : UITableView!
     
@@ -18,8 +18,8 @@ class StoresController : BaseController , segmentedTapActionDelegate {
     @IBOutlet var lbl_TopExpire: UILabel!
     @IBOutlet var top_ImageView: UIImageView!
     
-    var arrStores : NSArray = NSArray()
-    var arrFavStores : NSArray = NSArray()
+    var arrStores : NSMutableArray = NSMutableArray()
+    var arrFavStores : NSMutableArray = NSMutableArray()
     var isMyFavourite : Bool = false
     
     // MARK: -  Current view related Methods
@@ -55,14 +55,14 @@ class StoresController : BaseController , segmentedTapActionDelegate {
     
     func leftSegmentTappedAction() {
         self.isMyFavourite = false
+        self.resetAllCollectionAndReloadViews()
         self.getAllStoresInfoFromServer()
-        self.tblView.reloadData()
     }
     
     func rightSegmentTappedAction() {
         self.isMyFavourite = true
+        self.resetAllCollectionAndReloadViews()
         self.getAllFavouriteStoresInfoFromServer()
-        self.tblView.reloadData()
     }
     
     
@@ -106,8 +106,10 @@ class StoresController : BaseController , segmentedTapActionDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell : StoresCell = tableView.dequeueReusableCellWithIdentifier("StoreCell",forIndexPath:indexPath) as! StoresCell
+        cell.storeDelegate = self
+        cell.tag = indexPath.row
         cell.configureStoreTableViewCell()
-        cell.setupStoreCellContent()
+        cell.setupStoreCellContent(self.isMyFavourite ? self.arrFavStores[indexPath.row] as! NSDictionary : self.arrStores[indexPath.row] as! NSDictionary)
         
         if self.isMyFavourite {
             cell.btnHeart.setBackgroundImage(UIImage(named: "store_icon_remove_fav"), forState: UIControlState.Normal)
@@ -122,6 +124,11 @@ class StoresController : BaseController , segmentedTapActionDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
+    
+    // MARK: - storeCellDelegate methods
+    func favouriteAndUnfavouriteTapped(intTag : Int) {
+        print("Cell object == \(self.isMyFavourite ? self.arrFavStores[intTag] as! NSDictionary : self.arrStores[intTag] as! NSDictionary)")
+    }
     
     
     // MARK: - API CALLS - All Stores, Favourites Stores
@@ -138,12 +145,7 @@ class StoresController : BaseController , segmentedTapActionDelegate {
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                do {
-                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
-                    self.showErrorPopupWith_title_message("STORES!", strMessage:dictUser["error"] as! String)
-                }catch {
-                    self.showErrorPopupWith_title_message("STORES!", strMessage:"Server Api error.")
-                }
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "STORES!")
         })
     }
     
@@ -160,57 +162,16 @@ class StoresController : BaseController , segmentedTapActionDelegate {
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                do {
-                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
-                    self.showErrorPopupWith_title_message("STORES!", strMessage:dictUser["error"] as! String)
-                }catch {
-                    self.showErrorPopupWith_title_message("STORES!", strMessage:"Server Api error.")
-                }
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "FAVOURITE STORES!")
         })
     }
     
-    func setStoreAsFavourites() {
-        
-        self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = ["access_token": self.auth_token, "store_id": "0"]
-        
-        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "set_favourite_store", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
-            
-                self.stopLoadingIndicatorView()
-                let dictResponse : NSDictionary = responseObject as! NSDictionary
-                print(dictResponse)
-            },
-            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
-                self.stopLoadingIndicatorView()
-                do {
-                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
-                    self.showErrorPopupWith_title_message("STORES!", strMessage:dictUser["error"] as! String)
-                }catch {
-                    self.showErrorPopupWith_title_message("STORES!", strMessage:"Server Api error.")
-                }
-        })
-    }
     
-    func setStoreAsUnFavourites() {
-        
-        self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = ["access_token": self.auth_token, "store_id": "0"]
-        
-        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "set_unfavourite_store", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
-            
-                self.stopLoadingIndicatorView()
-                let dictResponse : NSDictionary = responseObject as! NSDictionary
-                print(dictResponse)
-            },
-            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
-                self.stopLoadingIndicatorView()
-                do {
-                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
-                    self.showErrorPopupWith_title_message("STORES!", strMessage:dictUser["error"] as! String)
-                }catch {
-                    self.showErrorPopupWith_title_message("STORES!", strMessage:"Server Api error.")
-                }
-        })
+    // MARK: -  Store page Common Methods
+    func resetAllCollectionAndReloadViews() {
+        self.arrStores.removeAllObjects()
+        self.arrFavStores.removeAllObjects()
+        self.tblView.reloadData()
     }
     
     // MARK: -  Overrided Methods of BaseController

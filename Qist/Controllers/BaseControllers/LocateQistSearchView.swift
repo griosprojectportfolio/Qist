@@ -7,6 +7,11 @@
 //
 
 import Foundation
+import UIKit
+
+protocol locateQistSearchDelegate {
+    func searchQistForAddressTapped(strAddress : String)
+}
 
 class LocateQistSearchView : UIView , UITextFieldDelegate {
 
@@ -14,7 +19,7 @@ class LocateQistSearchView : UIView , UITextFieldDelegate {
     var gpsImgView : UIImageView!
     var searchTxtField : UITextField!
     var btnSearch : UIButton = UIButton(type: UIButtonType.Custom)
-
+    var locateQistDelegate: locateQistSearchDelegate?
     
     // MARK: - Initialze view
     override init(frame: CGRect) {
@@ -77,6 +82,7 @@ class LocateQistSearchView : UIView , UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        self.locateQistDelegate?.searchQistForAddressTapped(textField.text!)
         return false
     }
     

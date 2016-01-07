@@ -9,12 +9,18 @@
 import Foundation
 import UIKit
 
+protocol locateQistCellDelegate {
+    func favouriteButtonTapped(intTag:Int)
+}
+
 class LocateQistCell : UITableViewCell {
     
     @IBOutlet var lblTitle : UILabel!
     @IBOutlet var lblSubTitle: UILabel!
     @IBOutlet var btnHeart: UIButton!
     @IBOutlet var storeImgView: UIImageView!
+    
+    var locateCellDelegate: locateQistCellDelegate?
     
     func configureLocateQistTableViewCell(){
         
@@ -33,7 +39,7 @@ class LocateQistCell : UITableViewCell {
         
     }
     
-    func setupLocateQistCellContent(){
+    func setupLocateQistCellContent(dictData : NSDictionary){
         
         self.lblTitle.text = "Kirkcaldie & Stains"
         self.lblSubTitle.text = "Christchurch,Caterbury"
@@ -41,4 +47,8 @@ class LocateQistCell : UITableViewCell {
         
     }
     
+    @IBAction func heartButtonTapped(sender: UIButton){
+        self.locateCellDelegate?.favouriteButtonTapped(self.tag)
+    }
+
 }

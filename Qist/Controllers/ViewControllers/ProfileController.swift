@@ -22,6 +22,9 @@ class ProfileController : BaseController , segmentedTapActionDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         // Do any additional setup befour appear the view.
+        let arrFetchedData : NSArray = User.MR_findAll()
+        objUser = arrFetchedData.count > 0 ? arrFetchedData.objectAtIndex(0) as! User : nil
+        self.tblProfile.reloadData()
     }
     
     override func viewDidAppear(animated: Bool) {

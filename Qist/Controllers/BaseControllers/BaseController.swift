@@ -134,6 +134,112 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         self.view.addGestureRecognizer(self.rightSwipeGestureRecognizer)
     }
     
+    
+    // MARK: - API CALLS - Common server call Methods.
+    
+    func setStoreAsFavourites() {
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "store_id": "0"]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "set_favourite_store", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+            self.stopLoadingIndicatorView()
+            let dictResponse : NSDictionary = responseObject as! NSDictionary
+            print(dictResponse)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "FAVOURITE!")
+        })
+    }
+    
+    func setStoreAsUnFavourites() {
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "store_id": "0"]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "set_unfavourite_store", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+            self.stopLoadingIndicatorView()
+            let dictResponse : NSDictionary = responseObject as! NSDictionary
+            print(dictResponse)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "UNFAVOURITE!")
+        })
+    }
+    
+    func addProductToWishLists() {
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": "0"]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "add_product_to_wishlist", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+            self.stopLoadingIndicatorView()
+            let dictResponse : NSDictionary = responseObject as! NSDictionary
+            print(dictResponse)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "ADD PRODUCT!")
+        })
+    }
+    
+    func removeProductFromWishLists() {
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": "0"]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "remove_product_from_wishlist", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+            self.stopLoadingIndicatorView()
+            let dictResponse : NSDictionary = responseObject as! NSDictionary
+            print(dictResponse)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "REMOVE PRODUCT!")
+        })
+    }
+    
+    func addProductToCurrentCart() {
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": "0", "store_id" : "0"]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "add_product_to_cart", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+            self.stopLoadingIndicatorView()
+            let dictResponse : NSDictionary = responseObject as! NSDictionary
+            print(dictResponse)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "ADD CART!")
+        })
+    }
+    
+    
+    func removeProductFromCurrentCart() {
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": "0", "store_id" : "0", "all" : "0"]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "remove_product_from_wishlist", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+            self.stopLoadingIndicatorView()
+            let dictResponse : NSDictionary = responseObject as! NSDictionary
+            print(dictResponse)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "REMOVE CART!")
+        })
+    }
+    
     func setUserLoggedOutFromApplication() {
         
         self.startLoadingIndicatorView()
@@ -147,13 +253,17 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                do {
-                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
-                    self.showErrorPopupWith_title_message("LOGOUT!", strMessage:dictUser["error"] as! String)
-                }catch {
-                    self.showErrorPopupWith_title_message("LOGOUT!", strMessage:"Server Api error.")
-                }
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "LOGOUT!")
         })
+    }
+    
+    func showErrorMessageOnApiFailure(responseData : NSData, title : String) {
+        do {
+            let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(responseData, options: NSJSONReadingOptions.MutableLeaves)
+            self.showErrorPopupWith_title_message(title, strMessage:dictUser["error"] as! String)
+        }catch {
+            self.showErrorPopupWith_title_message(title, strMessage:"Server Api error.")
+        }
     }
     
     // MARK: - Common page loading View Methods.

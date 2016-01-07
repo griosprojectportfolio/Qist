@@ -48,11 +48,13 @@ class UpdateProfileController : BaseController  {
                 
                     self.stopLoadingIndicatorView()
                     let dictResponse : NSDictionary = responseObject as! NSDictionary
-                    self.showBackNavAlertWith_title_message("UPDATE!", strMessage: dictResponse["error"] as! String)
+                    let objCustomer : NSDictionary = dictResponse["user"] as! NSDictionary
+                    self.setUserLoginSession_AccessToken(objCustomer["access_token"] as! String)
+                    self.storeSignupUserInfoInCoreData(objCustomer)
                 },
                 failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                     self.stopLoadingIndicatorView()
-                    self.showErrorPopupWith_title_message("UPDATE!", strMessage:(error?.localizedDescription)!)
+                    self.showErrorMessageOnApiFailure(task!.responseData!, title: "UPDATE!")
             })
         }else {
             self.showErrorPopupWith_title_message("UPDATE!", strMessage: "Please enter valid text to update.")
@@ -61,6 +63,15 @@ class UpdateProfileController : BaseController  {
     
     
     // MARK: -  Login page Common Methods
+    
+    func storeSignupUserInfoInCoreData(dictData: NSDictionary) {
+        let arrData : NSArray = NSArray(object: dictData)
+        MagicalRecord.saveWithBlock({ ( context : NSManagedObjectContext!) -> Void in
+            User.entityFromArrayInContext( arrData , localContext: context)
+            self.showBackNavAlertWith_title_message("UPDATE!", strMessage: "Profile successfully updated on Qist.")
+        })
+    }
+    
     func getRequestParamsToUpdate() -> NSDictionary {
         var dictParams : NSDictionary!
         switch index {

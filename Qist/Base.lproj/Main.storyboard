@@ -495,6 +495,9 @@
                                                     <state key="normal">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="heartButtonTapped:" destination="4hY-91-m2N" eventType="touchUpInside" id="RxS-xR-hj8"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="n6j-3Z-KsU">
                                                     <rect key="frame" x="131" y="20" width="149" height="21"/>
@@ -996,6 +999,9 @@
                                                     <state key="normal" backgroundImage="specials_add_cart">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="addToCartsTapped:" destination="xzJ-Qa-cCg" eventType="touchUpInside" id="yr5-IM-Tcl"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="loH-U3-1RE">
                                                     <rect key="frame" x="247" y="27" width="115" height="22"/>
@@ -1004,6 +1010,9 @@
                                                     <state key="normal" image="button_remove_wishlist">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="removeFromWishlistTapped:" destination="xzJ-Qa-cCg" eventType="touchUpInside" id="lhp-FU-p10"/>
+                                                    </connections>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="specials_icon_timer" id="a4a-Rv-M2V">
                                                     <rect key="frame" x="247" y="14" width="10" height="10"/>
@@ -1184,6 +1193,9 @@
                                                     <state key="normal" image="specials_add_cart">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="addToCartsTapped:" destination="ibY-in-an2" eventType="touchUpInside" id="F5L-mZ-TeH"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iYl-xT-epb">
                                                     <rect key="frame" x="260" y="31" width="102" height="22"/>
@@ -1192,6 +1204,9 @@
                                                     <state key="normal" image="speicals_add_wishlist">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="addToWishlistTapped:" destination="ibY-in-an2" eventType="touchUpInside" id="Cdm-Ra-PvQ"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oIm-ch-2T7">
                                                     <rect key="frame" x="14" y="2" width="234" height="21"/>

@@ -7,6 +7,12 @@
 //
 
 import Foundation
+import UIKit
+
+protocol wishlistsCellDelegate {
+    func removeProductFromWishListsTapped(intTag : Int)
+    func addProductToCartsTapped(intTag : Int)
+}
 
 class WishListsCell : UITableViewCell {
     
@@ -20,6 +26,8 @@ class WishListsCell : UITableViewCell {
     @IBOutlet var btnAddToCart: UIButton!
     
     @IBOutlet var lblProductExp: UILabel!
+    
+    var wishlistsDelegate: wishlistsCellDelegate?
     
     
     func configureWishListsTableViewCell(){
@@ -60,6 +68,14 @@ class WishListsCell : UITableViewCell {
         self.lblProductSave.text = "Save : 10%"
         self.prodImgView.image = UIImage(named: "hamburger")
         
+    }
+ 
+    @IBAction func removeFromWishlistTapped(sender: UIButton){
+        self.wishlistsDelegate?.removeProductFromWishListsTapped(self.tag)
+    }
+    
+    @IBAction func addToCartsTapped(sender: UIButton){
+        self.wishlistsDelegate?.addProductToCartsTapped(self.tag)
     }
     
 }

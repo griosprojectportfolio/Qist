@@ -50,7 +50,7 @@ class SupportController : BaseController {
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                self.showErrorPopupWith_title_message("SUPPORT!", strMessage:(error?.localizedDescription)!)
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "SUPPORT!")
         })
     }
     

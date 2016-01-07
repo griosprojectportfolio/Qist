@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol storeCellDelegate {
-    func favouriteAndUnfavouriteButtonTapped(intSection : Int)
+    func favouriteAndUnfavouriteTapped(intTag : Int)
 }
 
 class StoresCell : UITableViewCell {
@@ -39,7 +39,7 @@ class StoresCell : UITableViewCell {
         
     }
     
-    func setupStoreCellContent(){
+    func setupStoreCellContent(dictData: NSDictionary){
         
         self.lblTitle.text = "Kirkcaldie & Stains"
         self.lblSubTitle.text = "Christchurch,Caterbury"
@@ -48,7 +48,7 @@ class StoresCell : UITableViewCell {
     }
     
     @IBAction func heartButtonTapped(sender: UIButton){
-        self.storeDelegate?.favouriteAndUnfavouriteButtonTapped(sender.tag)
+        self.storeDelegate?.favouriteAndUnfavouriteTapped(self.tag)
     }
     
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SpecialsController : BaseController , segmentedTapActionDelegate {
+class SpecialsController : BaseController , segmentedTapActionDelegate, specialsCellDelegate {
     
     @IBOutlet var tblSpecials : UITableView!
     
@@ -17,8 +17,10 @@ class SpecialsController : BaseController , segmentedTapActionDelegate {
     @IBOutlet var lbl_TopExpire: UILabel!
     @IBOutlet var top_ImageView: UIImageView!
     
+    var arrSpecials : NSMutableArray = NSMutableArray()
+    var arrJustForYou : NSMutableArray = NSMutableArray()
     var isJustForYou : Bool = false
-    
+
     // MARK: -  Current view related Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +31,7 @@ class SpecialsController : BaseController , segmentedTapActionDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         // Do any additional setup befour appear the view.
-        self.getAllSpecialProductFromServer()
+        self.leftSegmentTappedAction()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -52,11 +54,13 @@ class SpecialsController : BaseController , segmentedTapActionDelegate {
     
     func leftSegmentTappedAction() {
         self.isJustForYou = false
+        self.resetAllCollectionAndReloadViews()
         self.getAllSpecialProductFromServer()
     }
     
     func rightSegmentTappedAction() {
         self.isJustForYou = true
+        self.resetAllCollectionAndReloadViews()
         self.getAllJustForYouProductFromServer()
     }
     
@@ -95,13 +99,15 @@ class SpecialsController : BaseController , segmentedTapActionDelegate {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return self.isJustForYou ? self.arrJustForYou.count : self.arrSpecials.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell : SpecialsCell = tableView.dequeueReusableCellWithIdentifier("SpecialCell",forIndexPath:indexPath) as! SpecialsCell
+        cell.specialsDelegate = self
+        cell.tag = indexPath.row
         cell.configureStoreTableViewCell()
-        cell.setupStoreCellContent()
+        cell.setupSpecialsCellContent(self.isJustForYou ? self.arrJustForYou[indexPath.row] as! NSDictionary : self.arrSpecials[indexPath.row] as! NSDictionary)
         return cell
     }
     
@@ -110,8 +116,18 @@ class SpecialsController : BaseController , segmentedTapActionDelegate {
     }
     
     
+    // MARK: - specialsCellDelegate methods
+    func addProductToWishlistsTapped(intTag : Int) {
+        print("Cell object == \(self.isJustForYou ? self.arrJustForYou[intTag] as! NSDictionary : self.arrSpecials[intTag] as! NSDictionary)")
+    }
     
-    // MARK: - API CALLS - All Specials Stores
+    func addProductToCartsTapped(intTag : Int) {
+        print("Cell object == \(self.isJustForYou ? self.arrJustForYou[intTag] as! NSDictionary : self.arrSpecials[intTag] as! NSDictionary)")
+    }
+
+    
+    
+    // MARK: - API CALLS - All Specials and Just for you Stores
     func getAllSpecialProductFromServer() {
         
         self.startLoadingIndicatorView()
@@ -121,16 +137,12 @@ class SpecialsController : BaseController , segmentedTapActionDelegate {
             
                 self.stopLoadingIndicatorView()
                 let dictResponse : NSDictionary = responseObject as! NSDictionary
-                print(dictResponse)
+                self.arrSpecials = dictResponse["products"]?.mutableCopy() as! NSMutableArray
+                self.tblSpecials.reloadData()
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                do {
-                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
-                    self.showErrorPopupWith_title_message("SPECIALS!", strMessage:dictUser["error"] as! String)
-                }catch {
-                    self.showErrorPopupWith_title_message("SPECIALS!", strMessage:"Server Api error.")
-                }
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "SPECIALS!")
         })
     }
     
@@ -141,19 +153,23 @@ class SpecialsController : BaseController , segmentedTapActionDelegate {
         
         self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "just_for_you", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
-            self.stopLoadingIndicatorView()
-            let dictResponse : NSDictionary = responseObject as! NSDictionary
-            print(dictResponse)
+                self.stopLoadingIndicatorView()
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                self.arrJustForYou = dictResponse["products"]?.mutableCopy() as! NSMutableArray
+                self.tblSpecials.reloadData()
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                do {
-                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
-                    self.showErrorPopupWith_title_message("SPECIALS!", strMessage:dictUser["error"] as! String)
-                }catch {
-                    self.showErrorPopupWith_title_message("SPECIALS!", strMessage:"Server Api error.")
-                }
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "JUST FOR YOU!")
         })
+    }
+    
+    
+    // MARK: -  Specials page Common Methods
+    func resetAllCollectionAndReloadViews() {
+        self.arrSpecials.removeAllObjects()
+        self.arrJustForYou.removeAllObjects()
+        self.tblSpecials.reloadData()
     }
     
     // MARK: -  Overrided Methods of BaseController

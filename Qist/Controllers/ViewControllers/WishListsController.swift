@@ -8,7 +8,7 @@
 
 import Foundation
 
-class WishListsController : BaseController , segmentedTapActionDelegate {
+class WishListsController : BaseController ,segmentedTapActionDelegate, wishlistsCellDelegate {
     
     @IBOutlet var lblCurrentStore: UILabel!
     @IBOutlet var lblCurrentDate: UILabel!
@@ -129,6 +129,8 @@ class WishListsController : BaseController , segmentedTapActionDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell : WishListsCell = tableView.dequeueReusableCellWithIdentifier("WishListCell",forIndexPath:indexPath) as! WishListsCell
+        cell.wishlistsDelegate = self
+        cell.tag = indexPath.row
         cell.configureWishListsTableViewCell()
         cell.setupWishListsCellContent()
         return cell
@@ -151,6 +153,17 @@ class WishListsController : BaseController , segmentedTapActionDelegate {
     }
    
     
+    // MARK: - wishlistsCellDelegate methods
+    func removeProductFromWishListsTapped(intTag : Int) {
+    
+    }
+    
+    func addProductToCartsTapped(intTag : Int) {
+    
+    }
+
+    
+    
     // MARK: - API CALLS - Get WISHLISTS, CARTS etc
     func getAllWishlistsInfoFromServer() {
         
@@ -159,64 +172,16 @@ class WishListsController : BaseController , segmentedTapActionDelegate {
         
         self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "wishlist", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
-            self.stopLoadingIndicatorView()
-            let dictResponse : NSDictionary = responseObject as! NSDictionary
-            print(dictResponse)
+                self.stopLoadingIndicatorView()
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                print(dictResponse)
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                do {
-                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
-                    self.showErrorPopupWith_title_message("WISHLISTS!", strMessage:dictUser["error"] as! String)
-                }catch {
-                    self.showErrorPopupWith_title_message("WISHLISTS!", strMessage:"Server Api error.")
-                }
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "WISHLISTS!")
         })
     }
     
-    func removeProductFromWishLists() {
-        
-        self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": "0"]
-        
-        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "remove_product_from_wishlist", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
-            
-            self.stopLoadingIndicatorView()
-            let dictResponse : NSDictionary = responseObject as! NSDictionary
-            print(dictResponse)
-            },
-            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
-                self.stopLoadingIndicatorView()
-                do {
-                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
-                    self.showErrorPopupWith_title_message("REMOVE PRODUCT!", strMessage:dictUser["error"] as! String)
-                }catch {
-                    self.showErrorPopupWith_title_message("REMOVE PRODUCT!", strMessage:"Server Api error.")
-                }
-        })
-    }
-    
-    func addProductToCurrentCart() {
-        
-        self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": "0", "store_id" : "0"]
-        
-        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "add_product_to_cart", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
-            
-            self.stopLoadingIndicatorView()
-            let dictResponse : NSDictionary = responseObject as! NSDictionary
-            print(dictResponse)
-            },
-            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
-                self.stopLoadingIndicatorView()
-                do {
-                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
-                    self.showErrorPopupWith_title_message("ADD CART!", strMessage:dictUser["error"] as! String)
-                }catch {
-                    self.showErrorPopupWith_title_message("ADD CART!", strMessage:"Server Api error.")
-                }
-        })
-    }
     
     // MARK: -  Overrided Methods of BaseController
     override func configureComponentsLayout(){

@@ -7,6 +7,12 @@
 //
 
 import Foundation
+import UIKit
+
+protocol specialsCellDelegate {
+    func addProductToWishlistsTapped(intTag : Int)
+    func addProductToCartsTapped(intTag : Int)
+}
 
 class SpecialsCell : UITableViewCell {
     
@@ -18,6 +24,8 @@ class SpecialsCell : UITableViewCell {
     @IBOutlet var btnAddToWishList: UIButton!
     @IBOutlet var btnAddToCart: UIButton!
     @IBOutlet var prodImgView: UIImageView!
+    
+    var specialsDelegate: specialsCellDelegate?
     
     func configureStoreTableViewCell(){
         
@@ -49,15 +57,31 @@ class SpecialsCell : UITableViewCell {
         
     }
     
-    func setupStoreCellContent(){
+    func setupSpecialsCellContent(dictData : NSDictionary){
         
         self.lblStoreName.text = "Special 1 - Apple Store, Southland"
-        self.lblProductName.text = "Beats Headphone"
-        self.lblProductPay.text = "You Pay $450"
-        self.lblProductMrp.text = "MRP : $500"
-        self.lblProductSave.text = "Save : 10%"
-        self.prodImgView.image = UIImage(named: "hamburger")
         
+        if let prodName : String = dictData["name"] as? String {
+            self.lblProductName.text = prodName
+        }
+        if let original_price : String = dictData["original_price"] as? String {
+            self.lblProductMrp.text = "MRP : $\(original_price)"
+        }
+        if let qist_price : String = dictData["qist_price"] as? String {
+            self.lblProductPay.text = "You Pay : $\(qist_price)"
+        }
+        
+        self.prodImgView.image = UIImage(named: "hamburger")
+        self.lblProductSave.text = "Save : 10%"
+
+    }
+    
+    @IBAction func addToWishlistTapped(sender: UIButton){
+        self.specialsDelegate?.addProductToWishlistsTapped(self.tag)
+    }
+    
+    @IBAction func addToCartsTapped(sender: UIButton){
+        self.specialsDelegate?.addProductToCartsTapped(self.tag)
     }
     
 }

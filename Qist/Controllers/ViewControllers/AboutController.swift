@@ -53,7 +53,7 @@ class AboutController : BaseController {
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                self.showErrorPopupWith_title_message("ABOUT!", strMessage:(error?.localizedDescription)!)
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "ABOUT!")
         })
     }
 

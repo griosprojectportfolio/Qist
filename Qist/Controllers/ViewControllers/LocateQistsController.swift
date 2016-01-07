@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LocateQistsController : BaseController {
+class LocateQistsController : BaseController, locateQistSearchDelegate, locateQistCellDelegate {
     
     @IBOutlet var tblLocateQist : UITableView!
     
@@ -18,6 +18,7 @@ class LocateQistsController : BaseController {
     @IBOutlet var top_ImageView: UIImageView!
     
     var topSearchView : LocateQistSearchView!
+    var arrStores : NSMutableArray = NSMutableArray()
     
     // MARK: -  Current view related Methods
     override func viewDidLoad() {
@@ -42,12 +43,20 @@ class LocateQistsController : BaseController {
     }
     
     
-    // MARK: - Top Search view and searchQistDelegate Methods
+    // MARK: - Top Search view and locateQistSearchDelegate Methods
     func setupTopSearchControlOnView(){
         self.topSearchView = LocateQistSearchView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 64 ,self.view.frame.size.width,35 ))
+        self.topSearchView.locateQistDelegate = self
         self.topSearchView.addTopSearchQistLocationOnView(self)
     }
     
+    func searchQistForAddressTapped(strAddress : String) {
+        if !strAddress.isEmpty {
+            self.getAllStoresInfoOnAddressFromServer(strAddress)
+        }else {
+            self.showErrorPopupWith_title_message("LOCATE!", strMessage:"Please enter valid address.")
+        }
+    }
     
     // MARK: - Setup top view Contents and Actions Methods
     func setupTopViewDataContent(){
@@ -83,13 +92,15 @@ class LocateQistsController : BaseController {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return self.arrStores.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell : LocateQistCell = tableView.dequeueReusableCellWithIdentifier("LocateCell",forIndexPath:indexPath) as! LocateQistCell
+        cell.locateCellDelegate = self
+        cell.tag = indexPath.row
         cell.configureLocateQistTableViewCell()
-        cell.setupLocateQistCellContent()
+        cell.setupLocateQistCellContent(self.arrStores[indexPath.row] as! NSDictionary)
         return cell
     }
     
@@ -98,26 +109,28 @@ class LocateQistsController : BaseController {
     }
     
     
-    // MARK: - API CALLS - Get all stores
-    func getAllStoresInfoFromServer() {
+    // MARK: - locateQistCellDelegate method
+    func favouriteButtonTapped(intTag:Int) {
+        print("Cell object == \(self.arrStores[intTag] as! NSDictionary)")
+    }
+    
+    
+    // MARK: - API CALLS - Get all stores for Address
+    func getAllStoresInfoOnAddressFromServer(searchAddress:String) {
         
         self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = ["access_token": self.auth_token , "latitude" : self.latitude, "longitude" : self.longitude, "address": ""]
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "address": searchAddress]
         
-        self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "nearby_stores", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+        self.sharedApi.baseRequestWithHTTPMethod("GET", URLString:"nearby_stores", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
                 self.stopLoadingIndicatorView()
                 let dictResponse : NSDictionary = responseObject as! NSDictionary
-                print(dictResponse)
+                self.arrStores = dictResponse["products"]?.mutableCopy() as! NSMutableArray
+                self.tblLocateQist.reloadData()
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                do {
-                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
-                    self.showErrorPopupWith_title_message("LOCATE!", strMessage:dictUser["error"] as! String)
-                }catch {
-                    self.showErrorPopupWith_title_message("LOCATE!", strMessage:"Server Api error.")
-                }
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "LOCATE!")
         })
     }
     

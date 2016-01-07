@@ -7,6 +7,12 @@
 //
 
 import Foundation
+import UIKit
+
+protocol cartsCellDelegate {
+    func removeProductFromWishListsTapped(intTag : Int)
+    func addOrRemoveProductFromCartsTapped(intTag : Int)
+}
 
 class CartsCell : UITableViewCell {
     
@@ -20,6 +26,8 @@ class CartsCell : UITableViewCell {
     @IBOutlet var btnAddToCart: UIButton!
     
     @IBOutlet var lblProductExp: UILabel!
+    
+    var cartsDelegate: cartsCellDelegate?
     
     func configureCartsTableViewCell(){
         
@@ -51,7 +59,7 @@ class CartsCell : UITableViewCell {
         
     }
     
-    func setupCartsCellContent(){
+    func setupCartsCellContent(dictData: NSDictionary){
         
         self.lblProductName.text = "Beats Headphone"
         self.lblProductPay.text = "You Pay $450"
@@ -61,11 +69,11 @@ class CartsCell : UITableViewCell {
         
     }
     
-    @IBAction func removeFromWishlistsButtonTapped(sender: UIButton){
-        
+    @IBAction func removeFromWishlistTapped(sender: UIButton){
+        self.cartsDelegate?.removeProductFromWishListsTapped(self.tag)
     }
     
-    @IBAction func addOrRemoveButtonTapped(sender: UIButton){
-        
+    @IBAction func addOrRemoveFromCartTapped(sender: UIButton){
+        self.cartsDelegate?.addOrRemoveProductFromCartsTapped(self.tag)
     }
 }
