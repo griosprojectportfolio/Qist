@@ -25,9 +25,6 @@
 		1718F4491BA9402F00242278 /* ForgotPassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F4481BA9402F00242278 /* ForgotPassController.swift */; };
 		1718F44B1BA9404E00242278 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F44A1BA9404E00242278 /* SignupController.swift */; };
 		1718F44F1BA94A1000242278 /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F44E1BA94A1000242278 /* BaseController.swift */; };
-		1718F4551BA9637400242278 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1718F4521BA9637400242278 /* Default-568h@2x.png */; };
-		1718F4561BA9637400242278 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1718F4531BA9637400242278 /* Default-667h@2x.png */; };
-		1718F4571BA9637400242278 /* Default-1104h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1718F4541BA9637400242278 /* Default-1104h@2x.png */; };
 		1718F4611BA97CA600242278 /* Alert+Qist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F4601BA97CA500242278 /* Alert+Qist.swift */; };
 		1718F4631BA998BB00242278 /* QistTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F4621BA998BB00242278 /* QistTextField.swift */; };
 		1718F4651BA99DBC00242278 /* ScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F4641BA99DBC00242278 /* ScannerController.swift */; };
@@ -103,9 +100,6 @@
 		1718F4481BA9402F00242278 /* ForgotPassController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPassController.swift; sourceTree = "<group>"; };
 		1718F44A1BA9404E00242278 /* SignupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
 		1718F44E1BA94A1000242278 /* BaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseController.swift; sourceTree = "<group>"; };
-		1718F4521BA9637400242278 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		1718F4531BA9637400242278 /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
-		1718F4541BA9637400242278 /* Default-1104h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-1104h@2x.png"; sourceTree = "<group>"; };
 		1718F4601BA97CA500242278 /* Alert+Qist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alert+Qist.swift"; sourceTree = "<group>"; };
 		1718F4621BA998BB00242278 /* QistTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QistTextField.swift; sourceTree = "<group>"; };
 		1718F4641BA99DBC00242278 /* ScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerController.swift; sourceTree = "<group>"; };
@@ -199,7 +193,6 @@
 		1718F4081BA9327100242278 /* Qist */ = {
 			isa = PBXGroup;
 			children = (
-				1718F4501BA9635700242278 /* Assets */,
 				1718F42E1BA9344C00242278 /* Controllers */,
 				1718F42F1BA9344D00242278 /* Lib */,
 				1718F4321BA9344D00242278 /* Models */,
@@ -361,24 +354,6 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		1718F4501BA9635700242278 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				1718F4511BA9635700242278 /* Splash-images */,
-			);
-			path = Assets;
-			sourceTree = "<group>";
-		};
-		1718F4511BA9635700242278 /* Splash-images */ = {
-			isa = PBXGroup;
-			children = (
-				1718F4521BA9637400242278 /* Default-568h@2x.png */,
-				1718F4531BA9637400242278 /* Default-667h@2x.png */,
-				1718F4541BA9637400242278 /* Default-1104h@2x.png */,
-			);
-			path = "Splash-images";
-			sourceTree = "<group>";
-		};
 		3F40C2460E0989A9EE91D560 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,11 +460,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1718F4141BA9327100242278 /* Main.storyboard in Resources */,
-				1718F4571BA9637400242278 /* Default-1104h@2x.png in Resources */,
-				1718F4551BA9637400242278 /* Default-568h@2x.png in Resources */,
 				1718F4191BA9327100242278 /* LaunchScreen.xib in Resources */,
 				1718F4161BA9327100242278 /* Images.xcassets in Resources */,
-				1718F4561BA9637400242278 /* Default-667h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
