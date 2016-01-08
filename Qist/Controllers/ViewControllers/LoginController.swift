@@ -173,12 +173,7 @@ class LoginController : BaseController , facebookDataDelegate , twitterDataDeleg
                 },
                 failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                     self.stopLoadingIndicatorView()
-                    do {
-                        let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(task!.responseData!, options: NSJSONReadingOptions.MutableLeaves)
-                        self.showErrorPopupWith_title_message("LOGIN!", strMessage:dictUser["error"] as! String)
-                    }catch {
-                        self.showErrorPopupWith_title_message("ERROR!", strMessage:"Server Api error.")
-                    }
+                    self.showErrorMessageOnApiFailure(task!.responseData!, title: "LOGIN!")
             })
             
         }else{

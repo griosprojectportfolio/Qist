@@ -15,6 +15,7 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
     
     @IBOutlet var tblWishLists : UITableView!
     
+    var arrWishists : NSMutableArray = NSMutableArray()
     var arrByStores : NSMutableArray = [[],[],[]]
     var isByStore : Bool = false
     
@@ -50,11 +51,13 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
     
     func leftSegmentTappedAction() {
         isByStore = false
+        self.getAllWishlistsInfoFromServer()
         self.tblWishLists.reloadData()
     }
     
     func rightSegmentTappedAction() {
         isByStore = true
+        self.getAllWishlistsByStoreInfoFromServer()
         self.tblWishLists.reloadData()
     }
     
@@ -174,6 +177,8 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
             
                 self.stopLoadingIndicatorView()
                 let dictResponse : NSDictionary = responseObject as! NSDictionary
+                self.arrWishists = dictResponse["products"]?.mutableCopy() as! NSMutableArray
+                self.tblWishLists.reloadData()
                 print(dictResponse)
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
@@ -182,6 +187,23 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
         })
     }
     
+    func getAllWishlistsByStoreInfoFromServer() {
+        
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token , "latitude" : self.latitude, "longitude" : self.longitude]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "wishlist_by_store", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+                self.stopLoadingIndicatorView()
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                self.tblWishLists.reloadData()
+                print(dictResponse)
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "WISHLISTS!")
+        })
+    }
     
     // MARK: -  Overrided Methods of BaseController
     override func configureComponentsLayout(){

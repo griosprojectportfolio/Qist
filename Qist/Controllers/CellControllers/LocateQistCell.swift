@@ -41,10 +41,16 @@ class LocateQistCell : UITableViewCell {
     
     func setupLocateQistCellContent(dictData : NSDictionary){
         
-        self.lblTitle.text = "Kirkcaldie & Stains"
-        self.lblSubTitle.text = "Christchurch,Caterbury"
+        if let title : String = dictData["title"] as? String {
+            self.lblTitle.text = title
+        }
+        if let subTitle : String = dictData["location"] as? String {
+            self.lblSubTitle.text = subTitle
+        }
+        //self.lblTitle.text = "Kirkcaldie & Stains"
+        //self.lblSubTitle.text = "Christchurch,Caterbury"
         self.storeImgView.image = UIImage(named: "hamburger")
-        
+
     }
     
     @IBAction func heartButtonTapped(sender: UIButton){

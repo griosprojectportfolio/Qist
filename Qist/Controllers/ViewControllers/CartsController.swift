@@ -124,6 +124,8 @@ class CartsController : BaseController, segmentedTapActionDelegate, cartsCellDel
             
                 self.stopLoadingIndicatorView()
                 let dictResponse : NSDictionary = responseObject as! NSDictionary
+                self.arrCarts = dictResponse["products"]?.mutableCopy() as! NSMutableArray
+                self.tblCartsView.reloadData()
                 print(dictResponse)
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
@@ -141,6 +143,8 @@ class CartsController : BaseController, segmentedTapActionDelegate, cartsCellDel
             
                 self.stopLoadingIndicatorView()
                 let dictResponse : NSDictionary = responseObject as! NSDictionary
+                self.arrWishlists = dictResponse["products"]?.mutableCopy() as! NSMutableArray
+                self.tblCartsView.reloadData()
                 print(dictResponse)
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in

@@ -1906,6 +1906,9 @@
                                                     <state key="normal" image="store_icon_add_fav">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="heartButtonTapped:" destination="ZEH-fT-2CH" eventType="touchUpInside" id="B2D-Fh-wQW"/>
+                                                    </connections>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="divider" id="Ek6-4k-MmM">
                                                     <rect key="frame" x="15" y="85" width="348" height="1"/>

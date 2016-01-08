@@ -27,8 +27,9 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
     var rightSwipeGestureRecognizer : UISwipeGestureRecognizer!
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
-    let longitude = QistLocationManager.sharedManager.currentLocation.longitude
-    let latitude = QistLocationManager.sharedManager.currentLocation.latitude
+    let longitude = "-97" //QistLocationManager.sharedManager.currentLocation.longitude
+    let latitude = "27" //QistLocationManager.sharedManager.currentLocation.latitude
+    let radius = "100"
     var objUser : User!
 
     let btnBackNav: UIButton = UIButton(type: UIButtonType.Custom)
@@ -137,16 +138,15 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
     
     // MARK: - API CALLS - Common server call Methods.
     
-    func setStoreAsFavourites() {
+    func setStoreAsFavourites(dictParams : NSDictionary) {
         
         self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = ["access_token": self.auth_token, "store_id": "0"]
         
         self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "set_favourite_store", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
-            self.stopLoadingIndicatorView()
-            let dictResponse : NSDictionary = responseObject as! NSDictionary
-            print(dictResponse)
+                self.stopLoadingIndicatorView()
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                self.showErrorPopupWith_title_message("FAVOURITE!", strMessage:dictResponse["error"] as! String)
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
@@ -154,16 +154,15 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         })
     }
     
-    func setStoreAsUnFavourites() {
+    func setStoreAsUnFavourites(dictParams : NSDictionary) {
         
         self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = ["access_token": self.auth_token, "store_id": "0"]
         
         self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "set_unfavourite_store", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
-            self.stopLoadingIndicatorView()
-            let dictResponse : NSDictionary = responseObject as! NSDictionary
-            print(dictResponse)
+                self.stopLoadingIndicatorView()
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                self.showErrorPopupWith_title_message("UNFAVOURITE!", strMessage:dictResponse["error"] as! String)
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()

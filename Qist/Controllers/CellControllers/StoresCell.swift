@@ -41,9 +41,16 @@ class StoresCell : UITableViewCell {
     
     func setupStoreCellContent(dictData: NSDictionary){
         
-        self.lblTitle.text = "Kirkcaldie & Stains"
-        self.lblSubTitle.text = "Christchurch,Caterbury"
+        //self.lblTitle.text = "Kirkcaldie & Stains"
+        //self.lblSubTitle.text = "Christchurch,Caterbury"
         self.storeImgView.image = UIImage(named: "hamburger")
+        
+        if let title : String = dictData["title"] as? String {
+            self.lblTitle.text = title
+        }
+        if let subTitle : String = dictData["location"] as? String {
+            self.lblSubTitle.text = subTitle
+        }
         
     }
     

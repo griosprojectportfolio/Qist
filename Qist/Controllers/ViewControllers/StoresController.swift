@@ -127,7 +127,15 @@ class StoresController : BaseController , segmentedTapActionDelegate , storeCell
     
     // MARK: - storeCellDelegate methods
     func favouriteAndUnfavouriteTapped(intTag : Int) {
-        print("Cell object == \(self.isMyFavourite ? self.arrFavStores[intTag] as! NSDictionary : self.arrStores[intTag] as! NSDictionary)")
+        
+        let selectedStore : NSDictionary = self.isMyFavourite ? self.arrFavStores[intTag] as! NSDictionary : self.arrStores[intTag] as! NSDictionary
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "store_id": selectedStore["id"] as! String]
+
+        if self.isMyFavourite {
+            self.setStoreAsUnFavourites(dictParams)
+        }else {
+            self.setStoreAsFavourites(dictParams)
+        }
     }
     
     
@@ -135,34 +143,36 @@ class StoresController : BaseController , segmentedTapActionDelegate , storeCell
     func getAllStoresInfoFromServer() {
         
         self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = ["access_token": self.auth_token , "latitude" : self.latitude, "longitude" : self.longitude, "radius": "25"]
+        let dictParams : NSDictionary = ["access_token": self.auth_token , "latitude" : self.latitude, "longitude" : self.longitude, "radius": self.radius]
         
         self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "stores", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
                 self.stopLoadingIndicatorView()
                 let dictResponse : NSDictionary = responseObject as! NSDictionary
-                print(dictResponse)
+                self.arrStores = dictResponse["stores"]?.mutableCopy() as! NSMutableArray
+                self.tblView.reloadData()
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                self.showErrorMessageOnApiFailure(task!.responseData!, title: "STORES!")
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "ALL STORES!")
         })
     }
     
     func getAllFavouriteStoresInfoFromServer() {
         
         self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = ["access_token": self.auth_token , "latitude" : self.latitude, "longitude" : self.longitude, "radius": "25"]
+        let dictParams : NSDictionary = ["access_token": self.auth_token , "latitude" : self.latitude, "longitude" : self.longitude, "radius": self.radius]
         
         self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "favourite_store", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
                 self.stopLoadingIndicatorView()
                 let dictResponse : NSDictionary = responseObject as! NSDictionary
-                print(dictResponse)
+                self.arrFavStores = dictResponse["stores"]?.mutableCopy() as! NSMutableArray
+                self.tblView.reloadData()
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                self.showErrorMessageOnApiFailure(task!.responseData!, title: "FAVOURITE STORES!")
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "MY FAVOURITES!")
         })
     }
     

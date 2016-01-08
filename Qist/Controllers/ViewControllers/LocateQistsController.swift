@@ -111,7 +111,9 @@ class LocateQistsController : BaseController, locateQistSearchDelegate, locateQi
     
     // MARK: - locateQistCellDelegate method
     func favouriteButtonTapped(intTag:Int) {
-        print("Cell object == \(self.arrStores[intTag] as! NSDictionary)")
+        let selectedStore : NSDictionary = self.arrStores[intTag] as! NSDictionary
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "store_id": selectedStore["id"] as! String]
+        self.setStoreAsFavourites(dictParams)
     }
     
     
@@ -119,13 +121,13 @@ class LocateQistsController : BaseController, locateQistSearchDelegate, locateQi
     func getAllStoresInfoOnAddressFromServer(searchAddress:String) {
         
         self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = ["access_token": self.auth_token, "address": searchAddress]
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "address": searchAddress, "radius" : self.radius]
         
         self.sharedApi.baseRequestWithHTTPMethod("GET", URLString:"nearby_stores", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
                 self.stopLoadingIndicatorView()
                 let dictResponse : NSDictionary = responseObject as! NSDictionary
-                self.arrStores = dictResponse["products"]?.mutableCopy() as! NSMutableArray
+                self.arrStores = dictResponse["stores"]?.mutableCopy() as! NSMutableArray
                 self.tblLocateQist.reloadData()
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
