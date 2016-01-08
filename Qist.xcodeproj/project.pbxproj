@@ -60,7 +60,7 @@
 		17C30BEE1BB2935A00B141A0 /* StoresController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C30BED1BB2935A00B141A0 /* StoresController.swift */; };
 		17C30BF01BB2B0E900B141A0 /* CartsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C30BEF1BB2B0E800B141A0 /* CartsController.swift */; };
 		17C30BF21BB2E6E100B141A0 /* StoresCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C30BF11BB2E6E100B141A0 /* StoresCell.swift */; };
-		5A91332EC38115BA3B69C4A7 /* libPods-Qist.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3119CBC0CCEA183D72273706 /* libPods-Qist.a */; };
+		B32129B0D4133231597FE3C4 /* Pods_Qist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEFFE6870506334576A3A63 /* Pods_Qist.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,8 +135,8 @@
 		17C30BED1BB2935A00B141A0 /* StoresController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoresController.swift; sourceTree = "<group>"; };
 		17C30BEF1BB2B0E800B141A0 /* CartsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartsController.swift; sourceTree = "<group>"; };
 		17C30BF11BB2E6E100B141A0 /* StoresCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoresCell.swift; sourceTree = "<group>"; };
-		3119CBC0CCEA183D72273706 /* libPods-Qist.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Qist.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E0AB52774DEB7435663672A /* Pods-Qist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qist.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qist/Pods-Qist.release.xcconfig"; sourceTree = "<group>"; };
+		8AEFFE6870506334576A3A63 /* Pods_Qist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +147,7 @@
 				1752C0D11BAA9BB400B0C419 /* SystemConfiguration.framework in Frameworks */,
 				1752C0CF1BAA9BA800B0C419 /* Accounts.framework in Frameworks */,
 				1752C0CD1BAA9B9B00B0C419 /* Social.framework in Frameworks */,
-				5A91332EC38115BA3B69C4A7 /* libPods-Qist.a in Frameworks */,
+				B32129B0D4133231597FE3C4 /* Pods_Qist.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,7 +369,7 @@
 				1752C0D01BAA9BB400B0C419 /* SystemConfiguration.framework */,
 				1752C0CE1BAA9BA800B0C419 /* Accounts.framework */,
 				1752C0CC1BAA9B9B00B0C419 /* Social.framework */,
-				3119CBC0CCEA183D72273706 /* libPods-Qist.a */,
+				8AEFFE6870506334576A3A63 /* Pods_Qist.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -386,6 +386,7 @@
 				1718F4031BA9327100242278 /* Frameworks */,
 				1718F4041BA9327100242278 /* Resources */,
 				20107EFADF196ECB35D14A8B /* Copy Pods Resources */,
+				093CF8AA453E03A87EEB88F8 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -475,6 +476,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		093CF8AA453E03A87EEB88F8 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Qist/Pods-Qist-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		20107EFADF196ECB35D14A8B /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

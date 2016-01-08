@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import AFNetworking
+import MagicalRecord
 
 let isiPhone4s     =   UIScreen.mainScreen().bounds.size.width == 320 && UIScreen.mainScreen().bounds.size.height == 480
 let isiPhone5      =   UIScreen.mainScreen().bounds.size.width == 320 && UIScreen.mainScreen().bounds.size.height == 568

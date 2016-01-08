@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import UIKit
+import AFNetworking
+import MagicalRecord
 
 class LocateQistsController : BaseController, locateQistSearchDelegate, locateQistCellDelegate {
     

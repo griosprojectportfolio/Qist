@@ -12,14 +12,10 @@
 #import "Reachability.h"
 
 // Comment below line if you are not using AFNetworking
-#import "AFNetworking.h"
-#import "AFHTTPSessionManager.h"
-#import "AFHTTPRequestOperationManager.h"
-#import "AFNetworkActivityIndicatorManager.h"
+#import <AFNetworking/AFNetworking.h>
 
 // Comment below line if you are not using MagicalRecord
 #import <CoreData/CoreData.h>
 #import <MagicalRecord/MagicalRecord.h>
-#import "MagicalRecordShorthandMethodAliases.h"
 
 #endif

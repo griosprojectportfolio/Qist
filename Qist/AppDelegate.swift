@@ -6,8 +6,11 @@
 //  Copyright (c) 2015 GrepRuby3. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import CoreData
+import AFNetworking
+import MagicalRecord
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

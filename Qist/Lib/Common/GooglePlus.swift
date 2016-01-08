@@ -14,6 +14,8 @@ let visibleactions = "http://schemas.google.com/AddActivity"
 let authorizationURL = NSURL(string: "https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=" + clientID + "&redirect_uri=" + redirectURI + "&scope=" + scope + "&data-requestvisibleactions=" + visibleactions)!
 
 import Foundation
+import UIKit
+import AFNetworking
 
 protocol googlePlusDataDelegate{
     func currentGooglePlusUserData(aDictionary : NSDictionary)

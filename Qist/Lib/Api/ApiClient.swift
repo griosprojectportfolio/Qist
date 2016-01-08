@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import AFNetworking
+import MagicalRecord
 
 var kAppAPIBaseURLString : String! = "https://qist.co.nz/webdash/api/retailer/"
 
