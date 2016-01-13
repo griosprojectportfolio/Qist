@@ -87,11 +87,19 @@ class SpecialsController : BaseController , segmentedTapActionDelegate, specials
         
     }
     
-    @IBAction func addToCartButtonTapped(sender: UIButton) {
+    @IBAction func addToCartButtonTapped(intTag: Int) {
         
+        let selectedStore : NSDictionary = self.isJustForYou ? self.arrJustForYou[intTag] as! NSDictionary : self.arrSpecials[intTag] as! NSDictionary
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "store_id": selectedStore["id"] as! String]
+        
+        if self.isJustForYou {
+            self.setStoreAsUnFavourites(dictParams)
+        }else {
+            self.setStoreAsFavourites(dictParams)
+        }
     }
     
-    @IBAction func addToWishListButtonTapped(sender: UIButton) {
+    @IBAction func addToWishListButtonTapped(intTag: Int) {
         
     }
     

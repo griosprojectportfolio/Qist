@@ -174,7 +174,7 @@ class HistoryController : BaseController , segmentedTapActionDelegate {
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                self.showErrorMessageOnApiFailure(task!.responseData!, title: "HISTORY!")
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "SCAN!")
         })
     }
     
@@ -191,7 +191,7 @@ class HistoryController : BaseController , segmentedTapActionDelegate {
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                self.showErrorMessageOnApiFailure(task!.responseData!, title: "HISTORY!")
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "PURCHASE!")
         })
     }
     
