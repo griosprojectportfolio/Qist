@@ -31,7 +31,7 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
     
     let longitude = "-97" //QistLocationManager.sharedManager.currentLocation.longitude
     let latitude = "27" //QistLocationManager.sharedManager.currentLocation.latitude
-    let radius = "100"
+    let radius = "300"
     var objUser : User!
 
     let btnBackNav: UIButton = UIButton(type: UIButtonType.Custom)

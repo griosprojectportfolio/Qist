@@ -131,6 +131,7 @@ class StoresController : BaseController , segmentedTapActionDelegate , storeCell
     func favouriteAndUnfavouriteTapped(intTag : Int) {
         
         let selectedStore : NSDictionary = self.isMyFavourite ? self.arrFavStores[intTag] as! NSDictionary : self.arrStores[intTag] as! NSDictionary
+        print(selectedStore)
         let dictParams : NSDictionary = ["access_token": self.auth_token, "store_id": selectedStore["id"] as! String]
 
         if self.isMyFavourite {
@@ -163,13 +164,14 @@ class StoresController : BaseController , segmentedTapActionDelegate , storeCell
     func getAllFavouriteStoresInfoFromServer() {
         
         self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = ["access_token": self.auth_token , "latitude" : self.latitude, "longitude" : self.longitude, "radius": self.radius]
+        let dictParams : NSDictionary = ["access_token": self.auth_token]
         
         self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "favourite_store", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
                 self.stopLoadingIndicatorView()
                 let dictResponse : NSDictionary = responseObject as! NSDictionary
                 self.arrFavStores = dictResponse["stores"]?.mutableCopy() as! NSMutableArray
+                print(self.arrFavStores.count)
                 self.tblView.reloadData()
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in

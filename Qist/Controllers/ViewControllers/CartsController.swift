@@ -122,7 +122,7 @@ class CartsController : BaseController, segmentedTapActionDelegate, cartsCellDel
         
         self.startLoadingIndicatorView()
         let dictParams : NSDictionary = ["access_token": self.auth_token , "latitude" : self.latitude, "longitude" : self.longitude]
-        
+        print(dictParams)
         self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "current_cart", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
                 self.stopLoadingIndicatorView()

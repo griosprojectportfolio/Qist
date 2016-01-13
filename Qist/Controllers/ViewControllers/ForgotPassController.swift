@@ -72,16 +72,18 @@ class ForgotPassController : BaseController , facebookDataDelegate , twitterData
             
             self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "forgot_pass", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
                 
-                    self.stopLoadingIndicatorView()
-                    let dictTemp : NSDictionary = responseObject as! NSDictionary
-                    print(dictTemp)
+                self.stopLoadingIndicatorView()
+                let dictTemp : NSDictionary = responseObject as! NSDictionary
+                self.showErrorPopupWith_title_message("FORGOT PASSWORD!", strMessage: "Your password reset successfully please check your mail.")
+                
+                print(dictTemp)
                 },
                 failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                     self.stopLoadingIndicatorView()
                     self.showErrorMessageOnApiFailure(task!.responseData!, title: "FORGOT PASSWORD!")
             })
         }else{
-             self.showErrorPopupWith_title_message("FORGOT PASSWORD!", strMessage: errorMessage)
+            self.showErrorPopupWith_title_message("FORGOT PASSWORD!", strMessage: errorMessage)
         }
         
     }
