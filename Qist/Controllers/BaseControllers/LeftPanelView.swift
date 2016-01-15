@@ -25,7 +25,7 @@ class LeftPanelView : UIView , UITableViewDelegate , UITableViewDataSource , UIG
     let objWindow:UIWindow = UIApplication.sharedApplication().delegate!.window!!
 
     
-    let menuOtions : NSArray = [["STORES","CARTS","WISHLISTS","SPECIALS","LOCATE QIST","PROFILE","SETTINGS","HISTORY"],["ABOUT","SUPPORT","LOGOUT"]]
+    let menuOtions : NSArray = [["STORES","CARTS","WISHLISTS","SPECIALS","LOCATE","PROFILE","SETTINGS","HISTORY"],["ABOUT","SUPPORT","LOGOUT"]]
     let menuIcons : NSArray = [["sidebar_icon_store","sidebar_icon_cart","sidebar_icon_wishlist","sidebar_icon_special","sidebar_icon_locate","sidebar_icon_profile","sidebar_icon_setting","sidebar_icon_history"],["sidebar_icon_about","sidebar_icon_support","sidebar_icon_logout"]]
     
     

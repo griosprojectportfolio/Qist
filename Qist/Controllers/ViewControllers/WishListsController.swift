@@ -31,6 +31,7 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.getAllWishlistsInfoFromServer()
         // Do any additional setup befour appear the view.
     }
     
@@ -172,7 +173,6 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
     
     // MARK: - API CALLS - Get WISHLISTS, CARTS etc
     func getAllWishlistsInfoFromServer() {
-        
         self.startLoadingIndicatorView()
         let dictParams : NSDictionary = ["access_token": self.auth_token , "latitude" : self.latitude, "longitude" : self.longitude, "radius": self.radius]
         
