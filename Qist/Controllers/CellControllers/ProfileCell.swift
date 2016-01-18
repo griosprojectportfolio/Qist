@@ -8,11 +8,18 @@
 
 import Foundation
 
+protocol ProfileCellDelegates {
+    func btnChangetapped(index:NSInteger)
+}
+
+
 class ProfileCell : UITableViewCell {
     
     @IBOutlet var lblTitle : UILabel!
     @IBOutlet var lblSubTitle: UILabel!
     @IBOutlet var btnChange: UIButton!
+    
+    var delegates:ProfileCellDelegates!
     
     func configureProfileTableViewCell(){
         
@@ -29,6 +36,8 @@ class ProfileCell : UITableViewCell {
     }
 
     func setupProfileCellContentAt_IndexPath(indexPath:NSIndexPath,objUser:User){
+        
+        btnChange.tag = indexPath.row
         
         switch indexPath.row {
         
@@ -52,5 +61,9 @@ class ProfileCell : UITableViewCell {
         default :   self.lblTitle.text = ""
                     self.lblSubTitle.text = ""
         }
+    }
+    
+    @IBAction func btnChangeTap(sender:UIButton) {
+        delegates.btnChangetapped(sender.tag)
     }
 }

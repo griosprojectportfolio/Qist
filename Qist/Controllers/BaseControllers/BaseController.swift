@@ -189,10 +189,11 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         })
     }
     
-    func removeProductFromWishLists() {
+    func removeProductFromWishLists(dict : NSDictionary) {
         
         self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": "0"]
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": (dict.valueForKey("id")?.integerValue)!,"store_id ":(dict.valueForKey("retailer_id")?.integerValue)!]
+        print(dictParams)
         
         self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "remove_product_from_wishlist", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
@@ -206,11 +207,11 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         })
     }
     
-    func addProductToCurrentCart() {
+    func addProductToCurrentCart(dict : NSDictionary) {
         
         self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": "0", "store_id" : "0"]
-        
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": (dict.valueForKey("id")?.integerValue)!,"store_id":(dict.valueForKey("retailer_id")?.integerValue)!]
+         print(dictParams)
         self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "add_product_to_cart", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
             self.stopLoadingIndicatorView()
@@ -225,7 +226,6 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
     
     
     func removeProductFromCurrentCart() {
-        
         self.startLoadingIndicatorView()
         let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": "0", "store_id" : "0", "all" : "0"]
         
@@ -242,11 +242,10 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
     }
     
     func setUserLoggedOutFromApplication() {
-        
         self.startLoadingIndicatorView()
         let dictParams : NSDictionary = ["access_token": self.auth_token]
         
-        self.sharedApi.baseRequestWithHTTPMethod("DELETE", URLString: "logout", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "logout", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
                 self.stopLoadingIndicatorView()
                 self.setUserLoginSession_AccessToken("")
                 self.sharedApi.deleteAllTableContent()

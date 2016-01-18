@@ -61,12 +61,19 @@ class CartsCell : UITableViewCell {
     
     func setupCartsCellContent(dictData: NSDictionary){
         
-        self.lblProductName.text = "Beats Headphone"
-        self.lblProductPay.text = "You Pay $450"
-        self.lblProductMrp.text = "MRP : $500"
-        self.lblProductSave.text = "Save : 10%"
-        self.prodImgView.image = UIImage(named: "hamburger")
+        if let ProductName : String = dictData["name"] as? String {
+            self.lblProductName.text = ProductName
+        }
         
+        if let ProductMrp : String = dictData["original_price"] as? String {
+            self.lblProductMrp.text = ProductMrp
+        }
+        
+        if let ProductPay : String = dictData["qist_price"] as? String {
+            self.lblProductPay.text = ProductPay
+        }
+        self.lblProductSave.text = "Save : "
+        self.prodImgView.image = UIImage(named: "hamburger")
     }
     
     @IBAction func removeFromWishlistTapped(sender: UIButton){

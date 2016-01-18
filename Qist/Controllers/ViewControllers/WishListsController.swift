@@ -82,8 +82,11 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
         var intSection : Int = Int(1)
         if isByStore {
             intSection = self.arrByStores.count
+            return intSection
+        }else{
+            intSection = self.arrWishists.count
+            return intSection
         }
-        return intSection
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -104,6 +107,7 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
         headerView.addGestureRecognizer(headerTap)
         
         let lblTitle : UILabel = UILabel(frame: CGRectMake(headerView.frame.origin.x + 15, 10, headerView.frame.size.width - 30, 20))
+        
         lblTitle.text = "H&J Smith,Southland"
         lblTitle.font = UIFont.boldFontOfSize(13)
         lblTitle.textColor = UIColor.appBackgroundColor()
@@ -130,8 +134,12 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
         var rows : Int = Int(6)
         if isByStore {
             rows = self.arrByStores[section].count
+            return rows
+        }else {
+            rows = self.arrWishists.count
+            return rows
         }
-        return rows
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -139,7 +147,10 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
         cell.wishlistsDelegate = self
         cell.tag = indexPath.row
         cell.configureWishListsTableViewCell()
-        cell.setupWishListsCellContent()
+        if isByStore {
+        }else {
+        cell.setupWishListsCellContent(arrWishists.objectAtIndex(indexPath.row) as! NSDictionary)
+        }
         return cell
     }
     
@@ -154,22 +165,32 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
         if self.arrByStores[tag].count > 0 {
             self.arrByStores.replaceObjectAtIndex(tag, withObject:[])
         }else {
-            self.arrByStores.replaceObjectAtIndex(tag, withObject:["","",""])
+            self.arrByStores.replaceObjectAtIndex(tag, withObject:arrByStores.objectAtIndex(tag))
+            print(self.arrByStores)
         }
         self.tblWishLists.reloadSections(NSIndexSet(index: tag), withRowAnimation: UITableViewRowAnimation.Automatic)
     }
-   
+    
     
     // MARK: - wishlistsCellDelegate methods
     func removeProductFromWishListsTapped(intTag : Int) {
-    
+        if isByStore {
+            
+        }else {
+            let dict = arrWishists.objectAtIndex(intTag) as! NSDictionary
+            self.removeProductFromWishLists(dict)
+            self.getAllWishlistsInfoFromServer()
+        }
     }
     
     func addProductToCartsTapped(intTag : Int) {
-    
+        if isByStore {
+            
+        }else {
+            let dict = arrWishists.objectAtIndex(intTag) as! NSDictionary
+            self.addProductToCurrentCart(dict)
+        }
     }
-
-    
     
     // MARK: - API CALLS - Get WISHLISTS, CARTS etc
     func getAllWishlistsInfoFromServer() {
@@ -178,11 +199,11 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
         
         self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "wishlist", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
-                self.stopLoadingIndicatorView()
-                let dictResponse : NSDictionary = responseObject as! NSDictionary
-                self.arrWishists = dictResponse["products"]?.mutableCopy() as! NSMutableArray
-                self.tblWishLists.reloadData()
-                print(dictResponse)
+            self.stopLoadingIndicatorView()
+            let dictResponse : NSDictionary = responseObject as! NSDictionary
+            self.arrWishists = dictResponse["wishlist"]?.mutableCopy() as! NSMutableArray
+            self.tblWishLists.reloadData()
+            print(dictResponse)
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
@@ -197,10 +218,10 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
         
         self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "wishlist_by_store", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
-                self.stopLoadingIndicatorView()
-                let dictResponse : NSDictionary = responseObject as! NSDictionary
-                self.tblWishLists.reloadData()
-                print(dictResponse)
+            self.stopLoadingIndicatorView()
+            let dictResponse : NSDictionary = responseObject as! NSDictionary
+            self.tblWishLists.reloadData()
+            print(dictResponse)
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()

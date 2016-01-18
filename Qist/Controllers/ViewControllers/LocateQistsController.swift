@@ -122,7 +122,6 @@ class LocateQistsController : BaseController, locateQistSearchDelegate, locateQi
     
     // MARK: - API CALLS - Get all stores for Address
     func getAllStoresInfoOnAddressFromServer(searchAddress:String) {
-        
         self.startLoadingIndicatorView()
         let dictParams : NSDictionary = ["access_token": self.auth_token, "address": searchAddress, "radius" : self.radius]
         

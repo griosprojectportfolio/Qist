@@ -61,7 +61,7 @@ class SignupController : BaseController {
         
         if errorMessage.isEmpty {
             
-            self.alertQist = UIAlertController.confirmAlertWithTwoButtonTitles("Terms of Service", message:"By registering, I accept the Terms of Service and Privacy Policy" , btnTitle1:"I Agree", btnTitle2:"I Don't Agree" , handler: { (objAlertAction : UIAlertAction! ) -> Void in
+            self.alertQist = UIAlertController.confirmAlertWithTwoButtonTitles("Terms of Service", message:"By registering you are agreeing to accept the full terms and conditions of use available here: url: https://qist.co.nz/" , btnTitle1:"I Agree", btnTitle2:"I Don't Agree" , handler: { (objAlertAction : UIAlertAction! ) -> Void in
                 
                 switch objAlertAction.style {
                 case .Default :

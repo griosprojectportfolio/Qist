@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProfileController : BaseController , segmentedTapActionDelegate {
+class ProfileController : BaseController , segmentedTapActionDelegate ,ProfileCellDelegates{
     
     @IBOutlet var tblProfile : UITableView!
     
@@ -69,6 +69,7 @@ class ProfileController : BaseController , segmentedTapActionDelegate {
         let cell : ProfileCell = tableView.dequeueReusableCellWithIdentifier("ProCell",forIndexPath:indexPath) as! ProfileCell
         cell.configureProfileTableViewCell()
         cell.setupProfileCellContentAt_IndexPath(indexPath, objUser: objUser)
+        cell.delegates = self
         return cell
     }
     
@@ -79,6 +80,12 @@ class ProfileController : BaseController , segmentedTapActionDelegate {
             destination.index = indexPath.row
             self.navigationController?.pushViewController(destination, animated: true)
         }
+    }
+    
+    func btnChangetapped(index: NSInteger) {
+        let destination = self.storyboard?.instantiateViewControllerWithIdentifier("UpdateProfile") as! UpdateProfileController
+        destination.index = index
+        self.navigationController?.pushViewController(destination, animated: true)
     }
     
     
