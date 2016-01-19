@@ -28,6 +28,7 @@ class CartsController : BaseController, segmentedTapActionDelegate, cartsCellDel
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.title = "CARTS"
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -98,6 +99,11 @@ class CartsController : BaseController, segmentedTapActionDelegate, cartsCellDel
         cell.cartsDelegate = self
         cell.configureCartsTableViewCell()
         cell.setupCartsCellContent(self.isWishlists ? self.arrWishlists[indexPath.row] as! NSDictionary : self.arrCarts[indexPath.row] as! NSDictionary)
+        if self.isWishlists {
+            cell.btnAddToCart.setImage(UIImage(named: "button_add_cart"), forState: UIControlState.Normal)
+        }else {
+            cell.btnAddToCart.setImage(UIImage(named: "button_remove_cart"), forState: UIControlState.Normal)
+        }
         return cell
     }
     
@@ -108,13 +114,39 @@ class CartsController : BaseController, segmentedTapActionDelegate, cartsCellDel
     
     // MARK: - cartsCellDelegate methods
     func removeProductFromWishListsTapped(intTag : Int) {
-    
+        self.removeProductFromWishLists(self.isWishlists ? self.arrWishlists[intTag] as! NSDictionary : self.arrCarts[intTag] as! NSDictionary)
+        if self.isWishlists {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), {
+                self.arrWishlists.removeObjectAtIndex(intTag)
+                self.tblCartsView.reloadData()
+            })
+            
+        }else{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), {
+                self.arrCarts.removeObjectAtIndex(intTag)
+                self.tblCartsView.reloadData()
+            })
+        }
     }
     
     func addOrRemoveProductFromCartsTapped(intTag : Int) {
-    
+        if self.isWishlists {
+            self.addProductToCurrentCart(self.isWishlists ? self.arrWishlists[intTag] as! NSDictionary : self.arrCarts[intTag] as! NSDictionary)
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), {
+                self.getAllCurrentCartInfoFromServer()
+            })
+        }else{
+            self.removeProductFromCurrentCart(self.isWishlists ? self.arrWishlists[intTag] as! NSDictionary : self.arrCarts[intTag] as! NSDictionary)
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.arrCarts.removeObjectAtIndex(intTag)
+                    print(self.arrCarts)
+                    self.tblCartsView.reloadData()
+                })
+            })
+        }
     }
-
+    
     
     
     // MARK: - API CALLS - All Carts, Wish lists, Carts etc
@@ -125,11 +157,11 @@ class CartsController : BaseController, segmentedTapActionDelegate, cartsCellDel
         print(dictParams)
         self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "current_cart", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
-                self.stopLoadingIndicatorView()
-                let dictResponse : NSDictionary = responseObject as! NSDictionary
-                print(dictResponse)
-                self.arrCarts = dictResponse["products"]?.mutableCopy() as! NSMutableArray
-                self.tblCartsView.reloadData()
+            self.stopLoadingIndicatorView()
+            let dictResponse : NSDictionary = responseObject as! NSDictionary
+            print(dictResponse)
+            self.arrCarts = dictResponse["products"]?.mutableCopy() as! NSMutableArray
+            self.tblCartsView.reloadData()
             
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
@@ -145,11 +177,11 @@ class CartsController : BaseController, segmentedTapActionDelegate, cartsCellDel
         
         self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "wishlist", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
-                self.stopLoadingIndicatorView()
-                let dictResponse : NSDictionary = responseObject as! NSDictionary
-                self.arrWishlists = dictResponse["wishlist"]?.mutableCopy() as! NSMutableArray
-                self.tblCartsView.reloadData()
-                print(dictResponse)
+            self.stopLoadingIndicatorView()
+            let dictResponse : NSDictionary = responseObject as! NSDictionary
+            self.arrWishlists = dictResponse["wishlist"]?.mutableCopy() as! NSMutableArray
+            self.tblCartsView.reloadData()
+            print(dictResponse)
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
@@ -193,7 +225,7 @@ class CartsController : BaseController, segmentedTapActionDelegate, cartsCellDel
         }
     }
     
-   override func assignDataToComponents(){
+    override func assignDataToComponents(){
         // This function use for assign data to components.
     }
     

@@ -180,6 +180,7 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "add_product_to_wishlist", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
             self.stopLoadingIndicatorView()
+            self.showErrorPopupWith_title_message("", strMessage:"Product Added to wishlist.")
             let dictResponse : NSDictionary = responseObject as! NSDictionary
             print(dictResponse)
             },
@@ -198,11 +199,13 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "remove_product_from_wishlist", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
             self.stopLoadingIndicatorView()
+            self.showErrorPopupWith_title_message("", strMessage:"Product Removed from WishLists.")
             let dictResponse : NSDictionary = responseObject as! NSDictionary
             print(dictResponse)
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
+                print(task?.responseString)
                 self.showErrorMessageOnApiFailure(task!.responseData!, title: "REMOVE PRODUCT!")
         })
     }
@@ -213,9 +216,9 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": (dict.valueForKey("id")?.integerValue)!,"store_id":(dict.valueForKey("retailer_id")?.integerValue)!]
          print(dictParams)
         self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "add_product_to_cart", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
-            
             self.stopLoadingIndicatorView()
             let dictResponse : NSDictionary = responseObject as! NSDictionary
+            self.showErrorPopupWith_title_message("", strMessage:"Product Added in your cart.")
             print(dictResponse)
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
@@ -225,14 +228,16 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
     }
     
     
-    func removeProductFromCurrentCart() {
+    func removeProductFromCurrentCart(dict : NSDictionary) {
         self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": "0", "store_id" : "0", "all" : "0"]
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": (dict.valueForKey("id")?.integerValue)!,"store_id":(dict.valueForKey("retailer_id")?.integerValue)!]
+        print(dictParams)
         
         self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "remove_product_from_wishlist", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
             self.stopLoadingIndicatorView()
             let dictResponse : NSDictionary = responseObject as! NSDictionary
+            self.showErrorPopupWith_title_message("", strMessage:"Product Removed in your cart.")
             print(dictResponse)
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in

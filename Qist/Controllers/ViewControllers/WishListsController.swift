@@ -179,7 +179,9 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
         }else {
             let dict = arrWishists.objectAtIndex(intTag) as! NSDictionary
             self.removeProductFromWishLists(dict)
-            self.getAllWishlistsInfoFromServer()
+            arrWishists.removeObjectAtIndex(intTag)
+            self.tblWishLists.reloadData()
+            //self.getAllWishlistsInfoFromServer()
         }
     }
     
