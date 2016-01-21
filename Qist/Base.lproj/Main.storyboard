@@ -8,7 +8,7 @@
         <!--Login Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginController" customModule="Qist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Login" id="BYZ-38-t0r" customClass="LoginController" customModule="Qist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2088,7 +2088,7 @@
         <image name="top_store_bg" width="414" height="29"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VIT-LO-mtr"/>
-        <segue reference="ju7-7d-G0b"/>
+        <segue reference="pP9-Ko-efX"/>
+        <segue reference="WW0-um-egz"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -19,7 +19,8 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
     @IBOutlet var tblWishLists : UITableView!
     
     var arrWishists : NSMutableArray = NSMutableArray()
-    var arrByStores : NSMutableArray = [[],[],[]]
+    var arrByStores : NSMutableArray = NSMutableArray()
+    var arrByStoresCellContent : NSMutableArray = NSMutableArray()
     var isByStore : Bool = false
     
     // MARK: -  Current view related Methods
@@ -107,8 +108,8 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
         headerView.addGestureRecognizer(headerTap)
         
         let lblTitle : UILabel = UILabel(frame: CGRectMake(headerView.frame.origin.x + 15, 10, headerView.frame.size.width - 30, 20))
-        
-        lblTitle.text = "H&J Smith,Southland"
+        let dictObj = arrByStores.objectAtIndex(section) as! NSDictionary
+        lblTitle.text = dictObj.valueForKey("trading_name") as? String
         lblTitle.font = UIFont.boldFontOfSize(13)
         lblTitle.textColor = UIColor.appBackgroundColor()
         headerView.addSubview(lblTitle)
@@ -133,7 +134,12 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var rows : Int = Int(6)
         if isByStore {
-            rows = self.arrByStores[section].count
+            if arrByStoresCellContent.count != 0 {
+            let arrObj = arrByStoresCellContent.objectAtIndex(section) as! NSArray
+            rows = arrObj.count
+            }else {
+                rows = 0
+            }
             return rows
         }else {
             rows = self.arrWishists.count
@@ -148,6 +154,10 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
         cell.tag = indexPath.row
         cell.configureWishListsTableViewCell()
         if isByStore {
+            if arrByStoresCellContent.count != 0 {
+            let arrObj = self.arrByStoresCellContent.objectAtIndex(indexPath.section) as! NSArray
+            cell.setupWishListsCellContent(arrObj.objectAtIndex(indexPath.row) as! NSDictionary)
+            }
         }else {
         cell.setupWishListsCellContent(arrWishists.objectAtIndex(indexPath.row) as! NSDictionary)
         }
@@ -163,7 +173,9 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
     func sectionHeaderTapAction(sender:UITapGestureRecognizer){
         let tag : Int =  Int(sender.view!.tag)
         if self.arrByStores[tag].count > 0 {
-            self.arrByStores.replaceObjectAtIndex(tag, withObject:[])
+            let dictObj = arrByStores.objectAtIndex(tag) as! NSDictionary
+            //self.arrByStoresCellContent.addObject(dictObj.valueForKey("Product") as! NSMutableArray)
+            self.arrByStoresCellContent.replaceObjectAtIndex(tag, withObject:dictObj.valueForKey("Product") as! NSMutableArray)
         }else {
             self.arrByStores.replaceObjectAtIndex(tag, withObject:arrByStores.objectAtIndex(tag))
             print(self.arrByStores)
@@ -214,7 +226,7 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
     }
     
     func getAllWishlistsByStoreInfoFromServer() {
-        
+
         self.startLoadingIndicatorView()
         let dictParams : NSDictionary = ["access_token": self.auth_token , "latitude" : self.latitude, "longitude" : self.longitude, "radius": self.radius]
         
@@ -222,13 +234,23 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
             
             self.stopLoadingIndicatorView()
             let dictResponse : NSDictionary = responseObject as! NSDictionary
+            self.arrByStores = dictResponse.valueForKey("wishlist") as! NSMutableArray
+            print(self.arrByStores)
+            self.dataProcess()
             self.tblWishLists.reloadData()
-            print(dictResponse)
+            
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
                 self.showErrorMessageOnApiFailure(task!.responseData!, title: "WISHLISTS!")
         })
+    }
+    
+    func dataProcess() {
+        for var i = 0 ;i < arrByStores.count ; i++ {
+            arrByStoresCellContent.addObject([])
+        }
+        print(arrByStoresCellContent)
     }
     
     // MARK: -  Overrided Methods of BaseController

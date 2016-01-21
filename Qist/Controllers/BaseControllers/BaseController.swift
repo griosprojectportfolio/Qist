@@ -172,10 +172,10 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         })
     }
     
-    func addProductToWishLists() {
-        
+    func addProductToWishLists(dictParams : NSDictionary) {
+        print(dictParams)
         self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": "0"]
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": dictParams.valueForKey("id")!]
         
         self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "add_product_to_wishlist", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
@@ -287,8 +287,13 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
     
     // MARK: - Common Alert View Methods.
     func showErrorPopupWith_title_message(strTitle:String, strMessage:String){
+        print(strTitle)
         dispatch_async(dispatch_get_main_queue()) {
             self.alertQist = UIAlertController.alertWithTitleAndMessage(strTitle,message:strMessage, handler:{(objAlertAction : UIAlertAction!) -> Void in
+                if strMessage == "Invalid Access Token" {
+                    self.auth_token = ""
+                    self.navigationController?.popToRootViewControllerAnimated(true)
+                }
             })
             self.presentViewController(self.alertQist, animated: true, completion: nil)
         }

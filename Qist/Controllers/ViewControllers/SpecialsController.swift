@@ -130,10 +130,14 @@ class SpecialsController : BaseController , segmentedTapActionDelegate, specials
     // MARK: - specialsCellDelegate methods
     func addProductToWishlistsTapped(intTag : Int) {
         print("Cell object == \(self.isJustForYou ? self.arrJustForYou[intTag] as! NSDictionary : self.arrSpecials[intTag] as! NSDictionary)")
+        let dict = arrSpecials.objectAtIndex(intTag) as! NSDictionary
+        self.addProductToWishLists(dict)
     }
     
     func addProductToCartsTapped(intTag : Int) {
         print("Cell object == \(self.isJustForYou ? self.arrJustForYou[intTag] as! NSDictionary : self.arrSpecials[intTag] as! NSDictionary)")
+        let dict = arrSpecials.objectAtIndex(intTag) as! NSDictionary
+        self.addProductToCurrentCart(dict)
     }
 
     
@@ -158,7 +162,6 @@ class SpecialsController : BaseController , segmentedTapActionDelegate, specials
     }
     
     func getAllJustForYouProductFromServer() {
-        
         self.startLoadingIndicatorView()
         let dictParams : NSDictionary = ["access_token": self.auth_token]
         

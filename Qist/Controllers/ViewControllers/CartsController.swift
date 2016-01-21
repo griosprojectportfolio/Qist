@@ -147,8 +147,6 @@ class CartsController : BaseController, segmentedTapActionDelegate, cartsCellDel
         }
     }
     
-    
-    
     // MARK: - API CALLS - All Carts, Wish lists, Carts etc
     func getAllCurrentCartInfoFromServer() {
         

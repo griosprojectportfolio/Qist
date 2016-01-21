@@ -164,7 +164,8 @@ class StoresController : BaseController , segmentedTapActionDelegate , storeCell
     func getAllFavouriteStoresInfoFromServer() {
         
         self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = ["access_token": self.auth_token]
+        //let dictParams : NSDictionary = ["access_token": self.auth_token]
+        let dictParams : NSDictionary = ["access_token": self.auth_token , "latitude" : self.latitude, "longitude" : self.longitude, "radius": self.radius]
         
         self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "favourite_store", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
