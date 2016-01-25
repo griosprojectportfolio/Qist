@@ -107,9 +107,19 @@ class LoginController : BaseController , facebookDataDelegate , twitterDataDeleg
     
     // MARK: - facebookDataDelegate Delegate Methods
     func currentFacebookUserData(dictResponse:NSDictionary) {
-        self.stopLoadingIndicatorView()
-        // Save user basic info in database
-        //self.storeUserInfoInCoreData(dictResponse,isLoginVia:"Facebook")
+        
+        let dictParams : NSDictionary = [ "facebook_id" : dictResponse["id"]! ,"first_name" : dictResponse["first_name"]! , "last_name" : dictResponse["last_name"]!, "email" : dictResponse["email"]! ]
+
+        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "connect_facebook", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+                self.stopLoadingIndicatorView()
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                self.storeUserInfoInCoreData(dictResponse, isLoginVia:"Facebook")
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "Facebook!")
+        })
     }
     
     func failedToGetFacebookUserData(errorMessage:String) {
@@ -118,13 +128,25 @@ class LoginController : BaseController , facebookDataDelegate , twitterDataDeleg
     }
 
     
-    
     // MARK: - twitterDataDelegate Delegate Methods
     func currentTwitterUserData(dictResponse:NSDictionary) {
-        self.stopLoadingIndicatorView()
-        //let dictData : NSDictionary = [ "id" : dictResponse["id_str"] as! String ,"first_name" : dictResponse["name"] as! String , "last_name" : dictResponse["name"] as! String , "email" : "" , "birthday" : "", "gender" : "" ]
-        // Save user basic info in database
-        //self.storeUserInfoInCoreData(dictData,isLoginVia:"Twitter")
+        
+        let arrName = dictResponse["name"]!.componentsSeparatedByString(" ")
+        let strFirstname : String = arrName.count > 0 ? arrName[0] : ""
+        let strLastname : String = arrName.count > 1 ? arrName[1] : ""
+        
+        let dictParams : NSDictionary = [ "twitter_id":dictResponse["id"]! ,"first_name":strFirstname ,"last_name":strLastname, "email":"" ]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "connect_twitter", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+                self.stopLoadingIndicatorView()
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                self.storeUserInfoInCoreData(dictResponse, isLoginVia:"Twitter")
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "Twitter!")
+        })
     }
     
     func failedToGettwitterUserData(errorMessage:String) {
@@ -136,15 +158,30 @@ class LoginController : BaseController , facebookDataDelegate , twitterDataDeleg
     
     // MARK: - googlePlusDataDelegate Delegate Methods
     func currentGooglePlusUserData(dictResponse:NSDictionary) {
-        //let dictData : NSDictionary = [ "id" : dictResponse["id"] as! String ,"first_name" : dictResponse["name"] as! String , "last_name" : dictResponse["name"] as! String , "email" : dictResponse["email"] as! String , "birthday" : "", "gender" : dictResponse["gender"] as! String ]
-        // Save user basic info in database
-        //self.storeUserInfoInCoreData(dictData,isLoginVia:"Google Plus")
+        
+        self.startLoadingIndicatorView()
+        
+        let arrName = dictResponse["name"]!.componentsSeparatedByString(" ")
+        let strFirstname : String = arrName.count > 0 ? arrName[0] : ""
+        let strLastname : String = arrName.count > 1 ? arrName[1] : ""
+
+        let dictParams : NSDictionary = ["googleplus_id" : dictResponse["id"]!, "first_name":strFirstname, "last_name":strLastname, "email" : dictResponse["email"]! ]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "connect_googleplus", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            
+                self.stopLoadingIndicatorView()
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                self.storeUserInfoInCoreData(dictResponse, isLoginVia:"Google Plus")
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "Google Plus!")
+        })
     }
     
     func failedToGetGooglePlusUserData(errorMessage:String) {
         self.showErrorPopupWith_title_message("Google Plus", strMessage: errorMessage)
     }
-    
     
     
     
@@ -168,11 +205,8 @@ class LoginController : BaseController , facebookDataDelegate , twitterDataDeleg
                 
                     self.stopLoadingIndicatorView()
                     let dictResponse : NSDictionary = responseObject as! NSDictionary
-                    let objCustomer : NSDictionary = dictResponse["customer"] as! NSDictionary
-                    self.setUserLoginSession_AccessToken(objCustomer["access_token"] as! String)
-                    self.storeUserInfoInCoreData(objCustomer, isLoginVia: dictParams["user_name"] as! String)
+                    self.storeUserInfoInCoreData(dictResponse, isLoginVia: dictParams["user_name"] as! String)
                     self.resetLoginPageContents()
-
                 },
                 failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                     self.stopLoadingIndicatorView()
@@ -184,8 +218,12 @@ class LoginController : BaseController , facebookDataDelegate , twitterDataDeleg
         }
     }
     
-    func storeUserInfoInCoreData(dictData: NSDictionary ,isLoginVia:String) {
-        let arrData : NSArray = NSArray(object: dictData)
+    func storeUserInfoInCoreData(dictResponse: NSDictionary ,isLoginVia:String) {
+        
+        let objCustomer : NSDictionary = dictResponse["customer"] as! NSDictionary
+        self.setUserLoginSession_AccessToken(objCustomer["access_token"] as! String)
+        let arrData : NSArray = NSArray(object: objCustomer)
+        
         MagicalRecord.saveWithBlock({ ( context : NSManagedObjectContext!) -> Void in
             User.entityFromArrayInContext( arrData , localContext: context)
             self.showLoginAlertWithNavigation(isLoginVia)
