@@ -108,6 +108,8 @@ class QistSocials : NSObject {
                         
                         timelineRequest.account = twitterAccount
                         
+                        print(timelineRequest.account)
+                        
                         timelineRequest.performRequestWithHandler({ (responseData:NSData!,urlResponse:NSHTTPURLResponse!, error:NSError!) -> Void in
                             if error != nil {
                                 self.twDelegate?.failedToGettwitterUserData("There is some authentication problem.")

@@ -130,7 +130,7 @@ class LoginController : BaseController , facebookDataDelegate , twitterDataDeleg
     
     // MARK: - twitterDataDelegate Delegate Methods
     func currentTwitterUserData(dictResponse:NSDictionary) {
-        
+        print(dictResponse)
         let arrName = dictResponse["name"]!.componentsSeparatedByString(" ")
         let strFirstname : String = arrName.count > 0 ? arrName[0] : ""
         let strLastname : String = arrName.count > 1 ? arrName[1] : ""
