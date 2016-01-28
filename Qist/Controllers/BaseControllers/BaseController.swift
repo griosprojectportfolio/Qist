@@ -33,10 +33,10 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
     let latitude = "27" //QistLocationManager.sharedManager.currentLocation.latitude
     let radius = "300"
     var objUser : User!
-
+    
     let btnBackNav: UIButton = UIButton(type: UIButtonType.Custom)
     let btnBackLogo: UIButton = UIButton(type: UIButtonType.Custom)
-
+    
     
     var auth_token : String {
         get {
@@ -97,8 +97,6 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
     // MARK: - Navigation bar and there actions.
     func addLeftNavigationItemOnView(){
         
@@ -124,8 +122,6 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         }
     }
     
-    
-    
     // MARK: - Base Class Common Methods.
     func setUserLoginSession_AccessToken(token:String){
         self.auth_token = token
@@ -146,9 +142,9 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         
         self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "set_favourite_store", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
-                self.stopLoadingIndicatorView()
-                let dictResponse : NSDictionary = responseObject as! NSDictionary
-                self.showErrorPopupWith_title_message("FAVOURITE!", strMessage:dictResponse["error"] as! String)
+            self.stopLoadingIndicatorView()
+            let dictResponse : NSDictionary = responseObject as! NSDictionary
+            self.showErrorPopupWith_title_message("FAVOURITE!", strMessage:dictResponse["error"] as! String)
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
@@ -162,9 +158,9 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         
         self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "set_unfavourite_store", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
-                self.stopLoadingIndicatorView()
-                let dictResponse : NSDictionary = responseObject as! NSDictionary
-                self.showErrorPopupWith_title_message("UNFAVOURITE!", strMessage:dictResponse["error"] as! String)
+            self.stopLoadingIndicatorView()
+            let dictResponse : NSDictionary = responseObject as! NSDictionary
+            self.showErrorPopupWith_title_message("UNFAVOURITE!", strMessage:dictResponse["error"] as! String)
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
@@ -214,7 +210,7 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         
         self.startLoadingIndicatorView()
         let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": (dict.valueForKey("id")?.integerValue)!,"store_id":(dict.valueForKey("retailer_id")?.integerValue)!]
-         print(dictParams)
+        print(dictParams)
         self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "add_product_to_cart", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             self.stopLoadingIndicatorView()
             let dictResponse : NSDictionary = responseObject as! NSDictionary
@@ -251,10 +247,10 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         let dictParams : NSDictionary = ["access_token": self.auth_token]
         
         self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "logout", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
-                self.stopLoadingIndicatorView()
-                self.setUserLoginSession_AccessToken("")
-                self.sharedApi.deleteAllTableContent()
-                self.navigationController?.popToRootViewControllerAnimated(false)
+            self.stopLoadingIndicatorView()
+            self.setUserLoginSession_AccessToken("")
+            self.sharedApi.deleteAllTableContent()
+            self.navigationController?.popToRootViewControllerAnimated(false)
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
@@ -441,4 +437,57 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         objUser = arrFetchedData.count > 0 ? arrFetchedData.objectAtIndex(0) as! User : nil
         
     }
+    
+    // MARK: - facebook nil check.
+    func facebookUserDataChecks(dictResponse:NSDictionary)->NSMutableDictionary {
+        let dictMut : NSMutableDictionary! = NSMutableDictionary()
+        
+        if dictResponse.valueForKey("id") != nil {
+            let strId = dictResponse.valueForKey("id") as! String
+            let strUId = strId + "@qist.com"
+            dictMut.setValue(strUId, forKey: "facebook_id")
+        }else {
+            dictMut.setValue("", forKey: "facebook_id")
+        }
+        if dictResponse.valueForKey("first_name") != nil {
+            dictMut.setValue(dictResponse.valueForKey("first_name"), forKey: "first_name")
+        }else {
+            dictMut.setValue("", forKey: "first_name")
+        }
+        if dictResponse.valueForKey("last_name") != nil {
+            dictMut.setValue(dictResponse.valueForKey("last_name"), forKey: "last_name")
+        }else {
+            dictMut.setValue("", forKey: "last_name")
+        }
+        if dictResponse.valueForKey("email") != nil {
+            dictMut.setValue(dictResponse.valueForKey("email"), forKey: "email")
+        }else {
+            dictMut.setValue("", forKey: "email")
+        }
+        return dictMut
+    }
+    
+    // MARK: - twitter nil check.
+    func twitterUserDataChecks(dictResponse:NSDictionary)->NSDictionary {
+        let arrName = dictResponse["name"]!.componentsSeparatedByString(" ")
+        let strFirstname : String = arrName.count > 0 ? arrName[0] : ""
+        let strLastname : String = arrName.count > 1 ? arrName[1] : ""
+        let strId = NSString(format: "%u", (dictResponse.valueForKey("id")?.integerValue)!)
+        let strUId = (strId as String) + "@qist.com"
+        let dictParams : NSDictionary = [ "twitter_id":strUId ,"first_name":strFirstname ,"last_name":strLastname]
+        return dictParams
+    }
+    
+    // MARK: - twitter nil check.
+    func googlePlusUserDataChecks(dictResponse:NSDictionary)->NSDictionary {
+        print(dictResponse)
+        let arrName = dictResponse["name"]!.componentsSeparatedByString(" ")
+        let strFirstname : String = arrName.count > 0 ? arrName[0] : ""
+        let strLastname : String = arrName.count > 1 ? arrName[1] : ""
+        let strId = NSString(format: "%u", (dictResponse.valueForKey("id")?.integerValue)!)
+        let strUId = (strId as String) + "@qist.com"
+        let dictParams : NSDictionary = ["googleplus_id" : strUId, "first_name":strFirstname, "last_name":strLastname, "email" : dictResponse["email"]! ]
+        return dictParams
+    }
+    
 }

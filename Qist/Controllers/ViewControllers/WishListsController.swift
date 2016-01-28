@@ -85,7 +85,7 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
             intSection = self.arrByStores.count
             return intSection
         }else{
-            intSection = self.arrWishists.count
+            intSection = 1
             return intSection
         }
     }
@@ -132,7 +132,7 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var rows : Int = Int(6)
+        var rows : Int
         if isByStore {
             if arrByStoresCellContent.count != 0 {
             let arrObj = arrByStoresCellContent.objectAtIndex(section) as! NSArray
@@ -156,10 +156,10 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
         if isByStore {
             if arrByStoresCellContent.count != 0 {
             let arrObj = self.arrByStoresCellContent.objectAtIndex(indexPath.section) as! NSArray
-            cell.setupWishListsCellContent(arrObj.objectAtIndex(indexPath.row) as! NSDictionary)
+            cell.setupWishListsCellContent(arrObj.objectAtIndex(indexPath.row) as! NSDictionary,indexpath:indexPath)
             }
         }else {
-        cell.setupWishListsCellContent(arrWishists.objectAtIndex(indexPath.row) as! NSDictionary)
+        cell.setupWishListsCellContent(arrWishists.objectAtIndex(indexPath.row) as! NSDictionary,indexpath: indexPath)
         }
         return cell
     }
@@ -185,23 +185,30 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
     
     
     // MARK: - wishlistsCellDelegate methods
-    func removeProductFromWishListsTapped(intTag : Int) {
+    func removeProductFromWishListsTapped(Indexpath: NSIndexPath) {
         if isByStore {
-            
-        }else {
-            let dict = arrWishists.objectAtIndex(intTag) as! NSDictionary
+            let arrObj = self.arrByStoresCellContent.objectAtIndex(Indexpath.section) as! NSArray
+            let dict = arrObj.objectAtIndex(Indexpath.row) as! NSDictionary
             self.removeProductFromWishLists(dict)
-            arrWishists.removeObjectAtIndex(intTag)
+//            let arr = self.arrByStoresCellContent.objectAtIndex(Indexpath.section).mutableCopy()
+//            arr.removeObjectAtIndex(Indexpath.row)
+//            self.arrByStoresCellContent.insertObject(arr, atIndex:Indexpath.section)
+        }else {
+            let dict = arrWishists.objectAtIndex(Indexpath.row) as! NSDictionary
+            self.removeProductFromWishLists(dict)
+            arrWishists.removeObjectAtIndex(Indexpath.row)
             self.tblWishLists.reloadData()
             //self.getAllWishlistsInfoFromServer()
         }
     }
     
-    func addProductToCartsTapped(intTag : Int) {
+    func addProductToCartsTapped(Indexpath: NSIndexPath) {
         if isByStore {
-            
+            let arrObj = self.arrByStoresCellContent.objectAtIndex(Indexpath.section) as! NSArray
+            let dict = arrObj.objectAtIndex(Indexpath.row) as! NSDictionary
+            self.addProductToCurrentCart(dict)
         }else {
-            let dict = arrWishists.objectAtIndex(intTag) as! NSDictionary
+            let dict = arrWishists.objectAtIndex(Indexpath.row) as! NSDictionary
             self.addProductToCurrentCart(dict)
         }
     }
@@ -215,9 +222,10 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
             
             self.stopLoadingIndicatorView()
             let dictResponse : NSDictionary = responseObject as! NSDictionary
+            self.arrWishists.removeAllObjects()
             self.arrWishists = dictResponse["wishlist"]?.mutableCopy() as! NSMutableArray
             self.tblWishLists.reloadData()
-            print(dictResponse)
+            print(self.arrWishists.count)
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()

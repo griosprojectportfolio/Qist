@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 protocol wishlistsCellDelegate {
-    func removeProductFromWishListsTapped(intTag : Int)
-    func addProductToCartsTapped(intTag : Int)
+    func removeProductFromWishListsTapped(Indexpath : NSIndexPath)
+    func addProductToCartsTapped(Indexpath : NSIndexPath)
 }
 
 class WishListsCell : UITableViewCell {
@@ -28,6 +28,7 @@ class WishListsCell : UITableViewCell {
     @IBOutlet var lblProductExp: UILabel!
     
     var wishlistsDelegate: wishlistsCellDelegate?
+    var cellIndexpath : NSIndexPath!
     
     
     func configureWishListsTableViewCell(){
@@ -60,7 +61,7 @@ class WishListsCell : UITableViewCell {
 
     }
     
-    func setupWishListsCellContent(dict:NSDictionary){
+    func setupWishListsCellContent(dict:NSDictionary,indexpath:NSIndexPath){
         
         if let ProductName : String = dict["name"] as? String {
             self.lblProductName.text = ProductName
@@ -75,15 +76,15 @@ class WishListsCell : UITableViewCell {
         }
         self.lblProductSave.text = "Save : "
         self.prodImgView.image = UIImage(named: "hamburger")
-        
+        cellIndexpath = indexpath
     }
  
     @IBAction func removeFromWishlistTapped(sender: UIButton){
-        self.wishlistsDelegate?.removeProductFromWishListsTapped(self.tag)
+        self.wishlistsDelegate?.removeProductFromWishListsTapped(cellIndexpath)
     }
     
     @IBAction func addToCartsTapped(sender: UIButton){
-        self.wishlistsDelegate?.addProductToCartsTapped(self.tag)
+        self.wishlistsDelegate?.addProductToCartsTapped(cellIndexpath)
     }
     
 }

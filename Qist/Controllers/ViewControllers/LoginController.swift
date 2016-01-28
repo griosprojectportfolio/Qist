@@ -108,7 +108,7 @@ class LoginController : BaseController , facebookDataDelegate , twitterDataDeleg
     // MARK: - facebookDataDelegate Delegate Methods
     func currentFacebookUserData(dictResponse:NSDictionary) {
         
-        let dictParams : NSDictionary = [ "facebook_id" : dictResponse["id"]! ,"first_name" : dictResponse["first_name"]! , "last_name" : dictResponse["last_name"]!, "email" : dictResponse["email"]! ]
+        let dictParams : NSDictionary = facebookUserDataChecks(dictResponse)//[ "facebook_id" : dictResponse["id"]! ,"first_name" : dictResponse["first_name"]! , "last_name" : dictResponse["last_name"]!, "email" : dictResponse["email"]! ]
 
         self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "connect_facebook", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
@@ -131,12 +131,9 @@ class LoginController : BaseController , facebookDataDelegate , twitterDataDeleg
     // MARK: - twitterDataDelegate Delegate Methods
     func currentTwitterUserData(dictResponse:NSDictionary) {
         print(dictResponse)
-        let arrName = dictResponse["name"]!.componentsSeparatedByString(" ")
-        let strFirstname : String = arrName.count > 0 ? arrName[0] : ""
-        let strLastname : String = arrName.count > 1 ? arrName[1] : ""
         
-        let dictParams : NSDictionary = [ "twitter_id":dictResponse["id"]! ,"first_name":strFirstname ,"last_name":strLastname, "email":"" ]
-        
+        let dictParams : NSDictionary = twitterUserDataChecks(dictResponse)
+
         self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "connect_twitter", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
                 self.stopLoadingIndicatorView()
@@ -160,13 +157,8 @@ class LoginController : BaseController , facebookDataDelegate , twitterDataDeleg
     func currentGooglePlusUserData(dictResponse:NSDictionary) {
         
         self.startLoadingIndicatorView()
-        
-        let arrName = dictResponse["name"]!.componentsSeparatedByString(" ")
-        let strFirstname : String = arrName.count > 0 ? arrName[0] : ""
-        let strLastname : String = arrName.count > 1 ? arrName[1] : ""
+        let dictParams : NSDictionary = googlePlusUserDataChecks(dictResponse)
 
-        let dictParams : NSDictionary = ["googleplus_id" : dictResponse["id"]!, "first_name":strFirstname, "last_name":strLastname, "email" : dictResponse["email"]! ]
-        
         self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "connect_googleplus", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
                 self.stopLoadingIndicatorView()
