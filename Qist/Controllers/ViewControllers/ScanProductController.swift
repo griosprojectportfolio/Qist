@@ -8,10 +8,12 @@
 
 import Foundation
 
-class ScanProductController : BaseController {
+class ScanProductController : BaseController,UITableViewDelegate,UITableViewDataSource,ScanProductCellDelegates {
     
     @IBOutlet var lblCurrentStore: UILabel!
     @IBOutlet var lblCurrentDate: UILabel!
+    
+    @IBOutlet var tblScanProduct: UITableView!
 
     
     // MARK: -  Current view related Methods
@@ -48,6 +50,29 @@ class ScanProductController : BaseController {
     
     override func assignDataToComponents(){
         // This function use for assign data to components.
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cellObj = tableView.dequeueReusableCellWithIdentifier("ScanProduct") as! ScanProductCell
+        cellObj.productDelegates = self
+        return cellObj
+    }
+    
+    // MARK: - specialsCellDelegate methods
+    func addProductToWishListTapped(Indexpath: NSIndexPath) {
+//        print("Cell object == \(self.isJustForYou ? self.arrJustForYou[intTag] as! NSDictionary : self.arrSpecials[intTag] as! NSDictionary)")
+//        let dict = arrSpecials.objectAtIndex(intTag) as! NSDictionary
+//        self.addProductToWishLists(dict)
+    }
+    
+    func addProductToCartsTapped(Indexpath: NSIndexPath) {
+//        print("Cell object == \(self.isJustForYou ? self.arrJustForYou[intTag] as! NSDictionary : self.arrSpecials[intTag] as! NSDictionary)")
+//        let dict = arrSpecials.objectAtIndex(intTag) as! NSDictionary
+//        self.addProductToCurrentCart(dict)
     }
     
 }

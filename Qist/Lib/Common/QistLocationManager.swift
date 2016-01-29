@@ -93,7 +93,6 @@ class QistLocationManager : NSObject , CLLocationManagerDelegate {
     
     // MARK: - Reverse geocoding method
     func getAddressFromLatLong(location:CLLocation){
-        
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, e) -> Void in
             if let error = e {

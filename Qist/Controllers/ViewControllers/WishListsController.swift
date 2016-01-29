@@ -135,8 +135,8 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
         var rows : Int
         if isByStore {
             if arrByStoresCellContent.count != 0 {
-            let arrObj = arrByStoresCellContent.objectAtIndex(section) as! NSArray
-            rows = arrObj.count
+                let arrObj = arrByStoresCellContent.objectAtIndex(section) as! NSArray
+                rows = arrObj.count
             }else {
                 rows = 0
             }
@@ -155,11 +155,11 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
         cell.configureWishListsTableViewCell()
         if isByStore {
             if arrByStoresCellContent.count != 0 {
-            let arrObj = self.arrByStoresCellContent.objectAtIndex(indexPath.section) as! NSArray
-            cell.setupWishListsCellContent(arrObj.objectAtIndex(indexPath.row) as! NSDictionary,indexpath:indexPath)
+                let arrObj = self.arrByStoresCellContent.objectAtIndex(indexPath.section) as! NSArray
+                cell.setupWishListsCellContent(arrObj.objectAtIndex(indexPath.row) as! NSDictionary,indexpath:indexPath)
             }
         }else {
-        cell.setupWishListsCellContent(arrWishists.objectAtIndex(indexPath.row) as! NSDictionary,indexpath: indexPath)
+            cell.setupWishListsCellContent(arrWishists.objectAtIndex(indexPath.row) as! NSDictionary,indexpath: indexPath)
         }
         return cell
     }
@@ -190,9 +190,18 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
             let arrObj = self.arrByStoresCellContent.objectAtIndex(Indexpath.section) as! NSArray
             let dict = arrObj.objectAtIndex(Indexpath.row) as! NSDictionary
             self.removeProductFromWishLists(dict)
-//            let arr = self.arrByStoresCellContent.objectAtIndex(Indexpath.section).mutableCopy()
-//            arr.removeObjectAtIndex(Indexpath.row)
-//            self.arrByStoresCellContent.insertObject(arr, atIndex:Indexpath.section)
+            let arr = self.arrByStoresCellContent.objectAtIndex(Indexpath.section).mutableCopy()
+            arr.removeObjectAtIndex(Indexpath.row)
+            self.arrByStoresCellContent.insertObject(arr, atIndex:Indexpath.section)
+            self.tblWishLists.reloadData()
+            let dictObj = arrByStores.objectAtIndex(Indexpath.section).mutableCopy() as! NSMutableDictionary
+            print(arrByStores)
+            let arrmain = dictObj.valueForKey("Product")?.mutableCopy() as! NSMutableArray
+            arrmain.removeObjectAtIndex(Indexpath.row)
+            dictObj.setValue(arrmain, forKey: "Product")
+            print(dictObj)
+            arrByStores.replaceObjectAtIndex(Indexpath.section, withObject: dictObj)
+            print(arrByStores)
         }else {
             let dict = arrWishists.objectAtIndex(Indexpath.row) as! NSDictionary
             self.removeProductFromWishLists(dict)
@@ -229,12 +238,16 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                self.showErrorMessageOnApiFailure(task!.responseData!, title: "WISHLISTS!")
+                if task!.responseData != nil {
+                    self.showErrorMessageOnApiFailure(task!.responseData!, title: "WISHLISTS!")
+                }else{
+                    self.showErrorPopupWith_title_message("", strMessage:"Server request timed out.")
+                }
         })
     }
     
     func getAllWishlistsByStoreInfoFromServer() {
-
+        
         self.startLoadingIndicatorView()
         let dictParams : NSDictionary = ["access_token": self.auth_token , "latitude" : self.latitude, "longitude" : self.longitude, "radius": self.radius]
         
@@ -242,7 +255,7 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
             
             self.stopLoadingIndicatorView()
             let dictResponse : NSDictionary = responseObject as! NSDictionary
-            self.arrByStores = dictResponse.valueForKey("wishlist") as! NSMutableArray
+            self.arrByStores = dictResponse.valueForKey("wishlist")?.mutableCopy() as! NSMutableArray
             print(self.arrByStores)
             self.dataProcess()
             self.tblWishLists.reloadData()
@@ -250,7 +263,11 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                self.showErrorMessageOnApiFailure(task!.responseData!, title: "WISHLISTS!")
+                if task!.responseData != nil {
+                    self.showErrorMessageOnApiFailure(task!.responseData!, title: "WISHLISTS!")
+                }else{
+                    self.showErrorPopupWith_title_message("", strMessage:"Server request timed out.")
+                }
         })
     }
     

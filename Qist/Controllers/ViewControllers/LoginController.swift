@@ -109,6 +109,8 @@ class LoginController : BaseController , facebookDataDelegate , twitterDataDeleg
     func currentFacebookUserData(dictResponse:NSDictionary) {
         
         let dictParams : NSDictionary = facebookUserDataChecks(dictResponse)//[ "facebook_id" : dictResponse["id"]! ,"first_name" : dictResponse["first_name"]! , "last_name" : dictResponse["last_name"]!, "email" : dictResponse["email"]! ]
+        
+        print(dictParams)
 
         self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "connect_facebook", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             

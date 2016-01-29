@@ -157,7 +157,12 @@ class SpecialsController : BaseController , segmentedTapActionDelegate, specials
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                self.showErrorMessageOnApiFailure(task!.responseData!, title: "SPECIALS!")
+                if task!.responseData != nil {
+                     self.showErrorMessageOnApiFailure(task!.responseData!, title: "SPECIALS!")
+                }else{
+                    self.showErrorPopupWith_title_message("", strMessage:"Server request timed out.")
+                }
+                
         })
     }
     
@@ -174,7 +179,11 @@ class SpecialsController : BaseController , segmentedTapActionDelegate, specials
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                self.showErrorMessageOnApiFailure(task!.responseData!, title: "JUST FOR YOU!")
+                if task!.responseData != nil {
+                    self.showErrorMessageOnApiFailure(task!.responseData!, title: "JUST FOR YOU!")
+                }else{
+                    self.showErrorPopupWith_title_message("", strMessage:"Server request timed out.")
+                }
         })
     }
     

@@ -116,16 +116,21 @@ class CartsController : BaseController, segmentedTapActionDelegate, cartsCellDel
     func removeProductFromWishListsTapped(intTag : Int) {
         self.removeProductFromWishLists(self.isWishlists ? self.arrWishlists[intTag] as! NSDictionary : self.arrCarts[intTag] as! NSDictionary)
         if self.isWishlists {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), {
-                self.arrWishlists.removeObjectAtIndex(intTag)
-                self.tblCartsView.reloadData()
-            })
+            self.arrWishlists.removeObjectAtIndex(intTag)
+            self.tblCartsView.reloadData()
+
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), {
+//                self.arrWishlists.removeObjectAtIndex(intTag)
+//                self.tblCartsView.reloadData()
+//            })
             
         }else{
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), {
-                self.arrCarts.removeObjectAtIndex(intTag)
-                self.tblCartsView.reloadData()
-            })
+//            self.arrCarts.removeObjectAtIndex(intTag)
+//            self.tblCartsView.reloadData()
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), {
+//                self.arrCarts.removeObjectAtIndex(intTag)
+//                self.tblCartsView.reloadData()
+//            })
         }
     }
     
@@ -164,7 +169,11 @@ class CartsController : BaseController, segmentedTapActionDelegate, cartsCellDel
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                self.showErrorMessageOnApiFailure(task!.responseData!, title: "CARTS!")
+                if task!.responseData != nil {
+                    self.showErrorMessageOnApiFailure(task!.responseData!, title: "CARTS!")
+                }else{
+                    self.showErrorPopupWith_title_message("", strMessage:"Server request timed out.")
+                }
         })
     }
     
@@ -183,7 +192,11 @@ class CartsController : BaseController, segmentedTapActionDelegate, cartsCellDel
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                self.showErrorMessageOnApiFailure(task!.responseData!, title: "WISHLISTS!")
+                if task!.responseData != nil {
+                    self.showErrorMessageOnApiFailure(task!.responseData!, title: "WISHLISTS!")
+                }else{
+                    self.showErrorPopupWith_title_message("", strMessage:"Server request timed out.")
+                }
         })
     }
     

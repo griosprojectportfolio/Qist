@@ -8,6 +8,8 @@
 
 import Foundation
 import AVFoundation
+import AFNetworking
+import MagicalRecord
 
 class ScannerController : BaseController , AVCaptureMetadataOutputObjectsDelegate {
     
@@ -142,6 +144,23 @@ class ScannerController : BaseController , AVCaptureMetadataOutputObjectsDelegat
     
     // MARK: -  Navigate to Scanned Product Page
     func getScannedProduct(decodedURL: String) {
+        print(decodedURL)
+//        let aParams : NSDictionary = ["access_token":self.auth_token,"product_code":decodedURL]
+//        self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "wishlist", parameters: aParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+//            
+//            self.stopLoadingIndicatorView()
+//            let dictResponse : NSDictionary = responseObject as! NSDictionary
+//            print(dictResponse)
+//            },
+//            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+//                self.stopLoadingIndicatorView()
+//                if task!.responseData != nil {
+//                    self.showErrorMessageOnApiFailure(task!.responseData!, title: "WISHLISTS!")
+//                }else{
+//                    self.showErrorPopupWith_title_message("", strMessage:"Server request timed out.")
+//                }
+//        })
+
         if decodedURL == "http://www.qist.co.nz" {
             self.stopScanningQRs()
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))

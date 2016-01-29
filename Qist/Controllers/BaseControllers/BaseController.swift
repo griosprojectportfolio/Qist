@@ -29,8 +29,8 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
     var rightSwipeGestureRecognizer : UISwipeGestureRecognizer!
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
-    let longitude = "-97" //QistLocationManager.sharedManager.currentLocation.longitude
-    let latitude = "27" //QistLocationManager.sharedManager.currentLocation.latitude
+    let longitude = QistLocationManager.sharedManager.currentLocation.longitude//"-97"
+    let latitude = QistLocationManager.sharedManager.currentLocation.latitude//"27"
     let radius = "300"
     var objUser : User!
     
@@ -267,6 +267,19 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         }
     }
     
+    func scanProductFromApplication(dict : NSDictionary) {
+        self.startLoadingIndicatorView()
+        let dictParams : NSDictionary = ["access_token": self.auth_token]
+        
+        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "logout", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+            self.stopLoadingIndicatorView()
+            },
+            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                self.stopLoadingIndicatorView()
+                self.showErrorMessageOnApiFailure(task!.responseData!, title: "LOGOUT!")
+        })
+    }
+    
     // MARK: - Common page loading View Methods.
     func startLoadingIndicatorView(){
         dispatch_async(dispatch_get_main_queue(),{
@@ -441,11 +454,10 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
     // MARK: - facebook nil check.
     func facebookUserDataChecks(dictResponse:NSDictionary)->NSMutableDictionary {
         let dictMut : NSMutableDictionary! = NSMutableDictionary()
-        
+        let strId = dictResponse.valueForKey("id") as! String
+        let strUId = strId + "@qist.com"
         if dictResponse.valueForKey("id") != nil {
-            let strId = dictResponse.valueForKey("id") as! String
-            let strUId = strId + "@qist.com"
-            dictMut.setValue(strUId, forKey: "facebook_id")
+            dictMut.setValue(dictResponse.valueForKey("id"), forKey: "facebook_id")
         }else {
             dictMut.setValue("", forKey: "facebook_id")
         }
@@ -459,11 +471,7 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         }else {
             dictMut.setValue("", forKey: "last_name")
         }
-        if dictResponse.valueForKey("email") != nil {
-            dictMut.setValue(dictResponse.valueForKey("email"), forKey: "email")
-        }else {
-            dictMut.setValue("", forKey: "email")
-        }
+        dictMut.setValue(strUId, forKey: "email")
         return dictMut
     }
     
@@ -474,11 +482,11 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         let strLastname : String = arrName.count > 1 ? arrName[1] : ""
         let strId = NSString(format: "%u", (dictResponse.valueForKey("id")?.integerValue)!)
         let strUId = (strId as String) + "@qist.com"
-        let dictParams : NSDictionary = [ "twitter_id":strUId ,"first_name":strFirstname ,"last_name":strLastname]
+        let dictParams : NSDictionary = [ "twitter_id":dictResponse.valueForKey("id")! ,"first_name":strFirstname ,"last_name":strLastname,"email":strUId]
         return dictParams
     }
     
-    // MARK: - twitter nil check.
+    // MARK: - google nil check.
     func googlePlusUserDataChecks(dictResponse:NSDictionary)->NSDictionary {
         print(dictResponse)
         let arrName = dictResponse["name"]!.componentsSeparatedByString(" ")
@@ -486,7 +494,7 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         let strLastname : String = arrName.count > 1 ? arrName[1] : ""
         let strId = NSString(format: "%u", (dictResponse.valueForKey("id")?.integerValue)!)
         let strUId = (strId as String) + "@qist.com"
-        let dictParams : NSDictionary = ["googleplus_id" : strUId, "first_name":strFirstname, "last_name":strLastname, "email" : dictResponse["email"]! ]
+        let dictParams : NSDictionary = ["googleplus_id" : dictResponse.valueForKey("id")!, "first_name":strFirstname, "last_name":strLastname, "email" : strUId ]
         return dictParams
     }
     

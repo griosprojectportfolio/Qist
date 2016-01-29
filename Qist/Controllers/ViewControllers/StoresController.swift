@@ -157,7 +157,13 @@ class StoresController : BaseController , segmentedTapActionDelegate , storeCell
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                self.showErrorMessageOnApiFailure(task!.responseData!, title: "ALL STORES!")
+                
+                if task!.responseData != nil {
+                    self.showErrorMessageOnApiFailure(task!.responseData!, title: "ALL STORES!")
+                }else{
+                    self.showErrorPopupWith_title_message("", strMessage:"Server request timed out.")
+                }
+                
         })
     }
     
@@ -177,7 +183,11 @@ class StoresController : BaseController , segmentedTapActionDelegate , storeCell
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                self.showErrorMessageOnApiFailure(task!.responseData!, title: "MY FAVOURITES!")
+                if task!.responseData != nil {
+                    self.showErrorMessageOnApiFailure(task!.responseData!, title: "MY FAVOURITES!")
+                }else{
+                    self.showErrorPopupWith_title_message("", strMessage:"Server request timed out.")
+                }
         })
     }
     
