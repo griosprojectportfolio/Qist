@@ -132,7 +132,8 @@ class StoresController : BaseController , segmentedTapActionDelegate , storeCell
         
         let selectedStore : NSDictionary = self.isMyFavourite ? self.arrFavStores[intTag] as! NSDictionary : self.arrStores[intTag] as! NSDictionary
         print(selectedStore)
-        let dictParams : NSDictionary = ["access_token": self.auth_token, "store_id": selectedStore["id"] as! String]
+        
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "store_id": selectedStore["id"]!]
 
         if self.isMyFavourite {
             self.setStoreAsUnFavourites(dictParams)

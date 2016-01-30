@@ -36,14 +36,16 @@ class QistSocials : NSObject {
     // MARK: - Facebook User's basic Information
     func getFacebookUsersBasicInformation(){
         
-        if !SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
+        print(SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook))
+        
+        /*if !SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
             
             self.fbDelegate?.failedToGetFacebookUserData("The accounts must be setup under settings. After login from settings again tapped this button to connect through Facebook via app.")
             
-        }else{
+        }else{*/
             
             let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierFacebook)
-            
+            print(accountType)
             let postingOptions = [ACFacebookAppIdKey: FacebookAppIdKey ,ACFacebookPermissionsKey: FacebookPermissionsKey]
             
             accountStore.requestAccessToAccountsWithType(accountType, options: postingOptions as [NSObject : AnyObject] , completion: { (success, error) -> Void in
@@ -77,12 +79,12 @@ class QistSocials : NSObject {
                         
                     })
                 }else{
-                    print(error, terminator: "")
+                   self.fbDelegate?.failedToGetFacebookUserData("The accounts must be setup under settings. After login from settings again tapped this button to connect through Facebook via app.")
                 }
                 
             })
             
-        }
+        //}
     }
     
     // MARK: - Twitter User's basic Information
