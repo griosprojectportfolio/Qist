@@ -12,10 +12,7 @@ import AFNetworking
 import MagicalRecord
 
 class HistoryController : BaseController , segmentedTapActionDelegate {
-    
-    @IBOutlet var lblCurrentStore: UILabel!
-    @IBOutlet var lblCurrentDate: UILabel!
-    
+
     @IBOutlet var tblHistory : UITableView!
     
     var arrHistory : NSMutableArray = [[],[],[]]
@@ -200,11 +197,8 @@ class HistoryController : BaseController , segmentedTapActionDelegate {
         // This function use for set layout of components.
         self.setupTopSegmentedControlOnView()
         self.setupHistoryTopViewDataContent()
-        self.tblHistory?.frame = CGRectMake(self.tblHistory!.frame.origin.x, self.tblHistory!.frame.origin.y,self.tblHistory!.frame.size.width , self.view.frame.size.height - 190 )
-        if isiPhone5 || isiPhone4s {
-            self.lblCurrentStore.font = UIFont.defaultFontOfSize(12.0)
-            self.lblCurrentDate.font = UIFont.defaultFontOfSize(12.0)
-        }
+        self.tblHistory?.frame = CGRectMake(self.tblHistory!.frame.origin.x, self.view.frame.origin.y + 44,self.tblHistory!.frame.size.width , self.view.frame.size.height - 44 )
+
     }
     
     override func assignDataToComponents(){

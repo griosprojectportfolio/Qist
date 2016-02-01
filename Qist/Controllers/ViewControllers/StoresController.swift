@@ -15,11 +15,6 @@ class StoresController : BaseController , segmentedTapActionDelegate , storeCell
     
     @IBOutlet var tblView : UITableView!
     
-    @IBOutlet var lbl_Toptitle : UILabel!
-    @IBOutlet var lbl_TopSubTitle: UILabel!
-    @IBOutlet var lbl_TopExpire: UILabel!
-    @IBOutlet var top_ImageView: UIImageView!
-    
     var arrStores : NSMutableArray = NSMutableArray()
     var arrFavStores : NSMutableArray = NSMutableArray()
     var isMyFavourite : Bool = false
@@ -71,20 +66,7 @@ class StoresController : BaseController , segmentedTapActionDelegate , storeCell
     
     // MARK: - Setup top view Contents and Actions Methods
     func setupStoresTopViewDataContent(){
-        
-        self.lbl_Toptitle.textColor = UIColor.appCellTitleColor()
-        self.lbl_Toptitle.font = UIFont.boldFontOfSize(14.0)
-        self.lbl_Toptitle.text = "Weekly Special:Apple's Gold iWatch"
-        
-        self.lbl_TopSubTitle.textColor = UIColor.appCellSubTitleColor()
-        self.lbl_TopSubTitle.numberOfLines = 0
-        self.lbl_TopSubTitle.font = UIFont.defaultFontOfSize(09.0)
-        self.lbl_TopSubTitle.text = "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley."
-        
-        self.lbl_TopExpire.textColor = UIColor.appCellSubTitleColor()
-        self.lbl_TopExpire.font = UIFont.defaultFontOfSize(09.0)
-        self.lbl_TopExpire.text = "Expires: 2 DAYS 12 HRS"
-        
+
     }
     
     @IBAction func addToCartButtonTapped(sender: UIButton) {
@@ -205,7 +187,7 @@ class StoresController : BaseController , segmentedTapActionDelegate , storeCell
         // This function use for set layout of components.
         self.setupTopSegmentedControlOnView()
         self.setupStoresTopViewDataContent()
-        self.tblView?.frame = CGRectMake(self.tblView!.frame.origin.x, self.tblView!.frame.origin.y - 64 ,self.tblView!.frame.size.width , self.view.frame.size.height - 135 )
+        self.tblView?.frame = CGRectMake(self.tblView!.frame.origin.x, self.tblView!.frame.origin.y - 44 ,self.tblView!.frame.size.width , self.view.frame.size.height-44)
     }
     
     override func assignDataToComponents(){

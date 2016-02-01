@@ -283,11 +283,7 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
         // This function use for set layout of components.
         self.setupTopSegmentedControlOnView()
         self.setupWishListsTopViewDataContent()
-        self.tblWishLists?.frame = CGRectMake(self.tblWishLists!.frame.origin.x, self.tblWishLists!.frame.origin.y,self.tblWishLists!.frame.size.width , self.view.frame.size.height - 190 )
-        if isiPhone5 || isiPhone4s {
-            self.lblCurrentStore.font = UIFont.defaultFontOfSize(12.0)
-            self.lblCurrentDate.font = UIFont.defaultFontOfSize(12.0)
-        }
+        self.tblWishLists?.frame = CGRectMake(self.tblWishLists!.frame.origin.x, self.view.frame.origin.y+44,self.tblWishLists!.frame.size.width , self.view.frame.size.height - 44 )
     }
     
     override func assignDataToComponents(){

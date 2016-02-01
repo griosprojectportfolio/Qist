@@ -41,6 +41,10 @@ class ScanProductCell: UITableViewCell {
     
     func setupSpecialsCellContent(dictData : NSDictionary, indexPath : NSIndexPath){
         cellIndexPath = indexPath
+        lblTitle.text = dictData["name"] as? String
+        lblSubTitle.text = dictData["qr_message"] as? String
+        lblYouPay.text = dictData["qist_price"] as? String
+        lblMRP.text = dictData["original_price"] as? String
     }
     
     @IBAction func addToWishlistTapped(sender: UIButton){

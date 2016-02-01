@@ -13,9 +13,6 @@ import MagicalRecord
 
 class CartsController : BaseController, segmentedTapActionDelegate, cartsCellDelegate {
     
-    @IBOutlet var lblCurrentStore: UILabel!
-    @IBOutlet var lblCurrentDate: UILabel!
-    
     @IBOutlet var tblCartsView : UITableView!
     var objCheckOutView : CheckOutView!
     
@@ -59,7 +56,7 @@ class CartsController : BaseController, segmentedTapActionDelegate, cartsCellDel
         self.isWishlists = false
         self.resetAllCollectionAndReloadViews()
         self.getAllCurrentCartInfoFromServer()
-        self.tblCartsView?.frame = CGRectMake(self.tblCartsView!.frame.origin.x, self.tblCartsView!.frame.origin.y ,self.tblCartsView!.frame.size.width , self.view.frame.size.height - 310 )
+//        self.tblCartsView?.frame = CGRectMake(self.tblCartsView!.frame.origin.x, self.tblCartsView!.frame.origin.y ,self.tblCartsView!.frame.size.width , self.view.frame.size.height)
         self.setupCheckOutViewDataContent()
     }
     
@@ -67,7 +64,7 @@ class CartsController : BaseController, segmentedTapActionDelegate, cartsCellDel
         self.isWishlists = true
         self.resetAllCollectionAndReloadViews()
         self.getAllWishlistsInfoFromServer()
-        self.tblCartsView?.frame = CGRectMake(self.tblCartsView!.frame.origin.x, self.tblCartsView!.frame.origin.y ,self.tblCartsView!.frame.size.width , self.view.frame.size.height - 190 )
+//        self.tblCartsView?.frame = CGRectMake(self.tblCartsView!.frame.origin.x, self.tblCartsView!.frame.origin.y ,self.tblCartsView!.frame.size.width , self.view.frame.size.height - 190 )
         self.removeCheckOutViewDataContent()
     }
     
@@ -229,11 +226,7 @@ class CartsController : BaseController, segmentedTapActionDelegate, cartsCellDel
         // This function use for set layout of components.
         self.setupTopSegmentedControlOnView()
         self.setupCartsTopViewDataContent()
-        self.tblCartsView?.frame = CGRectMake(self.tblCartsView!.frame.origin.x, self.tblCartsView!.frame.origin.y ,self.tblCartsView!.frame.size.width , self.view.frame.size.height - 310 )
-        if isiPhone5 || isiPhone4s {
-            self.lblCurrentStore.font = UIFont.defaultFontOfSize(12.0)
-            self.lblCurrentDate.font = UIFont.defaultFontOfSize(12.0)
-        }
+        self.tblCartsView?.frame = CGRectMake(self.tblCartsView!.frame.origin.x, self.view.frame.origin.y+44 ,self.tblCartsView!.frame.size.width , self.view.frame.size.height-44)
     }
     
     override func assignDataToComponents(){

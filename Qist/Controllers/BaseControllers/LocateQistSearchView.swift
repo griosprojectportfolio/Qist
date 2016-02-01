@@ -75,6 +75,10 @@ class LocateQistSearchView : UIView , UITextFieldDelegate {
     // MARK: - Text Field Delegate Methods
     func textFieldDidBeginEditing(textField: UITextField) {
     }
+
+    func textFieldDidEndEditing(textField: UITextField) {
+        
+    }
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
         return true

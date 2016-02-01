@@ -41,7 +41,7 @@ class LocateQistCell : UITableViewCell {
     
     func setupLocateQistCellContent(dictData : NSDictionary){
         
-        if let title : String = dictData["title"] as? String {
+        if let title : String = dictData["trading_name"] as? String {
             self.lblTitle.text = title
         }
         if let subTitle : String = dictData["location"] as? String {

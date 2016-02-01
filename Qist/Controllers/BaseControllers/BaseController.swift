@@ -31,8 +31,10 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
     
     let longitude = QistLocationManager.sharedManager.currentLocation.longitude//"-97"
     let latitude = QistLocationManager.sharedManager.currentLocation.latitude//"27"
+    let address = "39045 Stephen Crossing, District of Columbia, United States"
     let radius = "300"
     var objUser : User!
+
     
     let btnBackNav: UIButton = UIButton(type: UIButtonType.Custom)
     let btnBackLogo: UIButton = UIButton(type: UIButtonType.Custom)
