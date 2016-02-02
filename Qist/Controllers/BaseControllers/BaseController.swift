@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import AFNetworking
 import MagicalRecord
+import SDWebImage
 
 let isiPhone4s     =   UIScreen.mainScreen().bounds.size.width == 320 && UIScreen.mainScreen().bounds.size.height == 480
 let isiPhone5      =   UIScreen.mainScreen().bounds.size.width == 320 && UIScreen.mainScreen().bounds.size.height == 568
@@ -499,5 +500,18 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         let dictParams : NSDictionary = ["googleplus_id" : dictResponse.valueForKey("id")!, "first_name":strFirstname, "last_name":strLastname, "email" : strUId ]
         return dictParams
     }
+
+
+    // MARK: - Calculate Percentage
+    func calculateSavingPercentage(qistPrice:NSString,originalPrice:NSString)-> NSString {
+        let oistPriz = qistPrice.doubleValue
+        let originalPriz = originalPrice.doubleValue
+        let divid : Double = oistPriz / originalPriz
+        let percentage = divid * 100
+        let strPercentage = NSString(format: "%.0f", percentage)
+        print(strPercentage)
+        return strPercentage
+    }
+
     
 }

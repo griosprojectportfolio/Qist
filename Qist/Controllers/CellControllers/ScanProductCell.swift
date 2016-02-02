@@ -45,6 +45,7 @@ class ScanProductCell: UITableViewCell {
         lblSubTitle.text = dictData["qr_message"] as? String
         lblYouPay.text = dictData["qist_price"] as? String
         lblMRP.text = dictData["original_price"] as? String
+        self.productImgView.sd_setImageWithURL(NSURL(fileURLWithPath: ""), placeholderImage:UIImage(named: "No_image"))
     }
     
     @IBAction func addToWishlistTapped(sender: UIButton){

@@ -68,7 +68,7 @@ class CheckOutView : UIView {
     }
     
     func checkOutButtonTapped() {
-    
+    delegate?.checkOutButtonTappedAction()
     }
     
 }

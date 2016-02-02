@@ -47,9 +47,7 @@ class LocateQistCell : UITableViewCell {
         if let subTitle : String = dictData["location"] as? String {
             self.lblSubTitle.text = subTitle
         }
-        //self.lblTitle.text = "Kirkcaldie & Stains"
-        //self.lblSubTitle.text = "Christchurch,Caterbury"
-        self.storeImgView.image = UIImage(named: "hamburger")
+        self.storeImgView.sd_setImageWithURL(NSURL(fileURLWithPath: ""), placeholderImage:UIImage(named: "No_image"))
 
     }
     

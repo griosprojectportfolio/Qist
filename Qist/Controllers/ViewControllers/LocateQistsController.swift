@@ -145,10 +145,9 @@ class LocateQistsController : BaseController, locateQistSearchDelegate, locateQi
     // MARK: - API CALLS - Get all stores for Address
     func getAllStoresInfoOnAddressFromServer() {
         self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = ["access_token": self.auth_token, "address": self.address]
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "latitude": self.latitude,"longitude": self.longitude]
 
         self.sharedApi.baseRequestWithHTTPMethod("GET", URLString:"nearby_stores", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
-
             self.stopLoadingIndicatorView()
             let dictResponse : NSDictionary = responseObject as! NSDictionary
             self.arrStores = dictResponse["stores"]?.mutableCopy() as! NSMutableArray

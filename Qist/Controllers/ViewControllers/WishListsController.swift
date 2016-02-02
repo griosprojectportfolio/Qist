@@ -156,10 +156,16 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
         if isByStore {
             if arrByStoresCellContent.count != 0 {
                 let arrObj = self.arrByStoresCellContent.objectAtIndex(indexPath.section) as! NSArray
-                cell.setupWishListsCellContent(arrObj.objectAtIndex(indexPath.row) as! NSDictionary,indexpath:indexPath)
+                let dict = arrObj.objectAtIndex(indexPath.row) as! NSDictionary
+                cell.setupWishListsCellContent(dict,indexpath:indexPath)
+                let strPer = "Save: " + (self.calculateSavingPercentage(dict["qist_price"] as! String, originalPrice: dict["original_price"] as! String) as String) + "%"
+                cell.lblProductSave.text = strPer
             }
         }else {
+            let dict = arrWishists.objectAtIndex(indexPath.row) as! NSDictionary
             cell.setupWishListsCellContent(arrWishists.objectAtIndex(indexPath.row) as! NSDictionary,indexpath: indexPath)
+            let strPer = "Save: " + (self.calculateSavingPercentage(dict["qist_price"] as! String, originalPrice: dict["original_price"] as! String) as String) + "%"
+            cell.lblProductSave.text = strPer
         }
         return cell
     }
@@ -207,7 +213,6 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
             self.removeProductFromWishLists(dict)
             arrWishists.removeObjectAtIndex(Indexpath.row)
             self.tblWishLists.reloadData()
-            //self.getAllWishlistsInfoFromServer()
         }
     }
     

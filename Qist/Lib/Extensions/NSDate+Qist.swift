@@ -31,6 +31,19 @@ extension NSDate {
     public func currentWeekMonth() -> Int {
         return getComponent(.WeekOfMonth)
     }
-    
+
+    func getDateFormate(today:String)->String? {
+        let formatter  = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        if let todayDate = formatter.dateFromString(today) {
+            formatter.dateStyle = NSDateFormatterStyle.MediumStyle
+            let strFormatedDate = formatter.stringFromDate(todayDate)
+            return strFormatedDate
+        } else {
+            return ""
+        }
+    }
+
+
 }
 

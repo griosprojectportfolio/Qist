@@ -57,7 +57,7 @@ class WishListsCell : UITableViewCell {
         
         lblProductExp.textAlignment = .Left
         lblProductExp.textColor = UIColor.appCellSubTitleColor()
-        lblProductExp.font = UIFont.normalFontOfSize(08.0)
+        lblProductExp.font = UIFont.normalFontOfSize(10.0)
 
     }
     
@@ -68,15 +68,15 @@ class WishListsCell : UITableViewCell {
         }
         
         if let ProductMrp : String = dict["original_price"] as? String {
-            self.lblProductMrp.text = ProductMrp
+            self.lblProductMrp.text = "MRP: " + ProductMrp
         }
         
         if let ProductPay : String = dict["qist_price"] as? String {
-            self.lblProductPay.text = ProductPay
+            self.lblProductPay.text = "You Pay: " + ProductPay
         }
-        self.lblProductSave.text = "Save : "
-        self.prodImgView.image = UIImage(named: "hamburger")
+        self.prodImgView.sd_setImageWithURL(NSURL(fileURLWithPath: ""), placeholderImage:UIImage(named: "No_image"))
         cellIndexpath = indexpath
+        lblProductExp.text = NSDate().getDateFormate((dict["valid_to_date"] as? String)!)
     }
  
     @IBAction func removeFromWishlistTapped(sender: UIButton){

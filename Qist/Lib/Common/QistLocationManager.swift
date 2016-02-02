@@ -20,6 +20,7 @@ class QistLocationManager : NSObject , CLLocationManagerDelegate {
     var locationManager: CLLocationManager!
     var seenError : Bool = false
     var locationFixAchieved : Bool = false
+    var dictAddress : NSDictionary! = NSDictionary()
     
     
     // MARK: - Singleton manager
@@ -99,12 +100,13 @@ class QistLocationManager : NSObject , CLLocationManagerDelegate {
                 print("Error:  \(error.localizedDescription)")
             } else {
                 let placemark : CLPlacemark = placemarks!.last!
-                let userInfo = [
-                    "city":     placemark.locality,
-                    "state":    placemark.administrativeArea,
-                    "country":  placemark.country
+                self.dictAddress = [
+                    "streetname":     placemark.thoroughfare!,
+                    "city":     placemark.locality!,
+                    "state":    placemark.administrativeArea!,
+                    "country":  placemark.country!
                 ]
-                print("Location:  \(userInfo)")
+                print("Location:  \(self.dictAddress)")
             }
         })
     }

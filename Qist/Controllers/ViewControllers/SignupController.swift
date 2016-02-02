@@ -101,7 +101,11 @@ class SignupController : BaseController {
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
-                self.showErrorMessageOnApiFailure(task!.responseData!, title: "REGISTER!")
+                if task!.responseData != nil {
+                   self.showErrorMessageOnApiFailure(task!.responseData!, title: "REGISTER!")
+                }else{
+                    self.showErrorPopupWith_title_message("", strMessage:"Server request timed out.")
+                }
         })
     }
     

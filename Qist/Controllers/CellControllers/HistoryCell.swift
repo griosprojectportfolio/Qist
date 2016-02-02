@@ -59,7 +59,7 @@ class HistoryCell : UITableViewCell {
         self.lblProductPay.text = "You Pay $450"
         self.lblProductMrp.text = "MRP : $500"
         self.lblProductSave.text = "Save : 10%"
-        self.prodImgView.image = UIImage(named: "hamburger")
+        self.prodImgView.sd_setImageWithURL(NSURL(fileURLWithPath: ""), placeholderImage:UIImage(named: "No_image"))
         
     }
     

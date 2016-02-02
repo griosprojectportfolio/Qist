@@ -80,7 +80,11 @@ class ForgotPassController : BaseController , facebookDataDelegate , twitterData
                 },
                 failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                     self.stopLoadingIndicatorView()
-                    self.showErrorMessageOnApiFailure(task!.responseData!, title: "FORGOT PASSWORD!")
+                    if task!.responseData != nil {
+                         self.showErrorMessageOnApiFailure(task!.responseData!, title: "FORGOT PASSWORD!")
+                    }else{
+                        self.showErrorPopupWith_title_message("", strMessage:"Server request timed out.")
+                    }
             })
         }else{
             self.showErrorPopupWith_title_message("FORGOT PASSWORD!", strMessage: errorMessage)

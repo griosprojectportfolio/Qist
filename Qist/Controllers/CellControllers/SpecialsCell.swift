@@ -70,10 +70,7 @@ class SpecialsCell : UITableViewCell {
         if let qist_price : String = dictData["qist_price"] as? String {
             self.lblProductPay.text = "You Pay : $\(qist_price)"
         }
-        
-        self.prodImgView.image = UIImage(named: "hamburger")
-        self.lblProductSave.text = "Save : 10%"
-
+        self.prodImgView.sd_setImageWithURL(NSURL(fileURLWithPath: ""), placeholderImage:UIImage(named: "No_image"))
     }
     
     @IBAction func addToWishlistTapped(sender: UIButton){

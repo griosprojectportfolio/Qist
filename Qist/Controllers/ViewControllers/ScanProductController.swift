@@ -59,6 +59,7 @@ class ScanProductController : BaseController,UITableViewDelegate,UITableViewData
         let cellObj = tableView.dequeueReusableCellWithIdentifier("ScanProduct") as! ScanProductCell
         cellObj.productDelegates = self
         cellObj.setupSpecialsCellContent(dictData, indexPath: indexPath)
+        cellObj.lblYouSave.text = calculateSavingPercentage((dictData["qist_price"] as? String)!, originalPrice: (dictData["original_price"] as? String)!) as String + "%"
         return cellObj
     }
     

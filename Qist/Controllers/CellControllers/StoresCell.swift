@@ -40,10 +40,8 @@ class StoresCell : UITableViewCell {
     }
     
     func setupStoreCellContent(dictData: NSDictionary){
-        
-        //self.lblTitle.text = "Kirkcaldie & Stains"
-        //self.lblSubTitle.text = "Christchurch,Caterbury"
-        self.storeImgView.image = UIImage(named: "hamburger")
+
+        self.storeImgView.sd_setImageWithURL(NSURL(fileURLWithPath: ""), placeholderImage:UIImage(named: "No_image"))
         
         if let title : String = dictData["trading_name"] as? String {
             self.lblTitle.text = title

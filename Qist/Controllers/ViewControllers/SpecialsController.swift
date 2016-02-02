@@ -99,8 +99,11 @@ class SpecialsController : BaseController , segmentedTapActionDelegate, specials
         let cell : SpecialsCell = tableView.dequeueReusableCellWithIdentifier("SpecialCell",forIndexPath:indexPath) as! SpecialsCell
         cell.specialsDelegate = self
         cell.tag = indexPath.row
+        let dict = self.isJustForYou ? self.arrJustForYou[indexPath.row] as! NSDictionary : self.arrSpecials[indexPath.row] as! NSDictionary
         cell.configureStoreTableViewCell()
-        cell.setupSpecialsCellContent(self.isJustForYou ? self.arrJustForYou[indexPath.row] as! NSDictionary : self.arrSpecials[indexPath.row] as! NSDictionary)
+        cell.setupSpecialsCellContent(dict)
+        let strPer = "Save: " + (self.calculateSavingPercentage(dict["qist_price"] as! String, originalPrice: dict["original_price"] as! String) as String) + "%"
+        cell.lblProductSave.text = strPer
         return cell
     }
     
