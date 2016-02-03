@@ -157,7 +157,8 @@ class CartsController : BaseController, segmentedTapActionDelegate, cartsCellDel
     func getAllCurrentCartInfoFromServer() {
 
         self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = ["access_token": self.auth_token , "latitude" : self.latitude, "longitude" : self.longitude]
+        //let dictParams : NSDictionary = ["access_token": self.auth_token , "latitude" : self.latitude, "longitude" : self.longitude]
+        let dictParams : NSDictionary = ["access_token": self.auth_token]
         print(dictParams)
         self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "current_cart", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
 

@@ -59,7 +59,7 @@ class SpecialsCell : UITableViewCell {
     
     func setupSpecialsCellContent(dictData : NSDictionary){
         
-        self.lblStoreName.text = "Special 1 - Apple Store, Southland"
+        self.lblStoreName.text = ""
         
         if let prodName : String = dictData["name"] as? String {
             self.lblProductName.text = prodName

@@ -55,10 +55,10 @@ class HistoryCell : UITableViewCell {
     
     func setupHistoryCellContent(){
         
-        self.lblProductName.text = "Beats Headphone"
-        self.lblProductPay.text = "You Pay $450"
-        self.lblProductMrp.text = "MRP : $500"
-        self.lblProductSave.text = "Save : 10%"
+        self.lblProductName.text = ""
+        self.lblProductPay.text = ""
+        self.lblProductMrp.text = ""
+        self.lblProductSave.text = ""
         self.prodImgView.sd_setImageWithURL(NSURL(fileURLWithPath: ""), placeholderImage:UIImage(named: "No_image"))
         
     }

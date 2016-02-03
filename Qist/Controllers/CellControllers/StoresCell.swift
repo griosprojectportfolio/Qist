@@ -41,13 +41,20 @@ class StoresCell : UITableViewCell {
     
     func setupStoreCellContent(dictData: NSDictionary){
 
-        self.storeImgView.sd_setImageWithURL(NSURL(fileURLWithPath: ""), placeholderImage:UIImage(named: "No_image"))
+
+        let imgurl : NSURL = NSURL(string: dictData["logo_url"] as! String)!
+
+        self.storeImgView.sd_setImageWithURL(imgurl, placeholderImage:UIImage(named: "No_image"))
         
         if let title : String = dictData["trading_name"] as? String {
             self.lblTitle.text = title
+        }else {
+            self.lblTitle.text = ""
         }
         if let subTitle : String = dictData["location"] as? String {
             self.lblSubTitle.text = subTitle
+        }else{
+            self.lblSubTitle.text = ""
         }
         
     }

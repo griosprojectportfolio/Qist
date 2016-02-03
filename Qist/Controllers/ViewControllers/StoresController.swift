@@ -87,6 +87,8 @@ class StoresController : BaseController , segmentedTapActionDelegate , storeCell
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.isMyFavourite ? self.arrFavStores.count : self.arrStores.count
     }
+
+
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell : StoresCell = tableView.dequeueReusableCellWithIdentifier("StoreCell",forIndexPath:indexPath) as! StoresCell
@@ -106,8 +108,15 @@ class StoresController : BaseController , segmentedTapActionDelegate , storeCell
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let vcObj = self.storyboard?.instantiateViewControllerWithIdentifier("StoreDetails") as! StoreDetailsController
+        vcObj.dictDate = self.isMyFavourite ? self.arrFavStores[indexPath.row] as! NSDictionary : self.arrStores[indexPath.row] as! NSDictionary
+        self.navigationController?.pushViewController(vcObj, animated: true)
+
     }
-    
+
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.0
+    }
     
     // MARK: - storeCellDelegate methods
     func favouriteAndUnfavouriteTapped(intTag : Int) {
@@ -130,7 +139,7 @@ class StoresController : BaseController , segmentedTapActionDelegate , storeCell
         
         self.startLoadingIndicatorView()
         let dictParams : NSDictionary = ["access_token": self.auth_token , "latitude" : self.latitude, "longitude" : self.longitude, "radius": self.radius]
-        
+        print(dictParams)
         self.sharedApi.baseRequestWithHTTPMethod("GET", URLString: "stores", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             
                 self.stopLoadingIndicatorView()
@@ -161,7 +170,7 @@ class StoresController : BaseController , segmentedTapActionDelegate , storeCell
                 self.stopLoadingIndicatorView()
                 let dictResponse : NSDictionary = responseObject as! NSDictionary
                 self.arrFavStores = dictResponse["stores"]?.mutableCopy() as! NSMutableArray
-                print(self.arrFavStores.count)
+                print(dictResponse)
                 self.tblView.reloadData()
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
@@ -173,7 +182,6 @@ class StoresController : BaseController , segmentedTapActionDelegate , storeCell
                 }
         })
     }
-    
     
     // MARK: -  Store page Common Methods
     func resetAllCollectionAndReloadViews() {
@@ -187,7 +195,7 @@ class StoresController : BaseController , segmentedTapActionDelegate , storeCell
         // This function use for set layout of components.
         self.setupTopSegmentedControlOnView()
         self.setupStoresTopViewDataContent()
-        self.tblView?.frame = CGRectMake(self.tblView!.frame.origin.x, self.tblView!.frame.origin.y - 44 ,self.tblView!.frame.size.width , self.view.frame.size.height-44)
+        self.tblView?.frame = CGRectMake(self.tblView!.frame.origin.x, self.tblView!.frame.origin.y - 54 ,self.tblView!.frame.size.width , self.view.frame.size.height-44)
     }
     
     override func assignDataToComponents(){

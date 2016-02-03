@@ -108,8 +108,17 @@ class LocateQistsController : BaseController, locateQistSearchDelegate, locateQi
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
+        if isSearch {
+            let vcObj = self.storyboard?.instantiateViewControllerWithIdentifier("StoreDetails") as! StoreDetailsController
+            vcObj.dictDate = self.arrSearchData[indexPath.row] as! NSDictionary
+            self.navigationController?.pushViewController(vcObj, animated: true)
+        }else{
+            let vcObj = self.storyboard?.instantiateViewControllerWithIdentifier("StoreDetails") as! StoreDetailsController
+            vcObj.dictDate = self.arrStores[indexPath.row] as! NSDictionary
+            self.navigationController?.pushViewController(vcObj, animated: true)
 
+        }
+    }
 
     // MARK: - locateQistCellDelegate method
     func favouriteButtonTapped(intTag:Int) {
@@ -145,8 +154,8 @@ class LocateQistsController : BaseController, locateQistSearchDelegate, locateQi
     // MARK: - API CALLS - Get all stores for Address
     func getAllStoresInfoOnAddressFromServer() {
         self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = ["access_token": self.auth_token, "latitude": self.latitude,"longitude": self.longitude]
-
+        //let dictParams : NSDictionary = ["access_token": self.auth_token, "latitude": self.latitude,"longitude": self.longitude]
+        let dictParams : NSDictionary = ["access_token": self.auth_token, "latitude": self.latitude,"address": self.address]
         self.sharedApi.baseRequestWithHTTPMethod("GET", URLString:"nearby_stores", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             self.stopLoadingIndicatorView()
             let dictResponse : NSDictionary = responseObject as! NSDictionary

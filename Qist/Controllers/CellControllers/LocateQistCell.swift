@@ -47,7 +47,7 @@ class LocateQistCell : UITableViewCell {
         if let subTitle : String = dictData["location"] as? String {
             self.lblSubTitle.text = subTitle
         }
-        self.storeImgView.sd_setImageWithURL(NSURL(fileURLWithPath: ""), placeholderImage:UIImage(named: "No_image"))
+        self.storeImgView.sd_setImageWithURL(NSURL(string:""), placeholderImage:UIImage(named: "No_image"))
 
     }
     

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A45A7261C5B35BA006971D5 /* ScanProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45A7251C5B35B9006971D5 /* ScanProductCell.swift */; };
+		0AB729651C61EAF200850B9C /* StoreDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB729641C61EAF200850B9C /* StoreDetailsController.swift */; };
 		17036DEF1C3B9594003A3012 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17036DED1C3B9594003A3012 /* User.swift */; };
 		17157E671C045A7C00D516DB /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 17157E661C045A7C00D516DB /* Reachability.m */; };
 		1718F40C1BA9327100242278 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F40B1BA9327100242278 /* AppDelegate.swift */; };
@@ -76,6 +77,7 @@
 
 /* Begin PBXFileReference section */
 		0A45A7251C5B35B9006971D5 /* ScanProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanProductCell.swift; sourceTree = "<group>"; };
+		0AB729641C61EAF200850B9C /* StoreDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreDetailsController.swift; sourceTree = "<group>"; };
 		141B83A7854F2BAA750B7BEF /* Pods-Qist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qist.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qist/Pods-Qist.debug.xcconfig"; sourceTree = "<group>"; };
 		17036DED1C3B9594003A3012 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		17157E651C045A7C00D516DB /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				1718F4641BA99DBC00242278 /* ScannerController.swift */,
 				174618FD1BC3F434002ECB60 /* ScanProductController.swift */,
 				17C30BED1BB2935A00B141A0 /* StoresController.swift */,
+				0AB729641C61EAF200850B9C /* StoreDetailsController.swift */,
 				17C30BEF1BB2B0E800B141A0 /* CartsController.swift */,
 				174D16B21BB416A500E0B4E8 /* WishListsController.swift */,
 				174D16B41BB416C100E0B4E8 /* SpecialsController.swift */,
@@ -431,7 +434,7 @@
 				TargetAttributes = {
 					1718F4051BA9327100242278 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = NQTEPVY56X;
+						DevelopmentTeam = 9N9Q6F2JY8;
 					};
 					1718F41D1BA9327100242278 = {
 						CreatedOnToolsVersion = 6.4;
@@ -561,6 +564,7 @@
 				1718F43C1BA9370800242278 /* UIColor+Qist.swift in Sources */,
 				1718F40C1BA9327100242278 /* AppDelegate.swift in Sources */,
 				1718F4381BA936D000242278 /* NSDate+Qist.swift in Sources */,
+				0AB729651C61EAF200850B9C /* StoreDetailsController.swift in Sources */,
 				1718F43E1BA9372300242278 /* UIFont+Qist.swift in Sources */,
 				17C30BEC1BB28F8E00B141A0 /* LeftPanelView.swift in Sources */,
 				174D16BD1BB41A0400E0B4E8 /* HistoryController.swift in Sources */,
