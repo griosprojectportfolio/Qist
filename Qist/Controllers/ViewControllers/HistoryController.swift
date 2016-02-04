@@ -15,7 +15,7 @@ class HistoryController : BaseController , segmentedTapActionDelegate {
 
     @IBOutlet var tblHistory : UITableView!
     
-    var arrHistory : NSMutableArray = [[],[],[]]
+    var arrHistory : NSMutableArray =  [] //[[],[],[]]
     var isPurchase : Bool = false
     
     // MARK: -  Current view related Methods
@@ -28,7 +28,7 @@ class HistoryController : BaseController , segmentedTapActionDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         // Do any additional setup befour appear the view.
-        self.getAllScanHistoryFromServer()
+        //self.getAllScanHistoryFromServer()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -52,13 +52,13 @@ class HistoryController : BaseController , segmentedTapActionDelegate {
     
     func leftSegmentTappedAction() {
         self.isPurchase = false
-        self.getAllScanHistoryFromServer()
+        //self.getAllScanHistoryFromServer()
         self.tblHistory.reloadData()
     }
     
     func rightSegmentTappedAction() {
         self.isPurchase = true
-        self.getAllPurchaseHistoryFromServer()
+        //self.getAllPurchaseHistoryFromServer()
         self.tblHistory.reloadData()
     }
     
@@ -167,7 +167,7 @@ class HistoryController : BaseController , segmentedTapActionDelegate {
             
                 self.stopLoadingIndicatorView()
                 let dictResponse : NSDictionary = responseObject as! NSDictionary
-                print(dictResponse)
+            //print(dictResponse)
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()

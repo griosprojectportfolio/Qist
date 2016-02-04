@@ -30,8 +30,8 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
     var rightSwipeGestureRecognizer : UISwipeGestureRecognizer!
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
-    let longitude = QistLocationManager.sharedManager.currentLocation.longitude//"-97"
-    let latitude = QistLocationManager.sharedManager.currentLocation.latitude//"27"
+    let longitude = QistLocationManager.sharedManager.currentLocation.longitude //"-97"
+    let latitude = QistLocationManager.sharedManager.currentLocation.latitude //"27"
     let address = "39045 Stephen Crossing, District of Columbia, United States"
     let radius = "25"
     var objUser : User!

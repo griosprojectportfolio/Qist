@@ -21,8 +21,7 @@ class StoreDetailsController: BaseController,UITableViewDataSource,UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let imgUrl : NSURL = NSURL(string: (dictDate.valueForKey("logo_url") as! String))!
-        imgView.sd_setImageWithURL(imgUrl, placeholderImage: UIImage(named: "No_image"))
+
         print(dictDate)
         self.title = dictDate["trading_name"] as? String
         dataNilCheck()
@@ -58,6 +57,15 @@ class StoreDetailsController: BaseController,UITableViewDataSource,UITableViewDe
         }else{
             arrCellContent.addObject("")
         }
+
+        let arrKeys = dictDate.allKeys as NSArray
+        if arrKeys.containsObject("logo_url") {
+            let imgUrl : NSURL = NSURL(string: (dictDate.valueForKey("logo_url") as! String))!
+            imgView.sd_setImageWithURL(imgUrl, placeholderImage: UIImage(named: "No_image"))
+        }else {
+            imgView.image = UIImage(named: "No_image")
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,14 +83,6 @@ class StoreDetailsController: BaseController,UITableViewDataSource,UITableViewDe
         // Do any additional setup after appear the view.
     }
 
-    // MARK: -  Overrided Methods of BaseController
-    override func configureComponentsLayout(){
-        // This function use for set layout of components.
-    }
-
-    override func assignDataToComponents(){
-        // This function use for assign data to components.
-    }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrCellTitle.count
@@ -103,6 +103,18 @@ class StoreDetailsController: BaseController,UITableViewDataSource,UITableViewDe
         return cellObj
     }
     
-    
+    // MARK: -  Overrided Methods of BaseController
+    override func leftNavBackButtonTapped(sender: UIButton) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+
+    override func configureComponentsLayout(){
+        // This function use for set layout of components.
+    }
+
+    override func assignDataToComponents(){
+        // This function use for assign data to components.
+    }
+
     
 }

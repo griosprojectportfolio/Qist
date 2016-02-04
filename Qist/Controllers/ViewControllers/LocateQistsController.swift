@@ -26,12 +26,12 @@ class LocateQistsController : BaseController, locateQistSearchDelegate, locateQi
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.title = "LOCATE QIST"
+        getAllStoresInfoOnAddressFromServer()
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         // Do any additional setup befour appear the view.
-        getAllStoresInfoOnAddressFromServer()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -155,7 +155,7 @@ class LocateQistsController : BaseController, locateQistSearchDelegate, locateQi
     func getAllStoresInfoOnAddressFromServer() {
         self.startLoadingIndicatorView()
         //let dictParams : NSDictionary = ["access_token": self.auth_token, "latitude": self.latitude,"longitude": self.longitude]
-        let dictParams : NSDictionary = ["access_token": self.auth_token, "latitude": self.latitude,"address": self.address]
+        let dictParams : NSDictionary = ["access_token": self.auth_token,"address": self.address]
         self.sharedApi.baseRequestWithHTTPMethod("GET", URLString:"nearby_stores", parameters: dictParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
             self.stopLoadingIndicatorView()
             let dictResponse : NSDictionary = responseObject as! NSDictionary
