@@ -82,7 +82,7 @@ class CartsCell : UITableViewCell {
         if let ProductPay : String = dictData["qist_price"] as? String {
             self.lblProductPay.text = "You Pay: " + ProductPay
         }
-        lblProductExp.text = NSDate().getDateFormate((dictData["valid_to_date"] as? String)!)
+        lblProductExp.text = "Expires:" + NSDate().getDateFormate((dictData["valid_to_date"] as? String)!)!
     }
 
     @IBAction func removeFromWishlistTapped(sender: UIButton){

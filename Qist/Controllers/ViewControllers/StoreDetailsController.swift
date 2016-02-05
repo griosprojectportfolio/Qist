@@ -15,7 +15,7 @@ class StoreDetailsController: BaseController,UITableViewDataSource,UITableViewDe
 
     var dictDate : NSDictionary!
 
-    var arrCellTitle  : NSArray = NSArray(objects: "Store Name","Address","Business","Contact Person","Contact No")
+    var arrCellTitle  : NSArray = NSArray(objects: "Store Name","Address","Website","Phone","Email")
     var arrCellContent : NSMutableArray = NSMutableArray()
 
     override func viewDidLoad() {
@@ -40,20 +40,22 @@ class StoreDetailsController: BaseController,UITableViewDataSource,UITableViewDe
             arrCellContent.addObject("")
         }
 
-        if let business_name = dictDate["business_name"] as? String {
-            arrCellContent.addObject(business_name)
+        if let website = dictDate["work_url"] as? String {
+            arrCellContent.addObject(website)
         }else{
             arrCellContent.addObject("")
         }
 
-        if let contact_person = dictDate["contact_person"] as? String {
-            arrCellContent.addObject(contact_person)
+        if let phone_1 = dictDate["work_phone_1"] as? String {
+            let phone_2 = dictDate["work_phone_2"] as? String
+            let phone_All = phone_1 + "," + phone_2!
+            arrCellContent.addObject(phone_All)
         }else{
             arrCellContent.addObject("")
         }
 
-        if let mobile_no = dictDate["mobile_no"] as? String {
-            arrCellContent.addObject(mobile_no)
+        if let email = dictDate["email"] as? String {
+            arrCellContent.addObject(email)
         }else{
             arrCellContent.addObject("")
         }

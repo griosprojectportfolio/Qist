@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,14 +13,12 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_qist" translatesAutoresizingMaskIntoConstraints="NO" id="Xgc-6X-3Ci">
                     <rect key="frame" x="115" y="115" width="250" height="250"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="250" id="jEs-EH-9V0"/>
                         <constraint firstAttribute="height" constant="250" id="trF-G4-YvC"/>
                     </constraints>
                 </imageView>
             </subviews>
-            <animations/>
             <color key="backgroundColor" red="0.92156862750000001" green="0.035294117649999998" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Xgc-6X-3Ci" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="K8v-Gy-0tU"/>

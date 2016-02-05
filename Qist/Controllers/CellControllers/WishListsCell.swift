@@ -76,7 +76,7 @@ class WishListsCell : UITableViewCell {
         }
         self.prodImgView.sd_setImageWithURL(NSURL(fileURLWithPath: ""), placeholderImage:UIImage(named: "No_image"))
         cellIndexpath = indexpath
-        lblProductExp.text = NSDate().getDateFormate((dict["valid_to_date"] as? String)!)
+        lblProductExp.text = "Expires: " + NSDate().getDateFormate((dict["valid_to_date"] as? String)!)!
     }
  
     @IBAction func removeFromWishlistTapped(sender: UIButton){

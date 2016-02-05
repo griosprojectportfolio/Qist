@@ -508,7 +508,8 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         let originalPriz = originalPrice.doubleValue
         let divid : Double = oistPriz / originalPriz
         let percentage = divid * 100
-        let strPercentage = NSString(format: "%.0f", percentage)
+        let perSave = 100 - percentage
+        let strPercentage = NSString(format: "%.0f", perSave)
         print(strPercentage)
         return strPercentage
     }
