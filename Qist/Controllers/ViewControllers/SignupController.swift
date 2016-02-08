@@ -18,8 +18,14 @@ class SignupController : BaseController {
     @IBOutlet var txtEmailAddress: QistTextField?
     @IBOutlet var txtPassword: QistTextField?
     @IBOutlet var txtRepeatPass: QistTextField?
+    @IBOutlet var txtDob: QistTextField?
 
     @IBOutlet var btnRegister: UIButton?
+
+    var datePicker : UIDatePicker!
+    var toolbar : UIToolbar!
+    var btnBarDone : UIBarButtonItem!
+    var btnBarfilex : UIBarButtonItem!
     
     
     
@@ -87,7 +93,7 @@ class SignupController : BaseController {
     func postUserBasicInfoOnServer(){
         
         self.startLoadingIndicatorView()
-        let dictParams : NSDictionary = [ "first_name": self.txtFirstName!.text! ,"last_name" : self.txtLastName!.text! ,
+        let dictParams : NSDictionary = [ "first_name": self.txtFirstName!.text! ,"last_name" : self.txtLastName!.text!,"dob" : self.txtDob!.text! ,
             "email": self.txtEmailAddress!.text! ,"password" : self.txtPassword!.text! ,"confirm_password" : self.txtRepeatPass!.text! ,
             "longitude" : self.longitude ,"latitude" : self.latitude]
         
@@ -142,6 +148,8 @@ class SignupController : BaseController {
             strError = "Please enter repeat password."
         }else if txtPassword?.text != txtRepeatPass?.text {
             strError = "Password and repeat password doesn't match."
+        }else if txtDob?.text == "" {
+            strError = "Please enter DOB."
         }
         return strError
     }
@@ -167,34 +175,59 @@ class SignupController : BaseController {
     // MARK: -  Overrided Methods of BaseController
     
     override func configureComponentsLayout(){
-        
+
+        datePicker = UIDatePicker()
+        datePicker.datePickerMode = UIDatePickerMode.Date
+        datePicker.addTarget(self, action: "selectedDate:", forControlEvents: UIControlEvents.ValueChanged)
+        btnBarDone = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target:self, action: "btnBarDoneTapped")
+        btnBarfilex = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        toolbar = UIToolbar(frame: CGRectMake(0,0,self.view.frame.size.width,40))
+        toolbar.setItems([btnBarfilex,btnBarDone], animated: true)
+
         // This function use for set layout of components.
         self.txtFirstName!.setupTextFieldBasicProperty("icon_username", isSecureEntery: false)
         self.txtLastName!.setupTextFieldBasicProperty("icon_username", isSecureEntery: false)
         self.txtEmailAddress!.setupTextFieldBasicProperty("icon_email", isSecureEntery: false)
         self.txtPassword!.setupTextFieldBasicProperty("icon_password", isSecureEntery: true)
         self.txtRepeatPass!.setupTextFieldBasicProperty("icon_password", isSecureEntery: true)
+        self.txtDob!.setupTextFieldBasicProperty("icon_dob", isSecureEntery: false)
+        self.txtDob?.inputView = datePicker
+        self.txtDob?.inputAccessoryView = toolbar
         
         if isiPhone4s {
             self.txtFirstName?.frame = CGRectMake(self.txtFirstName!.frame.origin.x, self.txtFirstName!.frame.origin.y - 10, self.txtFirstName!.frame.size.width, self.txtFirstName!.frame.size.height)
             self.txtLastName?.frame = CGRectMake(self.txtLastName!.frame.origin.x, self.txtLastName!.frame.origin.y , self.txtLastName!.frame.size.width, self.txtLastName!.frame.size.height)
-            self.txtEmailAddress?.frame = CGRectMake(self.txtEmailAddress!.frame.origin.x, self.txtEmailAddress!.frame.origin.y + 10, self.txtEmailAddress!.frame.size.width, self.txtEmailAddress!.frame.size.height)
-            self.txtPassword?.frame = CGRectMake(self.txtPassword!.frame.origin.x, self.txtPassword!.frame.origin.y + 20, self.txtPassword!.frame.size.width, self.txtPassword!.frame.size.height)
-            self.txtRepeatPass?.frame = CGRectMake(self.txtRepeatPass!.frame.origin.x, self.txtRepeatPass!.frame.origin.y + 30, self.txtRepeatPass!.frame.size.width, self.txtRepeatPass!.frame.size.height)
+
+            self.txtDob?.frame = CGRectMake(self.txtDob!.frame.origin.x, self.txtDob!.frame.origin.y + 10 , self.txtDob!.frame.size.width, self.txtDob!.frame.size.height)
+
+            self.txtEmailAddress?.frame = CGRectMake(self.txtEmailAddress!.frame.origin.x, self.txtEmailAddress!.frame.origin.y + 20, self.txtEmailAddress!.frame.size.width, self.txtEmailAddress!.frame.size.height)
+            self.txtPassword?.frame = CGRectMake(self.txtPassword!.frame.origin.x, self.txtPassword!.frame.origin.y + 30, self.txtPassword!.frame.size.width, self.txtPassword!.frame.size.height)
+            self.txtRepeatPass?.frame = CGRectMake(self.txtRepeatPass!.frame.origin.x, self.txtRepeatPass!.frame.origin.y + 40, self.txtRepeatPass!.frame.size.width, self.txtRepeatPass!.frame.size.height)
             
-            self.btnRegister?.frame = CGRectMake(self.btnRegister!.frame.origin.x, self.btnRegister!.frame.origin.y + 60, self.btnRegister!.frame.size.width, self.btnRegister!.frame.size.height)
+            self.btnRegister?.frame = CGRectMake(self.btnRegister!.frame.origin.x, self.btnRegister!.frame.origin.y + 33, self.btnRegister!.frame.size.width, self.btnRegister!.frame.size.height)
             
         }else if isiPhone5 {
             
             self.txtFirstName?.frame = CGRectMake(self.txtFirstName!.frame.origin.x, self.txtFirstName!.frame.origin.y - 5, self.txtFirstName!.frame.size.width, self.txtFirstName!.frame.size.height)
             self.txtLastName?.frame = CGRectMake(self.txtLastName!.frame.origin.x, self.txtLastName!.frame.origin.y , self.txtLastName!.frame.size.width, self.txtLastName!.frame.size.height)
-            self.txtEmailAddress?.frame = CGRectMake(self.txtEmailAddress!.frame.origin.x, self.txtEmailAddress!.frame.origin.y + 5, self.txtEmailAddress!.frame.size.width, self.txtEmailAddress!.frame.size.height)
-            self.txtPassword?.frame = CGRectMake(self.txtPassword!.frame.origin.x, self.txtPassword!.frame.origin.y + 10, self.txtPassword!.frame.size.width, self.txtPassword!.frame.size.height)
-            self.txtRepeatPass?.frame = CGRectMake(self.txtRepeatPass!.frame.origin.x, self.txtRepeatPass!.frame.origin.y + 15, self.txtRepeatPass!.frame.size.width, self.txtRepeatPass!.frame.size.height)
+
+            self.txtDob?.frame = CGRectMake(self.txtDob!.frame.origin.x, self.txtDob!.frame.origin.y+5, self.txtDob!.frame.size.width, self.txtDob!.frame.size.height)
+
+
+            self.txtEmailAddress?.frame = CGRectMake(self.txtEmailAddress!.frame.origin.x, self.txtEmailAddress!.frame.origin.y + 10, self.txtEmailAddress!.frame.size.width, self.txtEmailAddress!.frame.size.height)
+            self.txtPassword?.frame = CGRectMake(self.txtPassword!.frame.origin.x, self.txtPassword!.frame.origin.y + 15, self.txtPassword!.frame.size.width, self.txtPassword!.frame.size.height)
+            self.txtRepeatPass?.frame = CGRectMake(self.txtRepeatPass!.frame.origin.x, self.txtRepeatPass!.frame.origin.y + 20, self.txtRepeatPass!.frame.size.width, self.txtRepeatPass!.frame.size.height)
             
-            self.btnRegister?.frame = CGRectMake(self.btnRegister!.frame.origin.x, self.btnRegister!.frame.origin.y + 60, self.btnRegister!.frame.size.width, self.btnRegister!.frame.size.height)
+            self.btnRegister?.frame = CGRectMake(self.btnRegister!.frame.origin.x, self.btnRegister!.frame.origin.y + 20, self.btnRegister!.frame.size.width, self.btnRegister!.frame.size.height)
         }
-        
+    }
+
+    func selectedDate(datePicker:UIDatePicker) {
+        txtDob?.text = NSDate().getDobWithFormate(datePicker)
+    }
+
+    func btnBarDoneTapped() {
+        txtDob?.resignFirstResponder()
     }
     
 }

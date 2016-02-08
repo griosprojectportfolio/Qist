@@ -12,6 +12,7 @@ import CoreData
 class User: NSManagedObject {
 
     @NSManaged var email: String?
+    @NSManaged var dob: String?
     @NSManaged var first_name: String?
     @NSManaged var last_name: String?
     @NSManaged var id: NSNumber?
@@ -107,6 +108,10 @@ class User: NSManagedObject {
             if let contact_no : String = aDictionary["contact_no"] as? String {
                 objUser.contact_no = contact_no
             }
+            if let dob : String = aDictionary["dob"] as? String {
+                objUser.dob = dob
+            }
+
             print("final Store========\(objUser)")
         }
         

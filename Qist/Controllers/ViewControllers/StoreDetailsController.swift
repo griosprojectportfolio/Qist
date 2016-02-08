@@ -47,9 +47,7 @@ class StoreDetailsController: BaseController,UITableViewDataSource,UITableViewDe
         }
 
         if let phone_1 = dictDate["work_phone_1"] as? String {
-            let phone_2 = dictDate["work_phone_2"] as? String
-            let phone_All = phone_1 + "," + phone_2!
-            arrCellContent.addObject(phone_All)
+            arrCellContent.addObject(phone_1)
         }else{
             arrCellContent.addObject("")
         }
@@ -101,8 +99,27 @@ class StoreDetailsController: BaseController,UITableViewDataSource,UITableViewDe
         cellObj.detailTextLabel?.textColor = UIColor.appCellSubTitleColor()
         cellObj.detailTextLabel?.font = UIFont.normalFontOfSize(12)
         cellObj.detailTextLabel?.numberOfLines = 0
+        if indexPath.row == 2 {
+            cellObj.detailTextLabel?.textColor = UIColor.blueColor()
+        }else {
+            cellObj.detailTextLabel?.textColor = UIColor.appCellSubTitleColor()
+        }
         
         return cellObj
+    }
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
+        switch indexPath.row {
+        case 2:
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("WebView") as! WebViewController
+            vc.strwebUrl = arrCellContent.objectAtIndex(indexPath.row) as! NSString
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        default :
+            break
+        }
+
     }
     
     // MARK: -  Overrided Methods of BaseController

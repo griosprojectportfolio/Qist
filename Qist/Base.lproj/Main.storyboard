@@ -231,7 +231,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" minimumFontSize="17" background="text_field" id="fjD-ZR-rNb" customClass="QistTextField" customModule="Qist" customModuleProvider="target">
-                                <rect key="frame" x="16" y="362" width="343" height="40"/>
+                                <rect key="frame" x="16" y="408" width="343" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
@@ -245,7 +245,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" background="text_field" id="fbL-yi-SXH" customClass="QistTextField" customModule="Qist" customModuleProvider="target">
-                                <rect key="frame" x="16" y="410" width="343" height="40"/>
+                                <rect key="frame" x="16" y="455" width="343" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -259,7 +259,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Repeat Password" minimumFontSize="17" background="text_field" id="NfY-v8-7le" customClass="QistTextField" customModule="Qist" customModuleProvider="target">
-                                <rect key="frame" x="16" y="458" width="343" height="40"/>
+                                <rect key="frame" x="16" y="502" width="343" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -273,7 +273,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="41G-ft-6yN">
-                                <rect key="frame" x="110" y="544" width="155" height="40"/>
+                                <rect key="frame" x="110" y="590" width="155" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" backgroundImage="button_register">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -282,6 +282,20 @@
                                     <action selector="registerButtonTapped:" destination="iD7-yU-zP9" eventType="touchUpInside" id="7x2-2u-eRC"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="DOB" minimumFontSize="17" background="text_field" id="m21-09-Grd" customClass="QistTextField" customModule="Qist" customModuleProvider="target">
+                                <rect key="frame" x="16" y="361" width="343" height="40"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                        <color key="value" red="0.87450980389999999" green="0.1764705882" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="iD7-yU-zP9" id="17r-H9-g4o"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862750000001" green="0.035294117649999998" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -289,6 +303,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="btnRegister" destination="41G-ft-6yN" id="6Gd-ZB-E52"/>
+                        <outlet property="txtDob" destination="m21-09-Grd" id="x1d-u6-WEj"/>
                         <outlet property="txtEmailAddress" destination="fjD-ZR-rNb" id="USe-Qd-JuN"/>
                         <outlet property="txtFirstName" destination="eoa-Aa-OHP" id="5Fn-zV-udt"/>
                         <outlet property="txtLastName" destination="cbd-qa-tZO" id="2FE-4N-hXc"/>
@@ -486,6 +501,31 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LXp-aJ-a1u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2876.5" y="-1373.5"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="GUR-Aj-iRh">
+            <objects>
+                <viewController storyboardIdentifier="WebView" id="XYH-yp-a05" customClass="WebViewController" customModule="Qist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6Zz-9q-jG1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" id="Q9W-d1-WUf">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="674"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="webView" destination="Q9W-d1-WUf" id="aJP-Zu-xpZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uP5-fB-5C2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3319.5" y="-1373.5"/>
         </scene>
         <!--Stores Controller-->
         <scene sceneID="daF-mZ-Fc5">
@@ -1485,6 +1525,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="pP9-Ko-efX"/>
-        <segue reference="WW0-um-egz"/>
+        <segue reference="bQO-mT-A1G"/>
     </inferredMetricsTieBreakers>
 </document>

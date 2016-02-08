@@ -9,25 +9,25 @@
 import Foundation
 
 extension NSDate {
-    
+
     public func getComponent (component : NSCalendarUnit) -> Int {
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components(component, fromDate: self)
         return components.valueForComponent(component)
     }
-    
+
     public func currentYear() -> Int {
         return getComponent(.Year)
     }
-    
+
     public func currentMonth() -> Int {
         return getComponent(.Month)
     }
-    
+
     public func currentWeekday() -> Int {
         return getComponent(.Weekday)
     }
-    
+
     public func currentWeekMonth() -> Int {
         return getComponent(.WeekOfMonth)
     }
@@ -44,6 +44,26 @@ extension NSDate {
         }
     }
 
+    func getDobWithFormate(datePicker:UIDatePicker)->String {
+        let formatter  = NSDateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        let strDate = formatter.stringFromDate(datePicker.date)
+        return strDate
+    }
 
+    func getDobWithFormateString(strDate:String)->String {
+        let formatter  = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        if let todayDate = formatter.dateFromString(strDate) {
+            formatter.dateFormat = "dd/MM/yyyy"
+            let strDate = formatter.stringFromDate(todayDate)
+            return strDate
+        }else{
+            return " "
+        }
+        
+    }
+    
+    
 }
 

@@ -62,7 +62,7 @@ class ProfileController : BaseController , segmentedTapActionDelegate ,ProfileCe
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 6
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -75,7 +75,7 @@ class ProfileController : BaseController , segmentedTapActionDelegate ,ProfileCe
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 3 {
+        if indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 4 || indexPath.row == 2 {
             let destination = self.storyboard?.instantiateViewControllerWithIdentifier("UpdateProfile") as! UpdateProfileController
             destination.index = indexPath.row
             self.navigationController?.pushViewController(destination, animated: true)

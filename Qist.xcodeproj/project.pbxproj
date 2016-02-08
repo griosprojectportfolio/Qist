@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A45A7261C5B35BA006971D5 /* ScanProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45A7251C5B35B9006971D5 /* ScanProductCell.swift */; };
+		0A772B6D1C68DE8000ADBF0A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A772B6C1C68DE8000ADBF0A /* WebViewController.swift */; };
 		0AB729651C61EAF200850B9C /* StoreDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB729641C61EAF200850B9C /* StoreDetailsController.swift */; };
 		17036DEF1C3B9594003A3012 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17036DED1C3B9594003A3012 /* User.swift */; };
 		17157E671C045A7C00D516DB /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 17157E661C045A7C00D516DB /* Reachability.m */; };
@@ -77,6 +78,7 @@
 
 /* Begin PBXFileReference section */
 		0A45A7251C5B35B9006971D5 /* ScanProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanProductCell.swift; sourceTree = "<group>"; };
+		0A772B6C1C68DE8000ADBF0A /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		0AB729641C61EAF200850B9C /* StoreDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreDetailsController.swift; sourceTree = "<group>"; };
 		141B83A7854F2BAA750B7BEF /* Pods-Qist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qist.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qist/Pods-Qist.debug.xcconfig"; sourceTree = "<group>"; };
 		17036DED1C3B9594003A3012 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 				174D16BC1BB41A0400E0B4E8 /* HistoryController.swift */,
 				174618F91BC3CB48002ECB60 /* AboutController.swift */,
 				174618FB1BC3CB5F002ECB60 /* SupportController.swift */,
+				0A772B6C1C68DE8000ADBF0A /* WebViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -580,6 +583,7 @@
 				173EB3661BB54C20001E17A5 /* CartsCell.swift in Sources */,
 				174618FE1BC3F434002ECB60 /* ScanProductController.swift in Sources */,
 				1718F44F1BA94A1000242278 /* BaseController.swift in Sources */,
+				0A772B6D1C68DE8000ADBF0A /* WebViewController.swift in Sources */,
 				1718F4471BA93FC600242278 /* LoginController.swift in Sources */,
 				174D16B51BB416C100E0B4E8 /* SpecialsController.swift in Sources */,
 			);

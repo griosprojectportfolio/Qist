@@ -15,6 +15,11 @@ class UpdateProfileController : BaseController  {
  
     @IBOutlet var txtCommon: QistTextField?
     var index : Int!
+
+    var datePicker : UIDatePicker!
+    var toolbar : UIToolbar!
+    var btnBarDone : UIBarButtonItem!
+    var btnBarfilex : UIBarButtonItem!
     
     // MARK: -  Current view related Methods
     override func viewDidLoad() {
@@ -80,7 +85,8 @@ class UpdateProfileController : BaseController  {
         switch index {
             case 0 : dictParams = ["access_token": self.auth_token, "first_name":self.txtCommon!.text!]
             case 1 : dictParams = ["access_token": self.auth_token, "last_name":self.txtCommon!.text!]
-            case 3 : dictParams = ["access_token": self.auth_token, "password":self.txtCommon!.text!]
+            case 4 : dictParams = ["access_token": self.auth_token, "password":self.txtCommon!.text!]
+            case 2 : dictParams = ["access_token": self.auth_token, "dob":self.txtCommon!.text!]
             default : print("None")
         }
         return dictParams
@@ -94,20 +100,42 @@ class UpdateProfileController : BaseController  {
 
     override func configureComponentsLayout(){
         // This function use for set layout of components.
+        datePicker = UIDatePicker()
+        datePicker.datePickerMode = UIDatePickerMode.Date
+        datePicker.addTarget(self, action: "selectedDate:", forControlEvents: UIControlEvents.ValueChanged)
+        btnBarDone = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target:self, action: "btnBarDoneTapped")
+        btnBarfilex = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        toolbar = UIToolbar(frame: CGRectMake(0,0,self.view.frame.size.width,40))
+        toolbar.setItems([btnBarfilex,btnBarDone], animated: true)
+
         if index == 0 {
             self.txtCommon!.setupTextFieldBasicProperty("icon_username", isSecureEntery: false)
             self.txtCommon?.placeholder = "Enter first name."
         }else if index == 1 {
             self.txtCommon!.setupTextFieldBasicProperty("icon_username", isSecureEntery: false)
             self.txtCommon?.placeholder = "Enter last name."
-        }else if index == 3 {
+        }else if index == 4 {
             self.txtCommon!.setupTextFieldBasicProperty("icon_password", isSecureEntery: false)
             self.txtCommon?.placeholder = "Enter new password."
+        }else if index == 2 {
+            self.txtCommon!.setupTextFieldBasicProperty("icon_dob", isSecureEntery: false)
+            self.txtCommon?.placeholder = "Upadte DOB."
+            self.txtCommon?.inputView = datePicker
+            self.txtCommon?.inputAccessoryView = toolbar
         }
+
     }
     
     override func assignDataToComponents(){
         // This function use for assign data to components.
+    }
+
+    func selectedDate(datePicker:UIDatePicker) {
+        txtCommon?.text = NSDate().getDobWithFormate(datePicker)
+    }
+
+    func btnBarDoneTapped() {
+        txtCommon?.resignFirstResponder()
     }
     
 }
