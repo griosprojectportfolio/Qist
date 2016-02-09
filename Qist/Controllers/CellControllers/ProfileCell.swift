@@ -48,10 +48,14 @@ class ProfileCell : UITableViewCell {
         self.lblSubTitle.text = objUser.last_name!
 
         case 2 :    self.lblTitle.text = "DOB"
-        let strDob = objUser.dob! as String
-        let index1 = strDob.endIndex.advancedBy(-9)
-        let substring1 = strDob.substringToIndex(index1)
-        self.lblSubTitle.text = NSDate().getDobWithFormateString(substring1)
+        if objUser.dob != nil {
+            let strDob = objUser.dob! as String
+            let index1 = strDob.endIndex.advancedBy(-9)
+            let substring1 = strDob.substringToIndex(index1)
+            self.lblSubTitle.text = NSDate().getDobWithFormateString(substring1)
+        }else {
+            self.lblSubTitle.text = ""
+            }
 
         case 3 :    self.lblTitle.text = "Email Address"
         self.lblSubTitle.text = objUser.email
@@ -68,7 +72,7 @@ class ProfileCell : UITableViewCell {
         self.lblSubTitle.text = ""
         }
     }
-
+    
     @IBAction func btnChangeTap(sender:UIButton) {
         delegates.btnChangetapped(sender.tag)
     }
