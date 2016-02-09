@@ -449,13 +449,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="3Zn-rx-4bv">
-                                <rect key="frame" x="67" y="82" width="240" height="200"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="3Zn-rx-4bv">
+                                <rect key="frame" x="118" y="82" width="140" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="199-M3-UZU">
-                                <rect key="frame" x="0.0" y="284" width="375" height="380"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                <rect key="frame" x="0.0" y="195" width="375" height="280"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="storedetail" textLabel="4ac-TX-jAh" detailTextLabel="23j-RV-dgu" style="IBUITableViewCellStyleValue1" id="JRv-0K-tlk">
@@ -488,14 +488,50 @@
                                     <outlet property="delegate" destination="Jml-Re-Div" id="FaS-rI-ofq"/>
                                 </connections>
                             </tableView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" id="1RN-tl-HMO">
+                                <rect key="frame" x="10" y="476" width="355" height="80"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8Z3-Us-M31">
+                                <rect key="frame" x="157" y="583" width="60" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="icon_google_red"/>
+                                <connections>
+                                    <action selector="btnGPlusTapped:" destination="Jml-Re-Div" eventType="touchUpInside" id="33q-Im-6ot"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ijr-9F-3c0">
+                                <rect key="frame" x="244" y="583" width="60" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="icon_twitter_red"/>
+                                <connections>
+                                    <action selector="btnTwitterTapped:" destination="Jml-Re-Div" eventType="touchUpInside" id="fxI-ij-uXo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Lfe-ld-5x1">
+                                <rect key="frame" x="70" y="583" width="60" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="icon_fb_red"/>
+                                <connections>
+                                    <action selector="btnFBTapped:" destination="Jml-Re-Div" eventType="touchUpInside" id="mqH-sB-b5J"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="p7j-2E-CDl"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="btnFB" destination="Lfe-ld-5x1" id="vBf-WE-HGj"/>
+                        <outlet property="btnGPlus" destination="8Z3-Us-M31" id="hff-H7-Rgq"/>
+                        <outlet property="btnTwitter" destination="Ijr-9F-3c0" id="4LY-9Q-l07"/>
                         <outlet property="imgView" destination="3Zn-rx-4bv" id="iLJ-ce-fkp"/>
                         <outlet property="tblSotreDetail" destination="199-M3-UZU" id="iRg-w9-0VP"/>
+                        <outlet property="txtView" destination="1RN-tl-HMO" id="5Uf-id-rXE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LXp-aJ-a1u" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -514,6 +550,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="674"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="XYH-yp-a05" id="DOa-G4-7UC"/>
+                                </connections>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -526,6 +565,30 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uP5-fB-5C2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3319.5" y="-1373.5"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="uxG-pQ-F2V">
+            <objects>
+                <viewController storyboardIdentifier="MapView" id="DUT-mc-be1" customClass="MapViewController" customModule="Qist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="U8l-ZP-7Tt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="Cal-Bo-ZiY">
+                                <rect key="frame" x="0.0" y="0.0" width="376" height="668"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="mapView" destination="Cal-Bo-ZiY" id="qyT-SF-s1H"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NuD-6h-qrd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3745.5" y="-1373.5"/>
         </scene>
         <!--Stores Controller-->
         <scene sceneID="daF-mZ-Fc5">
@@ -875,8 +938,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Huk-YF-q3x">
-                                                    <rect key="frame" x="75" y="34" width="131" height="21"/>
+                                                    <rect key="frame" x="75" y="34" width="180" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1100,7 +1164,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Pay :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ikO-rb-akC">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Qist Price:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ikO-rb-akC">
                                                     <rect key="frame" x="166" y="95" width="61" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
@@ -1108,7 +1172,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$320" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="899-BR-orv">
-                                                    <rect key="frame" x="221" y="95" width="133" height="21"/>
+                                                    <rect key="frame" x="226" y="95" width="133" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                                                     <color key="textColor" red="0.87450980389999999" green="0.1764705882" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1509,8 +1573,11 @@
         <image name="checkbox" width="13" height="11"/>
         <image name="divider" width="1" height="1"/>
         <image name="icon_fb" width="71" height="70"/>
+        <image name="icon_fb_red" width="71" height="70"/>
         <image name="icon_google" width="71" height="70"/>
+        <image name="icon_google_red" width="71" height="70"/>
         <image name="icon_twitter" width="71" height="70"/>
+        <image name="icon_twitter_red" width="71" height="70"/>
         <image name="login_popup_bg" width="387" height="242"/>
         <image name="login_popup_cancel" width="36" height="28"/>
         <image name="login_popup_enail_field" width="348" height="34"/>
@@ -1524,7 +1591,7 @@
         <image name="text_field" width="373" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pP9-Ko-efX"/>
-        <segue reference="bQO-mT-A1G"/>
+        <segue reference="ju7-7d-G0b"/>
+        <segue reference="VIT-LO-mtr"/>
     </inferredMetricsTieBreakers>
 </document>

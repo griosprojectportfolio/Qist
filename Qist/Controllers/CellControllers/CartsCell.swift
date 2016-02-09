@@ -80,7 +80,7 @@ class CartsCell : UITableViewCell {
         }
 
         if let ProductPay : String = dictData["qist_price"] as? String {
-            self.lblProductPay.text = "You Pay: " + ProductPay
+            self.lblProductPay.text = "Qist Price: " + ProductPay
         }
         lblProductExp.text = "Expires:" + NSDate().getDateFormate((dictData["valid_to_date"] as? String)!)!
     }

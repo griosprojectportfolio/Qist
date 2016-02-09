@@ -68,7 +68,7 @@ class SpecialsCell : UITableViewCell {
             self.lblProductMrp.text = "MRP : $\(original_price)"
         }
         if let qist_price : String = dictData["qist_price"] as? String {
-            self.lblProductPay.text = "You Pay : $\(qist_price)"
+            self.lblProductPay.text = "Qist Price: $\(qist_price)"
         }
         self.prodImgView.sd_setImageWithURL(NSURL(fileURLWithPath: ""), placeholderImage:UIImage(named: "No_image"))
     }

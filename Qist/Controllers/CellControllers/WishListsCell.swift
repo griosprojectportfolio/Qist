@@ -72,7 +72,7 @@ class WishListsCell : UITableViewCell {
         }
         
         if let ProductPay : String = dict["qist_price"] as? String {
-            self.lblProductPay.text = "You Pay: " + ProductPay
+            self.lblProductPay.text = "Qist Price: " + ProductPay
         }
         self.prodImgView.sd_setImageWithURL(NSURL(fileURLWithPath: ""), placeholderImage:UIImage(named: "No_image"))
         cellIndexpath = indexpath
