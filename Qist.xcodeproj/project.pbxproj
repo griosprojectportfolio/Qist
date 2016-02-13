@@ -742,15 +742,15 @@
 			baseConfigurationReference = 141B83A7854F2BAA750B7BEF /* Pods-Qist.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Sanjay Kumar (WV9X9RFG98)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sanjay Kumar (WV9X9RFG98)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mike and Paul Enterprises Ltd (9N9Q6F2JY8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mike and Paul Enterprises Ltd (9N9Q6F2JY8)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Qist/Qist-Prefix.pch";
 				INFOPLIST_FILE = Qist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.michael.qist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c78e86d6-58a1-4d56-a475-337f16576f80";
+				PROVISIONING_PROFILE = "19347db1-fcd5-4ad8-931e-eb2c83363381";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Qist/Qist-Bridging.h";
 			};
 			name = Debug;
@@ -760,15 +760,15 @@
 			baseConfigurationReference = 5E0AB52774DEB7435663672A /* Pods-Qist.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Sanjay Kumar (WV9X9RFG98)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sanjay Kumar (WV9X9RFG98)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mike and Paul Enterprises Ltd (9N9Q6F2JY8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mike and Paul Enterprises Ltd (9N9Q6F2JY8)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Qist/Qist-Prefix.pch";
 				INFOPLIST_FILE = Qist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.michael.qist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c78e86d6-58a1-4d56-a475-337f16576f80";
+				PROVISIONING_PROFILE = "19347db1-fcd5-4ad8-931e-eb2c83363381";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Qist/Qist-Bridging.h";
 			};
 			name = Release;
