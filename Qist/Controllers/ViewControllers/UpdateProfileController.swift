@@ -119,7 +119,7 @@ class UpdateProfileController : BaseController  {
             self.txtCommon?.placeholder = "Enter new password."
         }else if index == 2 {
             self.txtCommon!.setupTextFieldBasicProperty("icon_dob", isSecureEntery: false)
-            self.txtCommon?.placeholder = "Upadte DOB."
+            self.txtCommon?.placeholder = "Update DOB."
             self.txtCommon?.inputView = datePicker
             self.txtCommon?.inputAccessoryView = toolbar
         }

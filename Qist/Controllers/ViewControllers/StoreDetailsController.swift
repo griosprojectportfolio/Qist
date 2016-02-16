@@ -17,6 +17,7 @@ class StoreDetailsController: BaseController,UITableViewDataSource,UITableViewDe
     @IBOutlet var btnFB : UIButton!
     @IBOutlet var btnGPlus : UIButton!
     @IBOutlet var btnTwitter : UIButton!
+    var callAlert : UIAlertController!
 
 
     var dictDate : NSDictionary!
@@ -41,11 +42,8 @@ class StoreDetailsController: BaseController,UITableViewDataSource,UITableViewDe
             arrCellContent.addObject("")
         }
 
-        if let address = dictDate["address"] as? String {
-            arrCellContent.addObject(address)
-        }else{
-            arrCellContent.addObject("")
-        }
+        let strFullAddress = address(dictDate)
+        arrCellContent.addObject(strFullAddress)
 
         if let website = dictDate["work_url"] as? String {
             arrCellContent.addObject(website)
@@ -74,6 +72,37 @@ class StoreDetailsController: BaseController,UITableViewDataSource,UITableViewDe
         }
 
     }
+
+    func address(dict:NSDictionary)-> String {
+        var address,suburb,city,zip : String!
+
+        if dict.valueForKey("address") != nil {
+            address = dict.valueForKey("address") as! String
+        }else {
+            address = ""
+        }
+
+        if dict.valueForKey("suburb") != nil {
+            suburb = dict.valueForKey("suburb") as! String
+        }else {
+            suburb = ""
+        }
+
+        if dict.valueForKey("city") != nil {
+            city = dict.valueForKey("city") as! String
+        }else {
+            city = ""
+        }
+
+        if dict.valueForKey("zip") != nil {
+            zip = dict.valueForKey("zip") as! String
+        }else {
+            zip = ""
+        }
+        let full_Addess : String = address + "," + suburb + "," + city + " " + zip
+        return full_Addess
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -106,7 +135,7 @@ class StoreDetailsController: BaseController,UITableViewDataSource,UITableViewDe
         cellObj.detailTextLabel?.textColor = UIColor.appCellSubTitleColor()
         cellObj.detailTextLabel?.font = UIFont.normalFontOfSize(12)
         cellObj.detailTextLabel?.numberOfLines = 0
-        if indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4 {
+        if indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 1 {
             cellObj.detailTextLabel?.textColor = UIColor.blueColor()
         }else {
             cellObj.detailTextLabel?.textColor = UIColor.appCellSubTitleColor()
@@ -123,7 +152,7 @@ class StoreDetailsController: BaseController,UITableViewDataSource,UITableViewDe
                 let vc = self.storyboard?.instantiateViewControllerWithIdentifier("MapView") as! MapViewController
                 vc.strLat = dictDate.valueForKey("latitude") as! String
                 vc.strLog = dictDate.valueForKey("longitude") as! String
-                vc.strAddress = dictDate.valueForKey("address") as! String
+                vc.strAddress = arrCellContent.objectAtIndex(indexPath.row) as? String
                 self.navigationController?.pushViewController(vc, animated: true)
             }else {
                 //self.showErrorPopupWith_title_message("", strMessage:"Server request timed out.")
@@ -138,9 +167,9 @@ class StoreDetailsController: BaseController,UITableViewDataSource,UITableViewDe
             break
         case 3:
             if arrCellContent.objectAtIndex(indexPath.row) as! NSString != "" {
-                makeACall(arrCellContent.objectAtIndex(indexPath.row) as! String)
+                showMakeACallMessage(arrCellContent.objectAtIndex(indexPath.row) as! String)
             }else {
-                //self.showErrorPopupWith_title_message("", strMessage:"Server request timed out.")
+                self.showErrorPopupWith_title_message("", strMessage:"Server request timed out.")
             }
             break
         case 4:
@@ -154,6 +183,18 @@ class StoreDetailsController: BaseController,UITableViewDataSource,UITableViewDe
             break
         }
 
+    }
+
+    func showMakeACallMessage(number:String) {
+        callAlert  = UIAlertController(title: "Call!", message: "Do you want to call retailer? ", preferredStyle: UIAlertControllerStyle.Alert)
+               let actionNo : UIAlertAction = UIAlertAction(title: "No", style: UIAlertActionStyle.Cancel, handler: nil)
+        let actionYes : UIAlertAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
+            self.makeACall(number)
+        }
+
+        callAlert.addAction(actionNo)
+        callAlert.addAction(actionYes)
+        self.presentViewController(callAlert, animated: true, completion:nil)
     }
 
     func callAWebView(strUrl:String) {

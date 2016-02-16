@@ -29,7 +29,7 @@ class SpecialsController : BaseController , segmentedTapActionDelegate, specials
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         // Do any additional setup befour appear the view.
-        self.leftSegmentTappedAction()
+        //self.leftSegmentTappedAction()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -53,7 +53,7 @@ class SpecialsController : BaseController , segmentedTapActionDelegate, specials
     func leftSegmentTappedAction() {
         self.isJustForYou = false
         self.resetAllCollectionAndReloadViews()
-        self.getAllSpecialProductFromServer()
+        //self.getAllSpecialProductFromServer()
     }
     
     func rightSegmentTappedAction() {

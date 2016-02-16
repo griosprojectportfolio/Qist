@@ -45,7 +45,7 @@ class LocateQistCell : UITableViewCell {
             self.lblTitle.text = title
         }
         if let subTitle : String = dictData["location"] as? String {
-            self.lblSubTitle.text = subTitle
+            self.lblSubTitle.text = self.address(dictData)
         }
         self.storeImgView.sd_setImageWithURL(NSURL(string:""), placeholderImage:UIImage(named: "No_image"))
 
@@ -53,6 +53,36 @@ class LocateQistCell : UITableViewCell {
     
     @IBAction func heartButtonTapped(sender: UIButton){
         self.locateCellDelegate?.favouriteButtonTapped(self.tag)
+    }
+
+    func address(dict:NSDictionary)-> String {
+        var address,suburb,city,zip : String!
+
+        if dict.valueForKey("address") != nil {
+            address = dict.valueForKey("address") as! String
+        }else {
+            address = ""
+        }
+
+        if dict.valueForKey("suburb") != nil {
+            suburb = dict.valueForKey("suburb") as! String
+        }else {
+            suburb = ""
+        }
+
+        if dict.valueForKey("city") != nil {
+            city = dict.valueForKey("city") as! String
+        }else {
+            city = ""
+        }
+
+        if dict.valueForKey("zip") != nil {
+            zip = dict.valueForKey("zip") as! String
+        }else {
+            zip = ""
+        }
+        let full_Addess : String = address + "," + suburb + "," + city + " " + zip
+        return full_Addess
     }
 
 }

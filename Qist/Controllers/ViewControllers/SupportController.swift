@@ -14,12 +14,17 @@ import MagicalRecord
 class SupportController : BaseController {
     
     @IBOutlet var webView: UIWebView!
+    @IBOutlet var lblQist_Version : UILabel!
     
     // MARK: -  Current view related Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.title = "SUPPORT"
+        let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as! String
+        lblQist_Version.text = "Qist Version: " + version
+        lblQist_Version.font = UIFont.boldFontOfSize(15)
+        lblQist_Version.textColor = UIColor.appCellTitleColor()
     }
     
     override func viewWillAppear(animated: Bool) {

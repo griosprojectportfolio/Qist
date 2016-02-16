@@ -139,7 +139,12 @@ class ScannerController : BaseController , AVCaptureMetadataOutputObjectsDelegat
 
             if metadataObj.stringValue != nil {
                 messageLabel.text = metadataObj.stringValue
-                getScannedProduct(metadataObj.stringValue)
+//                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+//                dispatch_after(delayTime, dispatch_get_main_queue()) {
+//
+//                }
+                self.stopScanningQRs()
+                self.getScannedProduct(metadataObj.stringValue)
             }
         }
     }
@@ -147,43 +152,36 @@ class ScannerController : BaseController , AVCaptureMetadataOutputObjectsDelegat
 
     // MARK: -  Navigate to Scanned Product Page
     func getScannedProduct(decodedURL: String) {
-
-    if decodedURL != "" {
-            scanProductApi(decodedURL)
+        if decodedURL != "" {
+            self.scanProductApi(decodedURL)
         }
     }
 
 
     func scanProductApi(decodedURL: String) {
-
         if decodedURL != "" {
-        self.stopScanningQRs()
-        let aParams : NSDictionary = ["access_token":self.auth_token,"product_id":decodedURL]
-        print(aParams)
-
-        self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "scanned_product", parameters: aParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
-
-            self.stopLoadingIndicatorView()
-            let dictResponse : NSDictionary = responseObject as! NSDictionary
-            print(dictResponse)
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, dispatch_get_main_queue()) {
-                self.activityIndicator.stopActivityIndicator(self)
-                self.dictScanProduct = dictResponse.valueForKey("product") as! NSDictionary
-                self.performSegueWithIdentifier("ScanProduct", sender: self)
-            }
-            },
-            failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
-                self.stopLoadingIndicatorView()
-                if task!.responseData != nil {
-                    self.showErrorMessageOnApiFailure(task!.responseData!, title: "ScanProduct!")
-                }else{
-                    self.showErrorPopupWith_title_message("", strMessage:"Server request timed out.")
+            let aParams : NSDictionary = ["access_token":self.auth_token,"product_id":decodedURL]
+            print(aParams)
+            self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "scanned_product", parameters: aParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                print(dictResponse)
+                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+                dispatch_after(delayTime, dispatch_get_main_queue()) {
+                    self.activityIndicator.stopActivityIndicator(self)
+                    self.dictScanProduct = dictResponse.valueForKey("product") as! NSDictionary
+                    self.performSegueWithIdentifier("ScanProduct", sender: self)
                 }
-        })
+                },
+                failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+                    self.activityIndicator.stopActivityIndicator(self)
+                    if task!.responseData != nil {
+                        self.showErrorMessageOnApiFailure(task!.responseData!, title: "ScanProduct!")
+                    }else{
+                        self.showErrorPopupWith_title_message("", strMessage:"Server request timed out.")
+                    }
+            })
 
         }
-
 
     }
 
