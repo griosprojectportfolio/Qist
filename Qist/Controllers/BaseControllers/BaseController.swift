@@ -189,7 +189,7 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
         })
     }
     
-    func removeProductFromWishLists(dict : NSDictionary) {
+    func removeProductFromWishLists(dict : NSDictionary,successBlock:() ->(),failureBlock:() ->()) {
         
         self.startLoadingIndicatorView()
         let dictParams : NSDictionary = ["access_token": self.auth_token, "product_id": (dict.valueForKey("id")?.integerValue)!,"store_id ":(dict.valueForKey("retailer_id")?.integerValue)!]
@@ -201,11 +201,13 @@ class BaseController: UIViewController , UITextFieldDelegate , leftPanelDelegate
             self.showErrorPopupWith_title_message("", strMessage:"Product Removed from WishLists.")
             let dictResponse : NSDictionary = responseObject as! NSDictionary
             print(dictResponse)
+            successBlock()
             },
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
                 print(task?.responseString)
                 self.showErrorMessageOnApiFailure(task!.responseData!, title: "REMOVE PRODUCT!")
+                failureBlock()
         })
     }
     

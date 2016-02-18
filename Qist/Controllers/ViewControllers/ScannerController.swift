@@ -139,11 +139,6 @@ class ScannerController : BaseController , AVCaptureMetadataOutputObjectsDelegat
 
             if metadataObj.stringValue != nil {
                 messageLabel.text = metadataObj.stringValue
-//                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
-//                dispatch_after(delayTime, dispatch_get_main_queue()) {
-//
-//                }
-                self.stopScanningQRs()
                 self.getScannedProduct(metadataObj.stringValue)
             }
         }
@@ -162,6 +157,7 @@ class ScannerController : BaseController , AVCaptureMetadataOutputObjectsDelegat
         if decodedURL != "" {
             let aParams : NSDictionary = ["access_token":self.auth_token,"product_id":decodedURL]
             print(aParams)
+             self.stopScanningQRs()
             self.sharedApi.baseRequestWithHTTPMethod("POST", URLString: "scanned_product", parameters: aParams, successBlock: { (task : AFHTTPRequestOperation?, responseObject : AnyObject?) -> () in
                 let dictResponse : NSDictionary = responseObject as! NSDictionary
                 print(dictResponse)
@@ -173,6 +169,7 @@ class ScannerController : BaseController , AVCaptureMetadataOutputObjectsDelegat
                 }
                 },
                 failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
+
                     self.activityIndicator.stopActivityIndicator(self)
                     if task!.responseData != nil {
                         self.showErrorMessageOnApiFailure(task!.responseData!, title: "ScanProduct!")
@@ -184,9 +181,6 @@ class ScannerController : BaseController , AVCaptureMetadataOutputObjectsDelegat
         }
 
     }
-
-
-
 
 
     // MARK: -  Common methods of Scanner page.

@@ -172,6 +172,13 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if isByStore {
+        }else{
+            let vcObj = self.storyboard?.instantiateViewControllerWithIdentifier("ProductDetail") as! ProductDetailController
+            vcObj.dictDate = arrWishists.objectAtIndex(indexPath.row) as! NSDictionary
+            vcObj.isCallViewController = "Wishlist"
+            self.navigationController?.pushViewController(vcObj, animated: true)
+        }
     }
     
     
@@ -195,24 +202,31 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
         if isByStore {
             let arrObj = self.arrByStoresCellContent.objectAtIndex(Indexpath.section) as! NSArray
             let dict = arrObj.objectAtIndex(Indexpath.row) as! NSDictionary
-            self.removeProductFromWishLists(dict)
-            let arr = self.arrByStoresCellContent.objectAtIndex(Indexpath.section).mutableCopy()
-            arr.removeObjectAtIndex(Indexpath.row)
-            self.arrByStoresCellContent.insertObject(arr, atIndex:Indexpath.section)
-            self.tblWishLists.reloadData()
-            let dictObj = arrByStores.objectAtIndex(Indexpath.section).mutableCopy() as! NSMutableDictionary
-            print(arrByStores)
-            let arrmain = dictObj.valueForKey("Product")?.mutableCopy() as! NSMutableArray
-            arrmain.removeObjectAtIndex(Indexpath.row)
-            dictObj.setValue(arrmain, forKey: "Product")
-            print(dictObj)
-            arrByStores.replaceObjectAtIndex(Indexpath.section, withObject: dictObj)
-            print(arrByStores)
-        }else {
+            self.removeProductFromWishLists(dict, successBlock: { () -> () in
+                let arr = self.arrByStoresCellContent.objectAtIndex(Indexpath.section).mutableCopy()
+                arr.removeObjectAtIndex(Indexpath.row)
+                self.arrByStoresCellContent.insertObject(arr, atIndex:Indexpath.section)
+                self.tblWishLists.reloadData()
+                let dictObj = self.arrByStores.objectAtIndex(Indexpath.section).mutableCopy() as! NSMutableDictionary
+                print(self.arrByStores)
+                let arrmain = dictObj.valueForKey("Product")?.mutableCopy() as! NSMutableArray
+                arrmain.removeObjectAtIndex(Indexpath.row)
+                dictObj.setValue(arrmain, forKey: "Product")
+                print(dictObj)
+                self.arrByStores.replaceObjectAtIndex(Indexpath.section, withObject: dictObj)
+                print(self.arrByStores)
+
+                }, failureBlock: { () -> () in
+
+            })
+            }else {
             let dict = arrWishists.objectAtIndex(Indexpath.row) as! NSDictionary
-            self.removeProductFromWishLists(dict)
-            arrWishists.removeObjectAtIndex(Indexpath.row)
-            self.tblWishLists.reloadData()
+            self.removeProductFromWishLists(dict, successBlock: { () -> () in
+                self.arrWishists.removeObjectAtIndex(Indexpath.row)
+                self.tblWishLists.reloadData()
+                }, failureBlock: { () -> () in
+
+            })
         }
     }
     
@@ -244,6 +258,8 @@ class WishListsController : BaseController ,segmentedTapActionDelegate, wishlist
             failureBlock : { (task : AFHTTPRequestOperation?, error: NSError?) -> () in
                 self.stopLoadingIndicatorView()
                 if task!.responseData != nil {
+                    self.arrWishists.removeAllObjects()
+                    self.tblWishLists.reloadData()
                     self.showErrorMessageOnApiFailure(task!.responseData!, title: "WISHLISTS!")
                 }else{
                     self.showErrorPopupWith_title_message("", strMessage:"Server request timed out.")

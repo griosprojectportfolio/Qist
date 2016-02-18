@@ -115,23 +115,17 @@ class CartsController : BaseController, segmentedTapActionDelegate, cartsCellDel
 
     // MARK: - cartsCellDelegate methods
     func removeProductFromWishListsTapped(intTag : Int) {
-        self.removeProductFromWishLists(self.isWishlists ? self.arrWishlists[intTag] as! NSDictionary : self.arrCarts[intTag] as! NSDictionary)
-        if self.isWishlists {
-            self.arrWishlists.removeObjectAtIndex(intTag)
-            self.tblCartsView.reloadData()
+        self.removeProductFromWishLists(self.isWishlists ? self.arrWishlists[intTag] as! NSDictionary : self.arrCarts[intTag] as! NSDictionary, successBlock: { () -> () in
+            if self.isWishlists {
+                self.arrWishlists.removeObjectAtIndex(intTag)
+                self.tblCartsView.reloadData()
 
-            //            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), {
-            //                self.arrWishlists.removeObjectAtIndex(intTag)
-            //                self.tblCartsView.reloadData()
-            //            })
+            }else{
+                //            self.arrCarts.removeObjectAtIndex(intTag)
+                //            self.tblCartsView.reloadData()
+            }
+            }) { () -> () in
 
-        }else{
-            //            self.arrCarts.removeObjectAtIndex(intTag)
-            //            self.tblCartsView.reloadData()
-            //            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), {
-            //                self.arrCarts.removeObjectAtIndex(intTag)
-            //                self.tblCartsView.reloadData()
-            //            })
         }
     }
 

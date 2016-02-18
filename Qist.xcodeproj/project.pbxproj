@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1BD94C1C75A4A000242A17 /* ProductDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1BD94B1C75A4A000242A17 /* ProductDetailController.swift */; };
 		0A45A7261C5B35BA006971D5 /* ScanProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45A7251C5B35B9006971D5 /* ScanProductCell.swift */; };
 		0A772B6D1C68DE8000ADBF0A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A772B6C1C68DE8000ADBF0A /* WebViewController.swift */; };
 		0A7794F71C69BEF2005B4133 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A7794F61C69BEF2005B4133 /* MessageUI.framework */; };
@@ -80,6 +81,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A1BD94B1C75A4A000242A17 /* ProductDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailController.swift; sourceTree = "<group>"; };
 		0A45A7251C5B35B9006971D5 /* ScanProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanProductCell.swift; sourceTree = "<group>"; };
 		0A772B6C1C68DE8000ADBF0A /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		0A7794F61C69BEF2005B4133 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -368,6 +370,7 @@
 				174618FB1BC3CB5F002ECB60 /* SupportController.swift */,
 				0A772B6C1C68DE8000ADBF0A /* WebViewController.swift */,
 				0A7794F81C69C610005B4133 /* MapViewController.swift */,
+				0A1BD94B1C75A4A000242A17 /* ProductDetailController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 				17C30BEA1BB28F7C00B141A0 /* LeftPanelCell.swift in Sources */,
 				179DAEE51C3BE21B0049B421 /* UpdateProfileController.swift in Sources */,
 				1718F4421BA93B0400242278 /* ApiClient.swift in Sources */,
+				0A1BD94C1C75A4A000242A17 /* ProductDetailController.swift in Sources */,
 				174D16B11BB4004700E0B4E8 /* SegmentedView.swift in Sources */,
 				17C30BEE1BB2935A00B141A0 /* StoresController.swift in Sources */,
 				1718F43C1BA9370800242278 /* UIColor+Qist.swift in Sources */,
